@@ -10,20 +10,23 @@ import Foundation
 public struct SpenceKit {
     public struct Constants {
         // corner radius
-        public static let maxCornerRadius: CGFloat = 2048
-        public static let moreCornerRadius: CGFloat = 32
-        public static let normalCornerRadius: CGFloat = 24
-        public static let lessCornerRadius: CGFloat = 16
+        public static let cornerRadiusMAX: CGFloat = 2048
+        public static let cornerRadius32: CGFloat = 32
+        public static let cornerRadius24: CGFloat = 24
+        public static let cornerRadius16: CGFloat = 16
+        public static let cornerRadius8: CGFloat = 8
         
         // padding
-        public static let morePadding: CGFloat = 24
-        public static let normalPadding: CGFloat = 16
-        public static let lessPadding: CGFloat = 8
+        public static let padding24: CGFloat = 24
+        public static let padding16: CGFloat = 16
+        public static let padding8: CGFloat = 8
+        public static let padding4: CGFloat = 4
         
         // spacing
-        public static let moreSpacing: CGFloat = 32
-        public static let normalSpacing: CGFloat = 16
-        public static let lessSpacing: CGFloat = 8
+        public static let spacing24: CGFloat = 32
+        public static let spacing16: CGFloat = 16
+        public static let spacing8: CGFloat = 8
+        public static let spacing4: CGFloat = 4
         
         public static let borderWidth: CGFloat = 2
     }

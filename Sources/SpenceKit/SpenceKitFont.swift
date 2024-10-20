@@ -21,17 +21,17 @@ public struct SpenceKitFont: Sendable {
         }
     }
 
-    public static let PPEditorialNew_LightItalic = SpenceKitFont(named: "PPEditorialNew-UltralightItalic")
-    public static let PPEditorialNew_RegularItalic = SpenceKitFont(named: "PPEditorialNew-Italic")
-    public static let PPEditorialNew_BoldItalic = SpenceKitFont(named: "PPEditorialNew-UltraboldItalic")
+    public static let PPEditorialNew_LightItalic = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-UltralightItalic")
+    public static let PPEditorialNew_RegularItalic = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-Italic")
+    public static let PPEditorialNew_BoldItalic = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-UltraboldItalic")
     
-    public static let PPEditorialNew_Light = SpenceKitFont(named: "PPEditorialNew-Ultralight")
-    public static let PPEditorialNew_Regular = SpenceKitFont(named: "PPEditorialNew-Regular")
-    public static let PPEditorialNew_Bold = SpenceKitFont(named: "PPEditorialNew-Ultrabold")
+    public static let PPEditorialNew_Light = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-Ultralight")
+    public static let PPEditorialNew_Regular = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-Regular")
+    public static let PPEditorialNew_Bold = SpenceKitFont(named: "PP Editorial New/PPEditorialNew-Ultrabold")
     
     
     public static let Inter = SpenceKitFont(named: "Inter")
     
     
-    public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times New Roman Condensed")
+    public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times-New-Roman-Condensed")
 }

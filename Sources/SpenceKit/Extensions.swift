@@ -60,8 +60,8 @@ extension Font {
         
         public static let SerifLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifLargeTitle.name,
                                                        size: Font.SpenceKit.FontSkeleton.SerifLargeTitle.size)
-        public static let SerifPrimaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifTitle.name,
-                                                  size: Font.SpenceKit.FontSkeleton.SerifTitle.size)
+        public static let SerifPrimaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.name,
+                                                  size: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.size)
         public static let SerifSecondaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.name,
                                                            size: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.size)
         public static let SerifTertiaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.name,

@@ -17,7 +17,7 @@ public struct SpenceKitFont: Sendable {
             try registerFont(named: name)
         } catch {
             let reason = error.localizedDescription
-            fatalError("Failed to register font: \(reason)")
+            fatalError("Failed to register font \"\(name)\": \(reason)")
         }
     }
 

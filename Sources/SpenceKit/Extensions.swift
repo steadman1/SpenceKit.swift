@@ -81,7 +81,7 @@ public extension View {
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
-            .stroke(color: strokeColor, width: font.size / 100)
+            .stroke(color: strokeColor, width: font.size / 140)
     }
     
     @available(iOS 15.0, *)
@@ -90,6 +90,8 @@ public extension View {
     }
 }
 
+// from "paescebu" on StackOverflow
+// https://stackoverflow.com/questions/57334125/how-to-make-text-stroke-in-swiftui
 @available(iOS 15.0, *)
 public struct StrokeModifier: ViewModifier {
     private let id = UUID()

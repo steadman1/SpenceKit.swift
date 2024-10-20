@@ -68,7 +68,7 @@ extension Font {
             Font.custom(
                 Font.SpenceKit.FontSkeleton.SansLargeTitle.name,
                 size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size
-            ).weight(.bold)
+            )
         }
         public static let SansPrimaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansPrimaryTitle.name,
                                                         size: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size)
@@ -80,7 +80,7 @@ extension Font {
             Font.custom(
                 Font.SpenceKit.FontSkeleton.SansHeadline.name,
                 size: Font.SpenceKit.FontSkeleton.SansHeadline.size
-            ).weight(.bold)
+            )
         }
         public static let SansHeadFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansHead.name,
                                                     size: Font.SpenceKit.FontSkeleton.SansHead.size)

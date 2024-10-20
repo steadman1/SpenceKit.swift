@@ -50,28 +50,25 @@ public struct ExpandingButton<Content: View>: View {
     private let label: () -> Content
     
     public var body: some View {
-        Button(action: action) {
-            ZStack {
+        ZStack {
+            RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24)
+                .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
+                .frame(maxWidth: .infinity)
+                .frame(height: 72)
+                .foregroundStyle(background)
+                .background(background)
+                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24))
+            
+            Button(action: action) {
                 if #available(iOS 17.0, *) {
-                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24)
-                        .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
+                    label()
                         .frame(maxWidth: .infinity)
                         .frame(height: 72)
-                        .foregroundStyle(background)
-                        .background(background)
-                        .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24))
-                    
-                    label()
                         .foregroundStyle(foreground)
                 } else {
-                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24)
-                        .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
+                    label()
                         .frame(maxWidth: .infinity)
                         .frame(height: 72)
-                        .foregroundColor(background)
-                        .background(background)
-                    
-                    label()
                         .foregroundColor(foreground)
                 }
             }

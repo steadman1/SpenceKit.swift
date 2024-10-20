@@ -6,8 +6,33 @@
 //
 
 import SwiftUI
+import UIKit
 
-@available(iOS 13.0, *)
+extension Color {
+    public struct SpenceKit {
+        public static let Border = Color(UIColor(resource: .init(name: "Colors/Border", bundle: .module)))
+        public static let Clear = Color(UIColor(resource: .init(name: "Colors/Clear", bundle: .module)))
+        
+        // Accents
+        public static let PrimaryAccent = Color(UIColor(resource: .init(name: "Colors/Accent/PrimaryAccent", bundle: .module)))
+        public static let SecondaryAccent = Color(UIColor(resource: .init(name: "Colors/Accent/SecondaryAccent", bundle: .module)))
+        
+        // CTA
+        public static let PrimaryCTA = Color(UIColor(resource: .init(name: "Colors/CTA/PrimaryCTA", bundle: .module)))
+        public static let SecondaryCTA = Color(UIColor(resource: .init(name: "Colors/CTA/SecondaryCTA", bundle: .module)))
+        
+        // Grounding
+        public static let Background = Color(UIColor(resource: .init(name: "Colors/Ground/Background", bundle: .module)))
+        public static let PrimaryForeground = Color(UIColor(resource: .init(name: "Colors/Ground/PrimaryForeground", bundle: .module)))
+        public static let LayerForeground = Color(UIColor(resource: .init(name: "Colors/Ground/LayerForeground", bundle: .module)))
+        
+        // Text
+        public static let PrimaryText = Color(UIColor(resource: .init(name: "Colors/Text/PrimaryText", bundle: .module)))
+        public static let SecondaryText = Color(UIColor(resource: .init(name: "Colors/Text/SecondaryText", bundle: .module)))
+        public static let TertiaryText = Color(UIColor(resource: .init(name: "Colors/Text/TertiaryText", bundle: .module)))
+    }
+}
+
 extension Font {
     public struct SpenceKit {
         public struct FontSkeleton: Sendable {
@@ -75,24 +100,20 @@ extension Font {
     }
 }
 
-@available(iOS 13.0, *)
 public extension View {
-    @available(iOS 15.0, *)
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
-            .stroke(color: strokeColor, width: font.size / 140)
+            .stroke(color: strokeColor, width: font.size / 80)
     }
     
-    @available(iOS 15.0, *)
     @MainActor func stroke(color: Color, width: CGFloat = 1) -> some View {
-        modifier(StrokeModifier(strokeSize: width, strokeColor: color))
+        modifier(StrokeModifier(strokeSize: width / 2, strokeColor: color))
     }
 }
 
 // from "paescebu" on StackOverflow
 // https://stackoverflow.com/questions/57334125/how-to-make-text-stroke-in-swiftui
-@available(iOS 15.0, *)
 public struct StrokeModifier: ViewModifier {
     private let id = UUID()
     var strokeSize: CGFloat = 1

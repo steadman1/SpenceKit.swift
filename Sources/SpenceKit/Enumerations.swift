@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum PriorityLevel {
-    case CTA
-    case primary
-    case secondary
-    case tertiary
-    case lowest
+public enum PriorityLevel: Int {
+    case CTA = 0
+    case primary = 1
+    case secondary = 2
+    case tertiary = 3
+    case lowest = 4
 }

@@ -143,7 +143,7 @@ public struct StrokeModifier: ViewModifier {
 
     private func appliedStrokeBackground(content: Content) -> some View {
         content
-            .padding(strokeSize*2)
+            .padding(strokeSize * 2)
             .background(
                 Rectangle()
                     .foregroundColor(strokeColor)

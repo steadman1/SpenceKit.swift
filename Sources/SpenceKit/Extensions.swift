@@ -81,15 +81,11 @@ public extension View {
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
-            .overlay(
-                self
-                    .font(.custom(font.name, size: font.size))
-                    .stroke(color: strokeColor, width: font.size / 10) // Adjust stroke width
-            )
+            .stroke(color: strokeColor, width: font.size / 10)
     }
     
     @available(iOS 15.0, *)
-    func stroke(color: Color, width: CGFloat = 1) -> some View {
+    @MainActor func stroke(color: Color, width: CGFloat = 1) -> some View {
         modifier(StrokeModifier(strokeSize: width, strokeColor: color))
     }
 }

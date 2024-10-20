@@ -15,25 +15,25 @@ extension Font {
             public let size: CGFloat
             
             // Define Font Attributes for Sans Typography
-            public static let SansLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 88)
-            public static let SansPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 64)
-            public static let SansSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 58)
-            public static let SansTertiaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 52)
-            public static let SansHeadline: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 40)
-            public static let SansBody: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 40)
-            public static let SansCallout: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 36)
-            public static let SansSubheadline: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 32)
-            public static let SansCaption: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 32)
-            public static let SansHint: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 24)
+            public static let SansLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 34)
+            public static let SansPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 28)
+            public static let SansSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 22)
+            public static let SansTertiaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 20)
+            public static let SansHeadline: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 17)
+            public static let SansBody: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 17)
+            public static let SansCallout: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 16)
+            public static let SansSubheadline: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 15)
+            public static let SansCaption: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 15)
+            public static let SansHint: FontSkeleton = .init(name: SpenceKitFont.Inter.name, size: 13)
             
             // Define Font Attributes for Serif Typography
-            public static let SerifLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 88)
-            public static let SerifPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 64)
-            public static let SerifSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 58)
+            public static let SerifLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 34)
+            public static let SerifPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 28)
+            public static let SerifSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 20)
             public static let SerifTertiaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_RegularItalic.name, size: 52)
-            public static let SerifBody: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 44)
-            public static let SerifCallout: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 40)
-            public static let SerifCaption: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 36)
+            public static let SerifBody: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 18)
+            public static let SerifCallout: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 17)
+            public static let SerifCaption: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 16)
         }
         
         // Custom fonts with specified sizes

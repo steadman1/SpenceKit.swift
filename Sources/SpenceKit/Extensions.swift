@@ -83,14 +83,7 @@ public extension Text {
             .overlay(
                 self
                     .font(.custom(font.name, size: font.size))
-                    .stroke(strokeColor, lineWidth: font.size / 10) // Adjust stroke width
+                    .shadow(color: strokeColor, radius: 2) // Adjust stroke width
             )
-    }
-}
-
-@available(iOS 13.0, *)
-public extension View {
-    func stroke(_ color: Color, lineWidth: CGFloat) -> some View {
-        self.overlay(self.foregroundColor(color).scaleEffect(1 + lineWidth / 100))
     }
 }

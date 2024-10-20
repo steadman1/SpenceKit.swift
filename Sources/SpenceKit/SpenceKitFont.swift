@@ -30,10 +30,10 @@ public struct SpenceKitFont: Sendable {
     public static let PPEditorialNew_Bold = SpenceKitFont(named: "PPEditorialNew-Ultrabold")
     
     
-    public static let Inter_Medium = SpenceKitFont(named: "Inter Medium")
-    public static let Inter_Semibold = SpenceKitFont(named: "Inter Semibold")
-    public static let Inter_Bold = SpenceKitFont(named: "Inter Bold")
+    public static let Inter_Medium = SpenceKitFont(named: "Inter-Medium")
+    public static let Inter_Semibold = SpenceKitFont(named: "Inter-Semibold")
+    public static let Inter_Bold = SpenceKitFont(named: "Inter-Bold")
     
     
-    public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times New Roman Condensed")
+    public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times-New-Roman-Condensed")
 }

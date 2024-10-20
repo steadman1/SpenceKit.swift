@@ -72,8 +72,10 @@ public struct IconButton<Content: View>: View {
             IconButton(PriorityLevel(rawValue: index)!) {
                 print()
             } label: {
-                Image(systemName: "arrow.up.right")
-                    .fontWeight(.black)
+                Text("hello")
+                    .font(Font.SpenceKit.SansHeadlineFont)
+//                Image(systemName: "arrow.up.right")
+//                    .fontWeight(.black)
             }
         }
     }

@@ -81,7 +81,7 @@ public extension View {
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
-            .stroke(color: strokeColor, width: font.size / 10)
+            .stroke(color: strokeColor, width: font.size / 100)
     }
     
     @available(iOS 15.0, *)

@@ -77,7 +77,7 @@ extension Font {
 
 @available(iOS 13.0, *)
 public extension Text {
-    @MainActor func bold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
+    @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
             .overlay(

@@ -6,11 +6,32 @@
 //
 
 import Foundation
+import SwiftUICore
 
-public enum PriorityLevel: Int {
+public enum SpenceKitStyle: Int {
     case CTA = 0
     case primary = 1
     case secondary = 2
     case tertiary = 3
     case lowest = 4
+}
+
+public enum SpenceKitSize: Int {
+    case head = 0
+    case subhead = 1
+    
+    public struct Icon {
+        public static func getFont(for size: SpenceKitSize) -> (font: Font, skeleton: Font.SpenceKit.FontSkeleton) {
+            switch size {
+            case .head:
+                return (.SpenceKit.SansHeadFont, .SansHead)
+            case .subhead:
+                return (.SpenceKit.SansSubheadFont, .SansSubhead)
+            }
+        }
+        
+        public static func getPixelSize(for size: SpenceKitSize) -> CGFloat {
+            return getFont(for: size).skeleton.size * 1.25
+        }
+    }
 }

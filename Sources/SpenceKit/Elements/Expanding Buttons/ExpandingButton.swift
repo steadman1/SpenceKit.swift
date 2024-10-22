@@ -11,15 +11,15 @@ import SwiftUI
 
 public struct ExpandingButton<Content: View>: View {
     public init(
-        _ priority: PriorityLevel = .primary,
+        _ style: SpenceKitStyle = .primary,
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Content
     ) {
-        self.priority = priority
+        self.style = style
         self.action = action
         self.label = label
         
-        switch priority {
+        switch style {
         case .CTA:
             self.foreground = .SpenceKit.PrimaryCTA
             self.background = .SpenceKit.SecondaryCTA
@@ -42,7 +42,7 @@ public struct ExpandingButton<Content: View>: View {
             self.border = .SpenceKit.Clear
         }
     }
-    private let priority: PriorityLevel
+    private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
     private let border: Color
@@ -50,26 +50,29 @@ public struct ExpandingButton<Content: View>: View {
     private let label: () -> Content
     
     public var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24)
-                .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
-                .frame(maxWidth: .infinity)
-                .frame(height: 72)
-                .foregroundStyle(background)
-                .background(background)
-                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadius24))
-            
-            Button(action: action) {
-                if #available(iOS 17.0, *) {
-                    label()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 72)
-                        .foregroundStyle(foreground)
-                } else {
-                    label()
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 72)
-                        .foregroundColor(foreground)
+        CornerRadiusReader { radius in
+            let cornerRadius = radius > 0 ? radius : SpenceKit.Constants.cornerRadius24
+            ZStack {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 64)
+                    .foregroundStyle(background)
+                    .background(background)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                
+                Button(action: action) {
+                    if #available(iOS 17.0, *) {
+                        label()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .foregroundStyle(foreground)
+                    } else {
+                        label()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .foregroundColor(foreground)
+                    }
                 }
             }
         }
@@ -80,7 +83,7 @@ public struct ExpandingButton<Content: View>: View {
 #Preview {
     VStack {
         ForEach(0..<5) { index in
-            ExpandingButton(PriorityLevel(rawValue: index)!) {
+            ExpandingButton(SpenceKitStyle(rawValue: index)!) {
                 print()
             } label: {
                 Text("hello")

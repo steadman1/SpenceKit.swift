@@ -1,0 +1,15 @@
+{
+  "originHash" : "b51c2fcb0e8c2447d63e8c03b9c209fde10b0e36ecba2c33345eebc099fe6167",
+  "pins" : [
+    {
+      "identity" : "viewextractor",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/GeorgeElsham/ViewExtractor",
+      "state" : {
+        "revision" : "e20b1944524d4454c2a65c0054ce345c2c5d0185",
+        "version" : "2.0.0"
+      }
+    }
+  ],
+  "version" : 3
+}

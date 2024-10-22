@@ -11,38 +11,27 @@ import SwiftUI
 
 public struct HelperButton<Content: View>: View {
     public init(
-        _ priority: PriorityLevel = .primary,
+        _ style: SpenceKitStyle = .primary,
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Content
     ) {
-        self.priority = priority
+        self.style = style
         self.action = action
         self.label = label
         
-        switch priority {
-        case .CTA:
-            self.foreground = .SpenceKit.PrimaryCTA
-            self.background = .SpenceKit.SecondaryCTA
-            self.border = .SpenceKit.Clear
+        switch style {
         case .primary:
-            self.foreground = .SpenceKit.PrimaryAccent
-            self.background = .SpenceKit.SecondaryAccent
-            self.border = .SpenceKit.Clear
-        case .secondary:
-            self.foreground = .SpenceKit.PrimaryText
+            self.foreground = .SpenceKit.TertiaryText
             self.background = .SpenceKit.PrimaryForeground
             self.border = .SpenceKit.Clear
-        case .tertiary:
-            self.foreground = .SpenceKit.PrimaryText
+        default:
+            self.foreground = .SpenceKit.TertiaryText
             self.background = .SpenceKit.Background
             self.border = .SpenceKit.Border
-        default:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.Clear
-            self.border = .SpenceKit.Clear
         }
     }
-    private let priority: PriorityLevel
+    
+    private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
     private let border: Color
@@ -58,7 +47,7 @@ public struct HelperButton<Content: View>: View {
                 label()
                     .foregroundColor(foreground)
             }
-        }.frame(width: 48 - (priority == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 48 - (priority == .tertiary ? SpenceKit.Constants.borderWidth : 0))
+        }.frame(width: 32 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 32 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0))
             .background(background)
             .clipShape(Circle())
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)
@@ -67,16 +56,24 @@ public struct HelperButton<Content: View>: View {
 
 @available(iOS 16.0, *)
 #Preview {
-    VStack {
-        ForEach(0..<5) { index in
-            IconButton(PriorityLevel(rawValue: index)!) {
-                print()
-            } label: {
-                Text("hello")
-                    .font(Font.SpenceKit.SansHeadlineFont)
-//                Image(systemName: "arrow.up.right")
-//                    .fontWeight(.black)
+    HStack(alignment: .top) {
+        // custom
+        VStack {
+            ForEach(1..<3) { index in
+                HelperButton(SpenceKitStyle(rawValue: index)!) {
+                    print()
+                } label: {
+                    SFIcon("checkmark", size: .head)
+                }
             }
+        }
+        
+        // statics
+        VStack {
+            HelperButtons.ClearText { }
+            HelperButtons.Peek { }
+            HelperButtons.Hide { }
+            HelperButtons.Info { }
         }
     }
 }

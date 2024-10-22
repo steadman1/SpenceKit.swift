@@ -11,15 +11,15 @@ import SwiftUI
 
 public struct IconButton<Content: View>: View {
     public init(
-        _ priority: PriorityLevel = .primary,
+        _ style: SpenceKitStyle = .primary,
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Content
     ) {
-        self.priority = priority
+        self.style = style
         self.action = action
         self.label = label
         
-        switch priority {
+        switch style {
         case .CTA:
             self.foreground = .SpenceKit.PrimaryCTA
             self.background = .SpenceKit.SecondaryCTA
@@ -42,7 +42,7 @@ public struct IconButton<Content: View>: View {
             self.border = .SpenceKit.Clear
         }
     }
-    private let priority: PriorityLevel
+    private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
     private let border: Color
@@ -58,7 +58,7 @@ public struct IconButton<Content: View>: View {
                 label()
                     .foregroundColor(foreground)
             }
-        }.frame(width: 48 - (priority == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 48 - (priority == .tertiary ? SpenceKit.Constants.borderWidth : 0))
+        }.frame(width: 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0))
             .background(background)
             .clipShape(Circle())
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)
@@ -69,7 +69,7 @@ public struct IconButton<Content: View>: View {
 #Preview {
     VStack {
         ForEach(0..<5) { index in
-            IconButton(PriorityLevel(rawValue: index)!) {
+            IconButton(SpenceKitStyle(rawValue: index)!) {
                 print()
             } label: {
                 Text("hello")

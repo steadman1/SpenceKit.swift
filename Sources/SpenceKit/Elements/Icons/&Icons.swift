@@ -18,6 +18,15 @@ public final class Icons {
             .frame(width: SpenceKitSize.Icon.getFont(for: size).skeleton.size * 1,
                    height: SpenceKitSize.Icon.getFont(for: size).skeleton.size * 1)
     }
+    
+    @MainActor @available(iOS 16.0, *)
+    public static func MagnifyingGlass(with size: SpenceKitSize) -> some View {
+        Image(uiImage: UIImage(resource: .init(name: "Icons/MagnifyingGlass", bundle: .module)))
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: SpenceKitSize.Icon.getFont(for: size).skeleton.size * 1,
+                   height: SpenceKitSize.Icon.getFont(for: size).skeleton.size * 1)
+    }
 }
 
 @available(iOS 16.0, *)

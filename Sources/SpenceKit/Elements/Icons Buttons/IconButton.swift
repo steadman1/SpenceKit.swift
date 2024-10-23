@@ -20,28 +20,34 @@ public struct IconButton<Content: View>: View {
         self.label = label
         
         switch style {
-        case .CTA:
-            self.foreground = .SpenceKit.PrimaryCTA
-            self.background = .SpenceKit.SecondaryCTA
-            self.border = .SpenceKit.Clear
-        case .primary:
-            self.foreground = .SpenceKit.PrimaryAccent
-            self.background = .SpenceKit.SecondaryAccent
-            self.border = .SpenceKit.Clear
-        case .secondary:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.PrimaryForeground
-            self.border = .SpenceKit.Clear
-        case .tertiary:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.Background
-            self.border = .SpenceKit.Border
-        default:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.Clear
-            self.border = .SpenceKit.Clear
+            case .CTA:
+                self.foreground = .SpenceKit.PrimaryCTA
+                self.background = .SpenceKit.SecondaryCTA
+                self.border = .SpenceKit.Clear
+            case .primary:
+                self.foreground = .SpenceKit.PrimaryAccent
+                self.background = .SpenceKit.SecondaryAccent
+                self.border = .SpenceKit.Clear
+            case .secondary:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.PrimaryForeground
+                self.border = .SpenceKit.Clear
+            case .tertiary:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.Background
+                self.border = .SpenceKit.Border
+            default:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.Clear
+                self.border = .SpenceKit.Clear
         }
+        
+        self.minWidth = style == .lowest ? 0 : 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0)
+        self.minHeight = self.minWidth
     }
+    private let minWidth: CGFloat
+    private let minHeight: CGFloat
+    
     private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
@@ -58,9 +64,10 @@ public struct IconButton<Content: View>: View {
                 label()
                     .foregroundColor(foreground)
             }
-        }.frame(width: 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0))
+        }.frame(minWidth: minWidth,
+                minHeight: minHeight)
             .background(background)
-            .clipShape(Circle())
+            .clipShape(RoundedRectangle(cornerRadius: minWidth > 0 ? SpenceKit.Constants.cornerRadiusMAX : 0))
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)
     }
 }

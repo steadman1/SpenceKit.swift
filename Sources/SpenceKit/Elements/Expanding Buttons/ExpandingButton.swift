@@ -20,26 +20,26 @@ public struct ExpandingButton<Content: View>: View {
         self.label = label
         
         switch style {
-        case .CTA:
-            self.foreground = .SpenceKit.PrimaryCTA
-            self.background = .SpenceKit.SecondaryCTA
-            self.border = .SpenceKit.Clear
-        case .primary:
-            self.foreground = .SpenceKit.PrimaryAccent
-            self.background = .SpenceKit.SecondaryAccent
-            self.border = .SpenceKit.Clear
-        case .secondary:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.PrimaryForeground
-            self.border = .SpenceKit.Clear
-        case .tertiary:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.Background
-            self.border = .SpenceKit.Border
-        default:
-            self.foreground = .SpenceKit.PrimaryText
-            self.background = .SpenceKit.Clear
-            self.border = .SpenceKit.Clear
+            case .CTA:
+                self.foreground = .SpenceKit.PrimaryCTA
+                self.background = .SpenceKit.SecondaryCTA
+                self.border = .SpenceKit.Clear
+            case .primary:
+                self.foreground = .SpenceKit.PrimaryAccent
+                self.background = .SpenceKit.SecondaryAccent
+                self.border = .SpenceKit.Clear
+            case .secondary:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.PrimaryForeground
+                self.border = .SpenceKit.Clear
+            case .tertiary:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.Background
+                self.border = .SpenceKit.Border
+            default:
+                self.foreground = .SpenceKit.PrimaryText
+                self.background = .SpenceKit.Clear
+                self.border = .SpenceKit.Clear
         }
     }
     private let style: SpenceKitStyle

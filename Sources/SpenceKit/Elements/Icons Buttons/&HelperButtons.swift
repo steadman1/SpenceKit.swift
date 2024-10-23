@@ -14,7 +14,7 @@ public final class HelperButtons {
     public static func ClearText(action: @escaping () -> Void) -> some View {
         HelperButton<AnyView>(.primary) {} label: {
             AnyView(
-                SFIcon("xmark", size: .head)
+                SFIcon("xmark", size: .small)
             )
         }
     }
@@ -23,7 +23,7 @@ public final class HelperButtons {
     public static func Peek(action: @escaping () -> Void) -> some View {
         HelperButton<AnyView>(.lowest) {} label: {
             AnyView(
-                SFIcon("eye", size: .head)
+                SFIcon("eye", size: .small)
             )
         }
     }
@@ -32,7 +32,7 @@ public final class HelperButtons {
     public static func Hide(action: @escaping () -> Void) -> some View {
         HelperButton<AnyView>(.lowest) {} label: {
             AnyView(
-                SFIcon("eye.slash", size: .head)
+                SFIcon("eye.slash", size: .small)
             )
         }
     }

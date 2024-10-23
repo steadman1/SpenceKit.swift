@@ -20,14 +20,14 @@ public struct HelperButton<Content: View>: View {
         self.label = label
         
         switch style {
-        case .primary:
-            self.foreground = .SpenceKit.TertiaryText
-            self.background = .SpenceKit.PrimaryForeground
-            self.border = .SpenceKit.Clear
-        default:
-            self.foreground = .SpenceKit.TertiaryText
-            self.background = .SpenceKit.Background
-            self.border = .SpenceKit.Border
+            case .primary:
+                self.foreground = .SpenceKit.TertiaryText
+                self.background = .SpenceKit.PrimaryForeground
+                self.border = .SpenceKit.Clear
+            default:
+                self.foreground = .SpenceKit.TertiaryText
+                self.background = .SpenceKit.Background
+                self.border = .SpenceKit.Border
         }
     }
     
@@ -47,7 +47,7 @@ public struct HelperButton<Content: View>: View {
                 label()
                     .foregroundColor(foreground)
             }
-        }.frame(width: 32 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 32 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0))
+        }.frame(width: 24 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0), height: 24 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0))
             .background(background)
             .clipShape(Circle())
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)
@@ -63,7 +63,7 @@ public struct HelperButton<Content: View>: View {
                 HelperButton(SpenceKitStyle(rawValue: index)!) {
                     print()
                 } label: {
-                    SFIcon("checkmark", size: .head)
+                    SFIcon("checkmark", size: .small)
                 }
             }
         }

@@ -97,7 +97,7 @@ public struct LargeChip<Content: View>: View {
                 }
             }
             .padding(.horizontal, SpenceKit.Constants.padding16)
-            .padding(.vertical, 12)
+            .padding(.vertical, SpenceKit.Constants.padding12)
             .background(background)
             .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)
@@ -114,16 +114,16 @@ public struct LargeChip<Content: View>: View {
     // Helper function to set colors based on priority
     private static func getColors(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
         switch style {
-        case .CTA:
-            return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
-        case .primary:
-            return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
-        case .secondary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
-        case .tertiary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
-        default:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
+            case .CTA:
+                return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
+            case .primary:
+                return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
+            case .secondary:
+                return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
+            case .tertiary:
+                return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
+            default:
+                return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
         }
     }
 }

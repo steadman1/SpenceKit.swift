@@ -13,7 +13,8 @@ let package = Package(
     ],
     dependencies: [
         // Declare the external package dependency
-        .package(url: "https://github.com/GeorgeElsham/ViewExtractor", from: "2.0.0")
+        .package(url: "https://github.com/GeorgeElsham/ViewExtractor", from: "2.0.0"),
+        .package(url: "https://github.com/vinceplusplus/measurement-reader.git", from: "2.1.1")
     ],
     targets: [
         // Targets define the basic building blocks of a package, such as a module or a test suite.
@@ -21,7 +22,8 @@ let package = Package(
         .target(
             name: "SpenceKit",
             dependencies: [
-                .product(name: "ViewExtractor", package: "ViewExtractor")
+                .product(name: "ViewExtractor", package: "ViewExtractor"),
+                .product(name: "MeasurementReader", package: "measurement-reader")
             ]
         ),
         .testTarget(

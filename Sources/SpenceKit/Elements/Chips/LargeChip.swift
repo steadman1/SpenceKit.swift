@@ -107,7 +107,7 @@ public struct LargeChip<Content: View>: View {
     
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
-            .font(.SpenceKit.SansHeadlineFont)
+            .font(style == .lowest ? .SpenceKit.SansHeadFont : .SpenceKit.SansHeadlineFont)
             .foregroundColor(LargeChip.getColors(for: style).foreground)
     }
     

@@ -54,7 +54,7 @@ public struct ExpandingButton<Content: View>: View {
             let cornerRadius = radius > 0 ? radius : SpenceKit.Constants.cornerRadius24
             ZStack {
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(border, lineWidth: SpenceKit.Constants.borderWidth)
+                    .stroke(border, lineWidth: SpenceKit.Constants.borderWidth * 2)
                     .frame(maxWidth: .infinity)
                     .frame(height: 64)
                     .foregroundStyle(background)

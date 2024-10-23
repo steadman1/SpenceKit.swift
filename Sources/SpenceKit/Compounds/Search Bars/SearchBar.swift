@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SearchBar.swift
 //  SpenceKit
 //
 //  Created by Spencer Steadman on 10/22/24.
@@ -47,7 +47,7 @@ public struct SearchBar<Content: View>: View {
         GeometryReader { geometry in
             ZStack {
                 RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
-                    .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth)
+                    .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
                     .frame(maxWidth: .infinity)
                     .frame(height: 64)
                     .foregroundStyle(Color.SpenceKit.Background)

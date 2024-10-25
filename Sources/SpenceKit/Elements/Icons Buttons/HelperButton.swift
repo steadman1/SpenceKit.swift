@@ -20,14 +20,14 @@ public struct HelperButton<Content: View>: View {
         self.label = label
         
         switch style {
-            case .primary:
-                self.foreground = .SpenceKit.TertiaryText
-                self.background = .SpenceKit.PrimaryForeground
-                self.border = .SpenceKit.Clear
-            default:
-                self.foreground = .SpenceKit.TertiaryText
-                self.background = .SpenceKit.Background
-                self.border = .SpenceKit.Border
+        case .primary:
+            self.foreground = .SpenceKit.TertiaryText
+            self.background = .SpenceKit.PrimaryForeground
+            self.border = .SpenceKit.Clear
+        default:
+            self.foreground = .SpenceKit.TertiaryText
+            self.background = .SpenceKit.Background
+            self.border = .SpenceKit.Border
         }
     }
     

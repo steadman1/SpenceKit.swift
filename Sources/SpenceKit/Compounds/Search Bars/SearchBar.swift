@@ -73,17 +73,17 @@ public struct SearchBar<Content: View>: View {
                     }
                     
                     switch style {
-                        case .CTA:
+                    case .CTA:
+                        label
+                    case .primary:
+                        VDivider().padding(.vertical, SpenceKit.Constants.padding8)
+                        ZStack {
                             label
-                        case .primary:
-                            VDivider().padding(.vertical, SpenceKit.Constants.padding8)
-                            ZStack {
-                                label
-                                    .padding(.leading, SpenceKit.Constants.padding4)
-                                    .padding(.trailing, SpenceKit.Constants.padding12)
-                            }.frame(minWidth: 24, minHeight: 24)
-                        default:
-                            EmptyView()
+                                .padding(.leading, SpenceKit.Constants.padding4)
+                                .padding(.trailing, SpenceKit.Constants.padding12)
+                        }.frame(minWidth: 24, minHeight: 24)
+                    default:
+                        EmptyView()
                     }
                 }.padding(.leading, SpenceKit.Constants.padding16)
                     .padding(.trailing, hasLabel ? SpenceKit.Constants.padding8 : SpenceKit.Constants.padding16)

@@ -77,6 +77,43 @@ public struct LargeChip<Content: View>: View {
         self.border = colors.border
     }
     
+    // With image and text without action
+    @available(iOS 16.0, *)
+    public init(
+        _ systemName: String,
+        _ text: String,
+        style: SpenceKitStyle = .primary
+    ) where Content == HStack<TupleView<(SFIcon, Text)>> {
+        self.style = style
+        self.label = LargeChip.getLabel(for: text, with: systemName, of: style)
+        self.action = {}
+        self.hasAction = false
+        
+        let colors = LargeChip.getColors(for: style)
+        self.foreground = colors.foreground
+        self.background = colors.background
+        self.border = colors.border
+    }
+    
+    // With image and text with action
+    @available(iOS 16.0, *)
+    public init(
+        _ systemName: String,
+        _ text: String,
+        style: SpenceKitStyle = .primary,
+        action: @escaping () -> Void
+    ) where Content == HStack<TupleView<(SFIcon, Text)>> {
+        self.style = style
+        self.label = LargeChip.getLabel(for: text, with: systemName, of: style)
+        self.action = action
+        self.hasAction = true
+        
+        let colors = LargeChip.getColors(for: style)
+        self.foreground = colors.foreground
+        self.background = colors.background
+        self.border = colors.border
+    }
+    
     private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
@@ -107,23 +144,31 @@ public struct LargeChip<Content: View>: View {
     
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
-            .font(style == .lowest ? .SpenceKit.SansHeadFont : .SpenceKit.SansHeadlineFont)
-            .foregroundColor(LargeChip.getColors(for: style).foreground)
+                    .font(style == .lowest ? .SpenceKit.SansHeadFont : .SpenceKit.SansHeadlineFont)
+                    .foregroundColor(LargeChip.getColors(for: style).foreground)
+    }
+    
+    @available(iOS 16.0, *)
+    private static func getLabel(for text: String, with systemName: String, of style: SpenceKitStyle) -> HStack<TupleView<(SFIcon, Text)>> {
+        return HStack {
+            SFIcon(systemName, size: .subhead)
+            LargeChip.getTextLabel(for: text, with: style)
+        }
     }
     
     // Helper function to set colors based on priority
     private static func getColors(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
         switch style {
-            case .CTA:
-                return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
-            case .primary:
-                return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
-            case .secondary:
-                return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
-            case .tertiary:
-                return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
-            default:
-                return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
+        case .CTA:
+            return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
+        case .primary:
+            return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
+        case .secondary:
+            return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
+        case .tertiary:
+            return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
+        default:
+            return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
         }
     }
 }

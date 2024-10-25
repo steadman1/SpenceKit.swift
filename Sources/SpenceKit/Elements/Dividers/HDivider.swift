@@ -13,7 +13,6 @@ public struct HDivider: View {
     public var body: some View {
         Rectangle()
             .frame(height: SpenceKit.Constants.borderWidth)
-            .frame(maxWidth: .infinity)
             .foregroundStyle(Color.SpenceKit.Border)
     }
 }

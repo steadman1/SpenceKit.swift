@@ -26,16 +26,16 @@ public enum SpenceKitSize: Int {
     public struct Icon {
         public static func getFont(for size: SpenceKitSize) -> (font: Font, skeleton: Font.SpenceKit.FontSkeleton) {
             switch size {
-                case .large:
-                    return (.SpenceKit.SansSecondaryTitleFont, .SansSecondaryTitle)
-                case .medium:
-                    return (.SpenceKit.SansTertiaryTitleFont, .SansTertiaryTitle)
-                case .head:
-                    return (.SpenceKit.SansHeadFont, .SansHead)
-                case .subhead:
-                    return (.SpenceKit.SansSubheadFont, .SansSubhead)
-                case .small:
-                    return (.SpenceKit.SansHintFont, .SansHint)
+            case .large:
+                return (.SpenceKit.SansSecondaryTitleFont, .SansSecondaryTitle)
+            case .medium:
+                return (.SpenceKit.SansTertiaryTitleFont, .SansTertiaryTitle)
+            case .head:
+                return (.SpenceKit.SansHeadFont, .SansHead)
+            case .subhead:
+                return (.SpenceKit.SansSubheadFont, .SansSubhead)
+            case .small:
+                return (.SpenceKit.SansHintFont, .SansHint)
             }
         }
         

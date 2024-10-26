@@ -1,8 +1,8 @@
 //
-//  ProgressSelector.swift
+//  IconProgressSelector.swift
 //  SpenceKit
 //
-//  Created by Spencer Steadman on 10/23/24.
+//  Created by Spencer Steadman on 10/25/24.
 //
 
 #if canImport(SwiftUI)
@@ -12,7 +12,7 @@ import ViewExtractor
 import MeasurementReader
 
 @available(iOS 16.0, *)
-public struct ProgressSelector<ContentCompleted: View, ContentActive: View, ContentInactive: View, ContentFinish: View>: View {
+public struct IconProgressSelector<ContentCompleted: View, ContentActive: View, ContentInactive: View, ContentFinish: View>: View {
     
     @Binding var selection: Int
     
@@ -38,9 +38,17 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                 ForEach(Array(zip(labels.indices, labels)), id: \.0) { index, name in
                     switch size {
                     case .large:
-                        LargeChip("checkmark", name, style: .primary)
+                        IconButton(.primary) {
+                            
+                        } label: {
+                            SFIcon("checkmark", size: .head)
+                        }
                     default:
-                        SmallChip("checkmark", name, style: .primary)
+                        IconButton(.primary) {
+                            
+                        } label: {
+                            SFIcon("checkmark", size: .subhead)
+                        }
                     }
                 }
             )
@@ -78,39 +86,6 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                 AnyView(SmallChip("arrow.up.right", "Finish", style: .CTA))
             }
         }() as ContentFinish
-    }
-    
-    // doesnt have finish
-    public init(
-        _ selection: Binding<Int>,
-        @ViewBuilder completed: @escaping () -> ContentCompleted,
-        @ViewBuilder active: @escaping () -> ContentActive,
-        @ViewBuilder inactive: @escaping () -> ContentInactive
-    ) where ContentFinish == EmptyView {
-        self._selection = selection
-        self.style = .lowest
-        self.hasFinish = false
-        self.contentCompleted = completed()
-        self.contentActive = active()
-        self.contentInactive = inactive()
-        self.contentFinish = EmptyView()
-    }
-    
-    // has finish
-    public init(
-        _ selection: Binding<Int>,
-        @ViewBuilder completed: @escaping () -> ContentCompleted,
-        @ViewBuilder active: @escaping () -> ContentActive,
-        @ViewBuilder inactive: @escaping () -> ContentInactive,
-        @ViewBuilder finish: @escaping () -> ContentFinish
-    ) {
-        self._selection = selection
-        self.style = .lowest
-        self.hasFinish = true
-        self.contentCompleted = completed()
-        self.contentActive = active()
-        self.contentInactive = inactive()
-        self.contentFinish = finish()
     }
     
     public var body: some View {
@@ -202,29 +177,11 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     VStack {
         if #available(iOS 16.0, *) {
             ProgressSelector(.constant(3), style: .CTA, hasFinish: true, labels: ["one", "one", "one"])
-            ProgressSelector(.constant(0)) {
-                LargeChip("Item 1", style: .CTA)
-                LargeChip("Item 2", style: .primary)
-                LargeChip("Item 3", style: .secondary)
-                LargeChip("Item 4", style: .tertiary)
-            } active: {
-                LargeChip("Item 1", style: .CTA)
-                LargeChip("Item 2", style: .primary)
-                LargeChip("Item 3", style: .secondary)
-                LargeChip("Item 4", style: .tertiary)
-            } inactive: {
-                LargeChip("Item 1", style: .secondary)
-                LargeChip("Item 2", style: .tertiary)
-                LargeChip("Item 3", style: .tertiary)
-                LargeChip("Item 4", style: .tertiary)
-            } finish: {
-                LargeChip("checkmark", "Finish", style: .primary)
-            }
-
         }
     }
 }
 
 #endif
+
 
 

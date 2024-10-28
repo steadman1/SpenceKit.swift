@@ -9,13 +9,17 @@
 
 import SwiftUI
 
-struct Toggle: View {
+public struct Toggle: View {
     
-    @Binding var isActive: Bool
+    @Binding public var isActive: Bool
     
-    let WIDTH: CGFloat = 72
+    public init(_ isActive: Binding<Bool>) {
+        self._isActive = isActive
+    }
     
-    var body: some View {
+    private let WIDTH: CGFloat = 72
+    
+    public var body: some View {
         ZStack(alignment: isActive ? .trailing : .leading) {
             HStack {
                 Spacer()
@@ -51,7 +55,7 @@ struct Toggle: View {
 @available(iOS 17.0, *)
 #Preview {
     @Previewable @State var isActive: Bool = false
-    Toggle(isActive: $isActive)
+    Toggle($isActive)
 }
 
 #endif

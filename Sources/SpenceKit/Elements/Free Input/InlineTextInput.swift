@@ -75,7 +75,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                     
                     ZStack(alignment: .leading) {
                         if text.isEmpty {
-                            Text("Search...")
+                            Text("Enter Text...")
                                 .font(.SpenceKit.SansHeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
                         }

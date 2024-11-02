@@ -85,9 +85,17 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self.contentFinish = {
             switch size {
             case .large:
-                AnyView(LargeChip("arrow.up.right", "Finish", style: .CTA))
+                AnyView(
+                    LargeChip("arrow.up.right", "Finish", style: .CTA) {
+                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
+                    }
+                )
             default:
-                AnyView(SmallChip("arrow.up.right", "Finish", style: .CTA))
+                AnyView(
+                    SmallChip("arrow.up.right", "Finish", style: .CTA) {
+                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
+                    }
+                )
             }
         }() as ContentFinish
     }
@@ -205,33 +213,34 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     }
 
     static func changeSelection(to index: Int, selection: Binding<Int>) {
-        selection.wrappedValue = index
+        withAnimation {
+            selection.wrappedValue = index
+        }
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
+    @Previewable @State var selection = 0
     VStack {
-        if #available(iOS 16.0, *) {
-            ProgressSelector(.constant(3), style: .CTA, hasFinish: true, labels: ["one", "one", "one"])
-            ProgressSelector(.constant(0)) {
-                LargeChip("Item 1", style: .CTA)
-                LargeChip("Item 2", style: .primary)
-                LargeChip("Item 3", style: .secondary)
-                LargeChip("Item 4", style: .tertiary)
-            } active: {
-                LargeChip("Item 1", style: .CTA)
-                LargeChip("Item 2", style: .primary)
-                LargeChip("Item 3", style: .secondary)
-                LargeChip("Item 4", style: .tertiary)
-            } inactive: {
-                LargeChip("Item 1", style: .secondary)
-                LargeChip("Item 2", style: .tertiary)
-                LargeChip("Item 3", style: .tertiary)
-                LargeChip("Item 4", style: .tertiary)
-            } finish: {
-                LargeChip("checkmark", "Finish", style: .primary)
-            }
-
+        ProgressSelector($selection, style: .CTA, hasFinish: true, labels: ["one", "one", "one"])
+        ProgressSelector($selection) {
+            LargeChip("Item 1", style: .CTA)
+            LargeChip("Item 2", style: .primary)
+            LargeChip("Item 3", style: .secondary)
+            LargeChip("Item 4", style: .tertiary)
+        } active: {
+            LargeChip("Item 1", style: .CTA)
+            LargeChip("Item 2", style: .primary)
+            LargeChip("Item 3", style: .secondary)
+            LargeChip("Item 4", style: .tertiary)
+        } inactive: {
+            LargeChip("Item 1", style: .secondary)
+            LargeChip("Item 2", style: .tertiary)
+            LargeChip("Item 3", style: .tertiary)
+            LargeChip("Item 4", style: .tertiary)
+        } finish: {
+            LargeChip("checkmark", "Finish", style: .primary)
         }
     }
 }

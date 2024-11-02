@@ -44,6 +44,7 @@ extension Font {
             public let size: CGFloat
             
             // Define Font Attributes for Sans Typography
+            public static let SansXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 42)
             public static let SansLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 34)
             public static let SansPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 28)
             public static let SansSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Semibold.name, size: 22)
@@ -58,6 +59,7 @@ extension Font {
             public static let SansHint: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 13)
             
             // Define Font Attributes for Serif Typography
+            public static let SerifXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 44)
             public static let SerifLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 36)
             public static let SerifPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 30)
             public static let SerifSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 24)
@@ -68,12 +70,10 @@ extension Font {
         }
         
         // Custom fonts with specified sizes
-        public static var SansLargeTitleFont: Font {
-            Font.custom(
-                Font.SpenceKit.FontSkeleton.SansLargeTitle.name,
-                size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size
-            )
-        }
+        public static let SansXLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansXLargeTitle.name,
+                                                             size: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size)
+        public static let SansLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansLargeTitle.name,
+                                                             size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size)
         public static let SansPrimaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansPrimaryTitle.name,
             size: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size).weight(.bold)
         public static let SansSecondaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansSecondaryTitle.name,
@@ -97,6 +97,8 @@ extension Font {
         public static let SansHintFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansHint.name,
                                                 size: Font.SpenceKit.FontSkeleton.SansHint.size).weight(.medium)
         
+        public static let SerifXLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifXLargeTitle.name,
+                                                       size: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.size)
         public static let SerifLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifLargeTitle.name,
                                                        size: Font.SpenceKit.FontSkeleton.SerifLargeTitle.size)
         public static let SerifPrimaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.name,

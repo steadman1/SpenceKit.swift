@@ -57,55 +57,53 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     }
     
     public var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 0) {
-                if !title.isEmpty {
-                    HStack {
-                        Text(title)
-                            .font(.SpenceKit.SansHeadlineFont)
-                            .foregroundStyle(Color.SpenceKit.SecondaryText)
-                            .padding(.bottom, SpenceKit.Constants.padding8)
-                        Spacer()
-                    }
-                }
-                HStack(spacing: 0) {
-                    identifier
-                        .foregroundStyle(Color.SpenceKit.TertiaryText)
-                        .padding(.leading, SpenceKit.Constants.padding16)
-                    
-                    ZStack(alignment: .leading) {
-                        if text.isEmpty {
-                            Text("Enter Text...")
-                                .font(.SpenceKit.SansHeadFont)
-                                .foregroundColor(Color.SpenceKit.TertiaryText)
-                        }
-                        TextField("", text: $text)
-                            .font(.SpenceKit.SansHeadFont)
-                    }.padding(.horizontal,
-                              SpenceKit.Constants.padding16 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0) )
-                    
-                    Spacer()
-                    
-                    helperButton
-                        .padding(.trailing, SpenceKit.Constants.padding16)
-                    
-                }.frame(maxWidth: .infinity)
-                    .frame(height: 48)
-                    .background(Color.SpenceKit.Background)
-                    .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
-                    .stroke(color: Color.SpenceKit.Border,
-                         width: SpenceKit.Constants.borderWidth)
-                    .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX + SpenceKit.Constants.borderWidth * 2))
-                
+        VStack(spacing: 0) {
+            if !title.isEmpty {
                 HStack {
-                    if !description.isEmpty {
-                        HStack {
-                            Text(description)
-                                .font(.SpenceKit.SansSubheadFont)
-                                .foregroundStyle(Color.SpenceKit.TertiaryText)
-                                .padding(.top, SpenceKit.Constants.padding8)
-                            Spacer()
-                        }
+                    Text(title)
+                        .font(.SpenceKit.SansHeadlineFont)
+                        .foregroundStyle(Color.SpenceKit.SecondaryText)
+                        .padding(.bottom, SpenceKit.Constants.padding8)
+                    Spacer()
+                }
+            }
+            HStack(spacing: 0) {
+                identifier
+                    .foregroundStyle(Color.SpenceKit.TertiaryText)
+                    .padding(.leading, SpenceKit.Constants.padding16)
+                
+                ZStack(alignment: .leading) {
+                    if text.isEmpty {
+                        Text("Enter Text...")
+                            .font(.SpenceKit.SansHeadFont)
+                            .foregroundColor(Color.SpenceKit.TertiaryText)
+                    }
+                    TextField("", text: $text)
+                        .font(.SpenceKit.SansHeadFont)
+                }.padding(.horizontal,
+                          SpenceKit.Constants.padding16 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0) )
+                
+                Spacer()
+                
+                helperButton
+                    .padding(.trailing, SpenceKit.Constants.padding16)
+                
+            }.frame(maxWidth: .infinity)
+                .frame(height: 48)
+                .background(Color.SpenceKit.Background)
+                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
+                .stroke(color: Color.SpenceKit.Border,
+                     width: SpenceKit.Constants.borderWidth)
+                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX + SpenceKit.Constants.borderWidth * 2))
+            
+            HStack {
+                if !description.isEmpty {
+                    HStack {
+                        Text(description)
+                            .font(.SpenceKit.SansSubheadFont)
+                            .foregroundStyle(Color.SpenceKit.TertiaryText)
+                            .padding(.top, SpenceKit.Constants.padding8)
+                        Spacer()
                     }
                 }
             }

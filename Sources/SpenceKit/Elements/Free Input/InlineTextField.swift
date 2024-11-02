@@ -45,6 +45,20 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
         _ text: Binding<String>,
         title: String,
         description: String,
+        @ViewBuilder helperButton: @escaping () -> HelperContent
+    ) where IdentifierContent == EmptyView {
+        self._text = text
+        self.title = title
+        self.description = description
+        self.identifier = EmptyView()
+        self.hasIdentifier = false
+        self.helperButton = helperButton()
+    }
+    
+    public init(
+        _ text: Binding<String>,
+        title: String,
+        description: String,
         @ViewBuilder identifier: @escaping () -> IdentifierContent,
         @ViewBuilder helperButton: @escaping () -> HelperContent
     ) {

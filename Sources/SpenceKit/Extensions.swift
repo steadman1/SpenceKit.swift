@@ -44,7 +44,7 @@ extension Font {
             public let size: CGFloat
             
             // Define Font Attributes for Sans Typography
-            public static let SansXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 42)
+            public static let SansXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 50)
             public static let SansLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 34)
             public static let SansPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 28)
             public static let SansSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Semibold.name, size: 22)
@@ -59,7 +59,7 @@ extension Font {
             public static let SansHint: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 13)
             
             // Define Font Attributes for Serif Typography
-            public static let SerifXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 44)
+            public static let SerifXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 52)
             public static let SerifLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 36)
             public static let SerifPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 30)
             public static let SerifSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 24)

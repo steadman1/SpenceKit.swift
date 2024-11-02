@@ -11,6 +11,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     
     @Binding public var text: String
     
+    private let placeholder: String
     private let title: String
     private let description: String
     private let identifier: IdentifierContent
@@ -18,8 +19,10 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     private let helperButton: HelperContent
     
     public init(
+        _ placeholder: String,
         _ text: Binding<String>
     ) where IdentifierContent == EmptyView, HelperContent == EmptyView {
+        self.placeholder = placeholder
         self._text = text
         self.title = ""
         self.description = ""
@@ -29,10 +32,12 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     }
     
     public init(
+        _ placeholder: String,
         _ text: Binding<String>,
         title: String,
         description: String
     ) where IdentifierContent == EmptyView, HelperContent == EmptyView {
+        self.placeholder = placeholder
         self._text = text
         self.title = title
         self.description = description
@@ -42,11 +47,13 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     }
     
     public init(
+        _ placeholder: String,
         _ text: Binding<String>,
         title: String,
         description: String,
         @ViewBuilder helperButton: @escaping () -> HelperContent
     ) where IdentifierContent == EmptyView {
+        self.placeholder = placeholder
         self._text = text
         self.title = title
         self.description = description
@@ -56,12 +63,14 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     }
     
     public init(
+        _ placeholder: String,
         _ text: Binding<String>,
         title: String,
         description: String,
         @ViewBuilder identifier: @escaping () -> IdentifierContent,
         @ViewBuilder helperButton: @escaping () -> HelperContent
     ) {
+        self.placeholder = placeholder
         self._text = text
         self.title = title
         self.description = description
@@ -88,7 +97,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 
                 ZStack(alignment: .leading) {
                     if text.isEmpty {
-                        Text("Enter Text...")
+                        Text(placeholder.isEmpty ? "Enter text" : placeholder)
                             .font(.SpenceKit.SansHeadFont)
                             .foregroundColor(Color.SpenceKit.TertiaryText)
                     }
@@ -128,9 +137,9 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
 @available(iOS 17.0, *)
 #Preview {
     @Previewable @State var text: String = ""
-    InlineTextField($text)
-    InlineTextField($text, title: "title!", description: "more info...")
-    InlineTextField($text, title: "title!", description: "more info...") {
+    InlineTextField("?", $text)
+    InlineTextField("Placeholder", $text, title: "title!", description: "more info...")
+    InlineTextField("Enter Text...", $text, title: "title!", description: "more info...") {
         SFIcon("arrow.up.right", size: .head)
     } helperButton: {
         HelperButtons.Info {

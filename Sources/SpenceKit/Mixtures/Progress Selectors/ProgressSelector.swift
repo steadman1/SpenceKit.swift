@@ -38,21 +38,29 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                 ForEach(Array(zip(labels.indices, labels)), id: \.0) { index, name in
                     switch size {
                     case .large:
-                        LargeChip("checkmark", name, style: .primary)
+                        LargeChip("checkmark", name, style: .primary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     default:
-                        SmallChip("checkmark", name, style: .primary)
+                        SmallChip("checkmark", name, style: .primary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     }
                 }
             )
         }() as ContentCompleted
         self.contentActive = {
             AnyView(
-                ForEach(labels, id: \.self) { name in
+                ForEach(Array(zip(labels.indices, labels)), id: \.0) { index, name in
                     switch size {
                     case .large:
-                        LargeChip(name, style: .secondary)
+                        LargeChip(name, style: .secondary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     default:
-                        SmallChip(name, style: .secondary)
+                        SmallChip(name, style: .secondary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     }
                     
                 }
@@ -60,12 +68,16 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         }() as ContentActive
         self.contentInactive = {
             AnyView(
-                ForEach(labels, id: \.self) { name in
+                ForEach(Array(zip(labels.indices, labels)), id: \.0) { index, name in
                     switch size {
                     case .large:
-                        LargeChip(name, style: .tertiary)
+                        LargeChip(name, style: .tertiary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     default:
-                        SmallChip(name, style: .tertiary)
+                        SmallChip(name, style: .tertiary) {
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                        }
                     }
                 }
             )
@@ -192,9 +204,8 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         }
     }
 
-    
-    func changeSelection(to index: Int) {
-        selection = index
+    static func changeSelection(to index: Int, selection: Binding<Int>) {
+        selection.wrappedValue = index
     }
 }
 

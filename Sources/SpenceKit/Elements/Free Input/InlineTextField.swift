@@ -10,6 +10,7 @@ import SwiftUI
 public struct InlineTextField<IdentifierContent: View, HelperContent: View>: View {
     
     @Binding public var text: String
+    @FocusState private var isFocused: Bool // Focus state for the TextField
     
     private let placeholder: String
     private let title: String
@@ -103,6 +104,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                     }
                     TextField("", text: $text)
                         .font(.SpenceKit.SansHeadFont)
+                        .focused($isFocused)
                 }.padding(.horizontal,
                           SpenceKit.Constants.padding16 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0) )
                 
@@ -125,11 +127,22 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                         Text(description)
                             .font(.SpenceKit.SansSubheadFont)
                             .foregroundStyle(Color.SpenceKit.TertiaryText)
-                            .padding(.top, SpenceKit.Constants.padding8)
-                        Spacer()
                     }
                 }
-            }
+                
+                Spacer()
+                
+                if isFocused, #available(iOS 16.0, *) {
+                    Button {
+                        isFocused = false
+                    } label: {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                            .font(.SpenceKit.SansHintFont)
+                            .foregroundColor(Color.SpenceKit.PrimaryText)
+                    
+                    }
+                }
+            }.padding(.top, SpenceKit.Constants.padding8)
         }
     }
 }

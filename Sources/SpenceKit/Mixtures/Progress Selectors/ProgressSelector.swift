@@ -16,6 +16,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     
     @Binding var selection: Int
     
+    private let padding: CGFloat
     private let style: SpenceKitStyle
     private let contentInactive: ContentInactive
     private let contentActive: ContentActive
@@ -28,9 +29,11 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         style: SpenceKitStyle,
         size: SpenceKitSize = .large,
         hasFinish: Bool = false,
-        labels: [String]
+        labels: [String],
+        padding: CGFloat = SpenceKit.Constants.padding16
     ) where ContentCompleted == AnyView, ContentActive == AnyView, ContentInactive == AnyView, ContentFinish == AnyView {
         self._selection = selection
+        self.padding = padding
         self.style = style
         self.hasFinish = hasFinish
         self.contentCompleted = {
@@ -103,11 +106,13 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     // doesnt have finish
     public init(
         _ selection: Binding<Int>,
+        padding: CGFloat = SpenceKit.Constants.padding16,
         @ViewBuilder completed: @escaping () -> ContentCompleted,
         @ViewBuilder active: @escaping () -> ContentActive,
         @ViewBuilder inactive: @escaping () -> ContentInactive
     ) where ContentFinish == EmptyView {
         self._selection = selection
+        self.padding = padding
         self.style = .lowest
         self.hasFinish = false
         self.contentCompleted = completed()
@@ -119,12 +124,14 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     // has finish
     public init(
         _ selection: Binding<Int>,
+        padding: CGFloat = SpenceKit.Constants.padding16,
         @ViewBuilder completed: @escaping () -> ContentCompleted,
         @ViewBuilder active: @escaping () -> ContentActive,
         @ViewBuilder inactive: @escaping () -> ContentInactive,
         @ViewBuilder finish: @escaping () -> ContentFinish
     ) {
         self._selection = selection
+        self.padding = padding
         self.style = .lowest
         self.hasFinish = true
         self.contentCompleted = completed()
@@ -151,10 +158,18 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                             }
                             
                             // Check if total width exceeds screen width
-                            if totalWidth > screenWidth - (proxy.maxWidth(indexed.count) ?? 0) || totalWidth == 0 {
-                                ScrollView(.horizontal) {
-                                    chipsContentView(indexed: indexed, proxy: proxy)
-                                }.scrollIndicators(.never)
+                            if totalWidth > screenWidth - padding - (proxy.maxWidth(indexed.count) ?? 0) || totalWidth == 0 {
+                                ScrollViewReader { scrollProxy in
+                                    ScrollView(.horizontal) {
+                                        chipsContentView(indexed: indexed, proxy: proxy)
+                                            .onChange(of: selection) { newSelection in
+                                                withAnimation {
+                                                    scrollProxy.scrollTo(newSelection, anchor: .center)
+                                                }
+                                            }
+                                    }
+                                    .scrollIndicators(.never)
+                                }
                             } else {
                                 chipsContentView(indexed: indexed, proxy: proxy)
                             }
@@ -183,7 +198,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                     Spacer()
                         .frame(width: proxy.maxWidth(indexed.count))
                 }
-            }
+            }.padding(.horizontal, padding)
             
             HStack {
                 HStack {
@@ -191,12 +206,15 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                         if index == selection {
                             views.0
                                 .measure(proxy, index)
+                                .id(index)
                         } else if index < selection {
                             views.1.0
                                 .measure(proxy, index)
+                                .id(index)
                         } else {
                             views.1.1
                                 .measure(proxy, index)
+                                .id(index)
                         }
                         
                         if (index < indexed.count - 1) || hasFinish {
@@ -206,9 +224,11 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                 }
                 
                 if hasFinish {
-                    contentFinish.measure(proxy, indexed.count)
+                    contentFinish
+                        .measure(proxy, indexed.count)
+                        .id(indexed.count)
                 }
-            }
+            }.padding(.horizontal, padding)
         }
     }
 

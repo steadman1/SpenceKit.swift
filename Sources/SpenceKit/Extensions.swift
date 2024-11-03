@@ -120,7 +120,7 @@ public extension View {
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
-            .stroke(color: strokeColor, width: font.size / 50)
+            .stroke(color: strokeColor, width: font.size / 80)
     }
     
     @MainActor func stroke(color: Color, width: CGFloat = 1) -> some View {

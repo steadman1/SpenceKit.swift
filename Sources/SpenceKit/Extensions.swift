@@ -70,10 +70,8 @@ extension Font {
         }
         
         // Custom fonts with specified sizes
-        public static let SansXLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansXLargeTitle.name,
-                                                             size: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size)
-        public static let SansLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SansLargeTitle.name,
-                                                             size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size)
+        public static let SansXLargeTitleFont: Font = .system(size: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size).weight(.bold)
+        public static let SansLargeTitleFont: Font = .system(size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size).weight(.bold)
         public static let SansPrimaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansPrimaryTitle.name,
             size: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size).weight(.bold)
         public static let SansSecondaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansSecondaryTitle.name,

@@ -114,6 +114,34 @@ extension Font {
     }
 }
 
+public struct LeftAligned: ViewModifier {
+    public func body(content: Content) -> some View {
+        HStack {
+            content
+            Spacer()
+        }
+    }
+}
+
+public struct RightAligned: ViewModifier {
+    public func body(content: Content) -> some View {
+        HStack {
+            Spacer()
+            content
+        }
+    }
+}
+
+public struct CenterAligned: ViewModifier {
+    public func body(content: Content) -> some View {
+        HStack {
+            Spacer()
+            content
+            Spacer()
+        }
+    }
+}
+
 public extension View {
     @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
@@ -123,6 +151,18 @@ public extension View {
     
     @MainActor func stroke(color: Color, width: CGFloat = 1) -> some View {
         modifier(StrokeModifier(strokeSize: width / 2, strokeColor: color))
+    }
+    
+    func left() -> some View {
+        self.modifier(LeftAligned())
+    }
+    
+    func right() -> some View {
+        self.modifier(RightAligned())
+    }
+    
+    func center() -> some View {
+        self.modifier(CenterAligned())
     }
 }
 

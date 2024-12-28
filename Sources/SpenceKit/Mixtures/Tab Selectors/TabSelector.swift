@@ -84,6 +84,11 @@ public struct TabSelector<ContentInactive: View, ContentActive: View>: View {
                                             views.0
                                         } else {
                                             views.1
+                                                .onTapGesture {
+                                                    withAnimation {
+                                                        selection = index
+                                                    }
+                                                }
                                         }
                                         
                                         if index < indexed.count - 1 {
@@ -95,32 +100,29 @@ public struct TabSelector<ContentInactive: View, ContentActive: View>: View {
                         }
                         
                         Spacer()
-                        
-                        
                     }.padding(SpenceKit.Constants.padding8)
                         .measure(proxy)
-                    
                 }.frame(maxWidth: geometry.size.width)
             }
         }
     }
 }
 
+@available(iOS 17.0, *)
 #Preview {
+    @Previewable @State var selectedTab: Int = 0
+    
     VStack {
-        if #available(iOS 16.0, *) {
-            TabSelector(.constant(0), style: .CTA, labels: ["One", "Two", "Three"])
-            TabSelector(.constant(0)) {
-                LargeChip("Item 1", style: .CTA)
-                LargeChip("Item 2", style: .primary)
-                LargeChip("Item 3", style: .secondary)
-            } inactive: {
-                LargeChip("Item 1", style: .secondary)
-                LargeChip("Item 2", style: .tertiary)
-                LargeChip("Item 3", style: .lowest)
-            }.frame(width: 300)
-
-        }
+        TabSelector($selectedTab, style: .CTA, labels: ["One", "Two", "Three"])
+        TabSelector($selectedTab) {
+            LargeChip("Item 1", style: .CTA)
+            LargeChip("Item 2", style: .primary)
+            LargeChip("Item 3", style: .secondary)
+        } inactive: {
+            LargeChip("Item 1", style: .secondary)
+            LargeChip("Item 2", style: .tertiary)
+            LargeChip("Item 3", style: .lowest)
+        }.frame(width: 300)
     }
 }
 

@@ -90,7 +90,7 @@ public struct SearchBar<Content: View>: View {
                 }.padding(.leading, SpenceKit.Constants.padding16)
                     .padding(.trailing, hasLabel ? SpenceKit.Constants.padding8 : SpenceKit.Constants.padding16)
             }.frame(maxWidth: geometry.size.width)
-        }.frame(maxHeight: 64)
+        }.frame(height: 64)
     }
 }
 

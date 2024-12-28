@@ -23,7 +23,8 @@ public struct TabBarTab: View {
         VStack {
             icon
                 .resizable()
-                .frame(width: 32, height: 32)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxWidth: 32, maxHeight: 32)
                 .foregroundStyle(Color.SpenceKit.PrimaryText)
             Text(title)
                 .font(Font.SpenceKit.SansHintFont)

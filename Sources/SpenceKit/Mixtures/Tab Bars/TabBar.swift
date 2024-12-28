@@ -52,9 +52,7 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
                                     views.1
                                         .padding(SpenceKit.Constants.padding12)
                                         .onTapGesture {
-                                            withAnimation {
-                                                selection = index
-                                            }
+                                            selection = index
                                         }
                                 }
                                 

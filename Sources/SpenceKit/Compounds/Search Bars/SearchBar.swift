@@ -63,6 +63,8 @@ public struct SearchBar<Content: View>: View {
                             Text(placeholder)
                                 .font(.SpenceKit.SansHeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
+                                .fixedSize(horizontal: true, vertical: true)
+                                .lineLimit(1)
                         }
                         TextField("", text: $query)
                             .font(.SpenceKit.SansHeadFont)

@@ -60,7 +60,7 @@ public struct SearchBar<Content: View>: View {
                     
                     ZStack(alignment: .leading) {
                         if query.isEmpty {
-                            Text("Search...")
+                            Text(placeholder)
                                 .font(.SpenceKit.SansHeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
                         }
@@ -96,13 +96,12 @@ public struct SearchBar<Content: View>: View {
 #Preview {
     VStack {
         if #available(iOS 16.0, *) {
-            SearchBar(.constant(""), style: .CTA) {
+            SearchBar(.constant(""), placeholder: "Search for anything...", style: .CTA) {
                 IconButton {
                     
                 } label: {
                     Icons.Airplane(with: .medium)
                 }
-
             }
             SearchBar(.constant("Testing"), style: .primary) {
                 IconButton(.lowest) {

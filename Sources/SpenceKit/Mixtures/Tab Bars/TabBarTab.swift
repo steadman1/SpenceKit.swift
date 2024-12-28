@@ -8,8 +8,16 @@
 import SwiftUI
 
 public struct TabBarTab: View {
-    public let title: String
-    public let icon: Image
+    private let title: String
+    private let icon: Image
+    
+    public init(
+        title: String,
+        icon: Image
+    ) {
+        self.title = title
+        self.icon = icon
+    }
     
     public var body: some View {
         VStack {

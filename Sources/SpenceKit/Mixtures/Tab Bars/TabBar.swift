@@ -68,7 +68,8 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
                 Spacer()
             }
         }.frame(maxWidth: .infinity)
-            .padding([.horizontal, .top], SpenceKit.Constants.padding12)
+            .padding(.horizontal, SpenceKit.Constants.padding16)
+            .padding(.top, SpenceKit.Constants.padding12)
             .background(Color.SpenceKit.PrimaryForeground)
     }
 }

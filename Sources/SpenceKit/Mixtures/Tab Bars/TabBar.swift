@@ -30,51 +30,46 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
     }
     
     public var body: some View {
-        GeometryReader { geometry in
-            MeasurementReader<Any, Untagged> { proxy in
-                HStack {
-                    HStack {
-                        Extract(contentActive) { active in
-                            Extract(contentInactive) { inactive in
-                                let inactive_active = Array(zip(active, inactive))
-                                let indexed = Array(zip(active.indices, inactive_active))
-                                HStack {
-                                    ForEach(indexed, id: \.0) { index, views in
-                                        if index == selection {
-                                            ZStack {
-                                                views.0
-                                            }.padding(SpenceKit.Constants.padding16)
-                                                .background(Color.SpenceKit.Background)
-                                                .clipShape(
-                                                    RoundedRectangle(
-                                                        cornerRadius: SpenceKit.Constants.cornerRadius16
-                                                    )
-                                                )
-                                        } else {
-                                            views.1
-                                                .onTapGesture {
-                                                    withAnimation {
-                                                        selection = index
-                                                    }
-                                                }
+        HStack {
+            HStack {
+                Extract(contentActive) { active in
+                    Extract(contentInactive) { inactive in
+                        let inactive_active = Array(zip(active, inactive))
+                        let indexed = Array(zip(active.indices, inactive_active))
+                        HStack {
+                            ForEach(indexed, id: \.0) { index, views in
+                                if index == selection {
+                                    ZStack {
+                                        views.0
+                                    }.padding(SpenceKit.Constants.padding16)
+                                        .background(Color.SpenceKit.Background)
+                                        .clipShape(
+                                            RoundedRectangle(
+                                                cornerRadius: SpenceKit.Constants.cornerRadius16
+                                            )
+                                        )
+                                } else {
+                                    views.1
+                                        .onTapGesture {
+                                            withAnimation {
+                                                selection = index
+                                            }
                                         }
-                                        
-                                        if index < indexed.count - 1 {
-                                            Spacer()
-                                        }
-                                    }
+                                }
+                                
+                                if index < indexed.count - 1 {
+                                    Spacer()
                                 }
                             }
                         }
-                        
-                        Spacer()
                     }
-                        .measure(proxy)
-                }.frame(maxWidth: .infinity)
-                    .padding(SpenceKit.Constants.padding16)
-                    .background(Color.SpenceKit.PrimaryForeground)
+                }
+                
+                Spacer()
             }
-        }
+        }.frame(maxWidth: .infinity)
+            .padding(SpenceKit.Constants.padding16)
+            .background(Color.SpenceKit.PrimaryForeground)
     }
 }
 

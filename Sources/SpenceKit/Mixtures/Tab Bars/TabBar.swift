@@ -41,7 +41,7 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
                                 if index == selection {
                                     ZStack {
                                         views.0
-                                    }.padding(SpenceKit.Constants.padding16)
+                                    }.padding(SpenceKit.Constants.padding12)
                                         .background(Color.SpenceKit.Background)
                                         .clipShape(
                                             RoundedRectangle(
@@ -68,7 +68,7 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
                 Spacer()
             }
         }.frame(maxWidth: .infinity)
-            .padding(SpenceKit.Constants.padding16)
+            .padding(SpenceKit.Constants.padding12)
             .background(Color.SpenceKit.PrimaryForeground)
     }
 }
@@ -78,6 +78,7 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
     @Previewable @State var selectedTab: Int = 0
     
     VStack {
+        Spacer()
         TabBar($selectedTab) {
             TabBarTab(title: "Home", icon: .init(systemName: "house.fill"))
             TabBarTab(title: "Search", icon: .init(systemName: "magnifyingglass.circle.fill"))

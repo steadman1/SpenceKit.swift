@@ -24,7 +24,7 @@ public struct TabBarTab: View {
             icon
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: 32, maxHeight: 32)
+                .frame(maxWidth: 24, maxHeight: 24)
                 .foregroundStyle(Color.SpenceKit.PrimaryText)
             Text(title)
                 .font(Font.SpenceKit.SansHintFont)

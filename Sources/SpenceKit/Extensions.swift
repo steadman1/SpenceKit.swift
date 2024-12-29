@@ -11,9 +11,15 @@ import UIKit
 extension Animation {
     public struct SpenceKit {
         public struct Bouncy {
-            public static let Quick = Animation.bouncy(duration: 0.15, extraBounce: 0.1)
-            public static let Default = Animation.bouncy(duration: 0.3, extraBounce: 0.1)
-            public static let Slow = Animation.bouncy(duration: 0.6, extraBounce: 0.1)
+            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: 0)
+            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: 0.05)
+            public static let slow = Animation.bouncy(duration: 0.8, extraBounce: 0.1)
+        }
+        
+        public struct Default {
+            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: -0.1)
+            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: -0.1)
+            public static let slow = Animation.bouncy(duration: 0.8, extraBounce: -0.1)
         }
     }
 }

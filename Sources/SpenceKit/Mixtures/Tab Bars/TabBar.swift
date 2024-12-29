@@ -83,7 +83,7 @@ public struct TabBar: View {
                             HStack {
                                 Button {
                                     selection = index
-                                    withAnimation(Animation.SpenceKit.Bouncy.Quick) {
+                                    withAnimation(Animation.SpenceKit.Default.quick) {
                                         animate = index
                                     }
                                 } label: {
@@ -137,9 +137,9 @@ public struct TabBar: View {
                         .padding(.top, SpenceKit.Constants.padding12)
                         .padding(.bottom, isFloating ? SpenceKit.Constants.padding12 : 0)
                     
-//                    if isFloating {
-//                        HDivider()
-//                    }
+                    if !isFloating {
+                        HDivider()
+                    }
                 }.background(Color.SpenceKit.Background)
                     .clipShape(
                         RoundedRectangle(

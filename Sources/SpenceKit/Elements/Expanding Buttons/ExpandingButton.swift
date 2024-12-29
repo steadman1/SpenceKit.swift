@@ -74,7 +74,8 @@ public struct ExpandingButton<Content: View>: View {
                             .foregroundColor(foreground)
                     }
                 }
-            }
+            }.background(Color.SpenceKit.Background)
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         }
     }
 }

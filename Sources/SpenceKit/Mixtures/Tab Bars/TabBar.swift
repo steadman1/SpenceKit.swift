@@ -128,7 +128,7 @@ public struct TabBar: View {
                                     RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                                 )
                             
-                            if usesSpacers && index < tabs.count - 1 {
+                            if (usesSpacers || isFloating) && index < tabs.count - 1 {
                                 Spacer()
                             }
                         }
@@ -137,9 +137,9 @@ public struct TabBar: View {
                         .padding(.top, SpenceKit.Constants.padding12)
                         .padding(.bottom, isFloating ? SpenceKit.Constants.padding12 : 0)
                     
-                    if geometry.size.width <= MAX_WIDTH {
-                        HDivider()
-                    }
+//                    if isFloating {
+//                        HDivider()
+//                    }
                 }.background(Color.SpenceKit.Background)
                     .clipShape(
                         RoundedRectangle(
@@ -158,7 +158,7 @@ public struct TabBar: View {
                 }
             }
         }.frame(
-            maxHeight: (tabStyle == .tertiary ? 32 : 24) + SpenceKit.Constants.padding16 * 4
+            maxHeight: (tabStyle == .tertiary ? 32 : 24) + SpenceKit.Constants.padding16 * 3
         )
     }
 }

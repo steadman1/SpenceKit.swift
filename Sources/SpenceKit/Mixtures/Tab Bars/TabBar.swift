@@ -12,59 +12,80 @@ import ViewExtractor
 import MeasurementReader
 
 @available(iOS 16.0, *)
-public struct TabBar<ContentInactive: View, ContentActive: View>: View {
+public struct TabBar: View {
     
     @Binding var selection: Int
+    @State private var animate: Int
 
-    private let contentInactive: ContentInactive
-    private let contentActive: ContentActive
+    private let tabs: [Tab]
+    
+    private let tabStyle: SpenceKitStyle
+    private let foregroundActive: Color
+    private let foregroundInactive: Color
+    private let background: Color
+    private let border: Color
     
     public init(
         _ selection: Binding<Int>,
-        @ViewBuilder active: @escaping () -> ContentActive,
-        @ViewBuilder inactive: @escaping () -> ContentInactive
+        tabStyle: SpenceKitStyle,
+        colorStyle: SpenceKitStyle,
+        tabs: [Tab]
     ) {
         self._selection = selection
-        self.contentInactive = inactive()
-        self.contentActive = active()
+        self._animate = .init(initialValue: selection.wrappedValue)
+        self.tabs = tabs
+        self.tabStyle = tabStyle
+        
+        switch colorStyle {
+        case .CTA:
+            self.foregroundActive = .SpenceKit.PrimaryCTA
+            self.foregroundInactive = .SpenceKit.SecondaryCTA
+            self.background = .SpenceKit.SecondaryCTA
+            self.border = .SpenceKit.Clear
+        case .primary:
+            self.foregroundActive = .SpenceKit.PrimaryAccent
+            self.foregroundInactive = .SpenceKit.PrimaryAccent
+            self.background = .SpenceKit.SecondaryAccent
+            self.border = .SpenceKit.Clear
+        default:
+            self.foregroundActive = .SpenceKit.PrimaryText
+            self.foregroundInactive = .SpenceKit.PrimaryText
+            self.background = .SpenceKit.PrimaryForeground
+            self.border = .SpenceKit.Clear
+        }
     }
     
     public var body: some View {
         HStack {
-            HStack {
-                Extract(contentActive) { active in
-                    Extract(contentInactive) { inactive in
-                        let inactive_active = Array(zip(active, inactive))
-                        let indexed = Array(zip(active.indices, inactive_active))
-                        HStack {
-                            ForEach(indexed, id: \.0) { index, views in
-                                if index == selection {
-                                    ZStack {
-                                        views.0
-                                    }.padding(SpenceKit.Constants.padding12)
-                                        .background(Color.SpenceKit.Background)
-                                        .clipShape(
-                                            RoundedRectangle(
-                                                cornerRadius: SpenceKit.Constants.cornerRadius16
-                                            )
-                                        )
-                                } else {
-                                    views.1
-                                        .padding(SpenceKit.Constants.padding12)
-                                        .onTapGesture {
-                                            selection = index
-                                        }
-                                }
-                                
-                                if index < indexed.count - 1 {
-                                    Spacer()
-                                }
-                            }
+            ForEach(Array(zip(tabs.indices, tabs)), id: \.0) { index, tab in
+                let isActive = index == animate
+                HStack {
+                    Button {
+                        selection = index
+                        withAnimation(Animation.SpenceKit.Bouncy.Quick) {
+                            animate = index
                         }
+                    } label: {
+                        HStack(spacing: SpenceKit.Constants.spacing) {
+                            tab.activeIcon
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 24, height: 24)
+                            if isActive {
+                                Text(tab.title)
+                                    .font(Font.SpenceKit.SansHeadlineFont)
+                            }
+                        }.foregroundStyle(
+                            isActive ? foregroundActive : foregroundInactive
+                        )
                     }
-                }
-                
-                Spacer()
+                }.padding(SpenceKit.Constants.padding12)
+                    .padding(.trailing, SpenceKit.Constants.padding4)
+                    .background(isActive ? background : Color.SpenceKit.Clear)
+                    .clipShape(
+                        RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                    )
+                    .stroke(color: border, width: SpenceKit.Constants.borderWidth)
             }
         }.frame(maxWidth: .infinity)
             .padding(.horizontal, SpenceKit.Constants.padding16)
@@ -79,13 +100,15 @@ public struct TabBar<ContentInactive: View, ContentActive: View>: View {
     
     VStack {
         Spacer()
-        TabBar($selectedTab) {
-            TabBarTab(title: "Home", icon: .init(systemName: "house.fill"))
-            TabBarTab(title: "Search", icon: .init(systemName: "magnifyingglass.circle.fill"))
-        } inactive: {
-            TabBarTab(title: "Home", icon: .init(systemName: "house"))
-            TabBarTab(title: "Search", icon: .init(systemName: "magnifyingglass.circle"))
-        }
+        TabBar(
+            $selectedTab,
+            tabStyle: .primary,
+            colorStyle: .CTA,
+            tabs: [
+                Tab(title: "Home", icon: .init(systemName: "house.fill")),
+                Tab(title: "Search", icon: .init(systemName: "magnifyingglass.circle.fill"))
+            ]
+        )
     }
 }
 

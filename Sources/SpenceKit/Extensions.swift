@@ -8,6 +8,16 @@
 import SwiftUI
 import UIKit
 
+extension Animation {
+    public struct SpenceKit {
+        public struct Bouncy {
+            public static let Quick = Animation.bouncy(duration: 0.2, extraBounce: -0.1)
+            public static let Default = Animation.bouncy(duration: 0.4, extraBounce: -0.1)
+            public static let Slow = Animation.bouncy(duration: 0.8, extraBounce: -0.1)
+        }
+    }
+}
+
 extension Color {
     public struct SpenceKit {
         public static let Border = Color(UIColor(resource: .init(name: "Colors/Border", bundle: .module)))

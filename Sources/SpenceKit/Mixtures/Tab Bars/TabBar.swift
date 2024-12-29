@@ -25,16 +25,22 @@ public struct TabBar: View {
     private let background: Color
     private let border: Color
     
+    private let usesSpacers: Bool
+    
+    private let MAX_WIDTH: CGFloat = 440
+    
     public init(
         _ selection: Binding<Int>,
-        tabStyle: SpenceKitStyle,
-        colorStyle: SpenceKitStyle,
+        tabStyle: SpenceKitStyle = .primary,
+        colorStyle: SpenceKitStyle = .primary,
+        usesSpacers: Bool = true,
         tabs: [Tab]
     ) {
         self._selection = selection
         self._animate = .init(initialValue: selection.wrappedValue)
         self.tabs = tabs
         self.tabStyle = tabStyle
+        self.usesSpacers = usesSpacers
         
         switch colorStyle {
         case .CTA:
@@ -47,50 +53,113 @@ public struct TabBar: View {
             self.foregroundInactive = .SpenceKit.PrimaryAccent
             self.background = .SpenceKit.SecondaryAccent
             self.border = .SpenceKit.Clear
-        default:
+        case .secondary:
             self.foregroundActive = .SpenceKit.PrimaryText
             self.foregroundInactive = .SpenceKit.PrimaryText
             self.background = .SpenceKit.PrimaryForeground
             self.border = .SpenceKit.Clear
+        default:
+            self.foregroundActive = .SpenceKit.PrimaryText
+            self.foregroundInactive = .SpenceKit.PrimaryText
+            self.background = .SpenceKit.Background
+            self.border = .SpenceKit.Border
         }
     }
     
     public var body: some View {
-        HStack {
-            ForEach(Array(zip(tabs.indices, tabs)), id: \.0) { index, tab in
-                let isActive = index == animate
-                HStack {
-                    Button {
-                        selection = index
-                        withAnimation(Animation.SpenceKit.Bouncy.Quick) {
-                            animate = index
-                        }
-                    } label: {
-                        HStack(spacing: SpenceKit.Constants.spacing) {
-                            tab.activeIcon
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 24, height: 24)
-                            if isActive {
-                                Text(tab.title)
-                                    .font(Font.SpenceKit.SansHeadlineFont)
+        GeometryReader { geometry in
+            let isFloating = geometry.size.width > MAX_WIDTH
+            HStack {
+                if isFloating {
+                    Spacer()
+                }
+                ZStack(alignment: .top) {
+                    HStack {
+                        ForEach(
+                            Array(zip(tabs.indices, tabs)),
+                            id: \.0
+                        ) { index, tab in
+                            let isActive = index == animate
+                            HStack {
+                                Button {
+                                    selection = index
+                                    withAnimation(Animation.SpenceKit.Bouncy.Quick) {
+                                        animate = index
+                                    }
+                                } label: {
+                                    VStack {
+                                        HStack(spacing: SpenceKit.Constants.spacing12) {
+                                            (isActive ? tab.activeIcon : tab.inactiveIcon)
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .frame(
+                                                    width: tabStyle == .tertiary ? 32 : 24,
+                                                    height: tabStyle == .tertiary ? 32 : 24
+                                                )
+                                            if isActive && tabStyle == .primary {
+                                                Text(tab.title)
+                                                    .font(Font.SpenceKit.SansHeadlineFont)
+                                            }
+                                        }.foregroundStyle(
+                                            isActive ? foregroundActive : foregroundInactive
+                                        )
+                                        
+                                        if tabStyle == .tertiary {
+                                            Text(tab.title)
+                                                .font(Font.SpenceKit.SansHintFont)
+                                                .foregroundStyle(
+                                                    isActive ? foregroundActive : foregroundInactive
+                                                )
+                                        }
+                                    }
+                                }
+                            }.padding(SpenceKit.Constants.padding12)
+                                .padding(
+                                    .trailing,
+                                    tabStyle == .primary ? SpenceKit.Constants.padding4 : 0
+                                )
+                                .background(isActive && tabStyle != .tertiary ? background : Color.SpenceKit.Clear)
+                                .clipShape(
+                                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                                ).stroke(
+                                    color: isActive ? border : Color.SpenceKit.Clear,
+                                    width: SpenceKit.Constants.borderWidth
+                                ).clipShape(
+                                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                                )
+                            
+                            if usesSpacers && index < tabs.count - 1 {
+                                Spacer()
                             }
-                        }.foregroundStyle(
-                            isActive ? foregroundActive : foregroundInactive
-                        )
+                        }
+                    }.frame(maxWidth: MAX_WIDTH)
+                        .padding(.horizontal, isFloating ? SpenceKit.Constants.padding16 : SpenceKit.Constants.padding12)
+                        .padding(.top, SpenceKit.Constants.padding12)
+                        .padding(.bottom, isFloating ? SpenceKit.Constants.padding12 : 0)
+                    
+                    if geometry.size.width <= MAX_WIDTH {
+                        HDivider()
                     }
-                }.padding(SpenceKit.Constants.padding12)
-                    .padding(.trailing, SpenceKit.Constants.padding4)
-                    .background(isActive ? background : Color.SpenceKit.Clear)
+                }.background(Color.SpenceKit.Background)
                     .clipShape(
-                        RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                        RoundedRectangle(
+                            cornerRadius: isFloating ? SpenceKit.Constants.cornerRadiusMAX : 0
+                        )
+                    ).stroke(
+                        color: isFloating ? Color.SpenceKit.Border : Color.SpenceKit.Clear,
+                        width: SpenceKit.Constants.borderWidth
+                    ).clipShape(
+                        RoundedRectangle(
+                            cornerRadius: isFloating ? SpenceKit.Constants.cornerRadiusMAX : 0
+                        )
                     )
-                    .stroke(color: border, width: SpenceKit.Constants.borderWidth)
+                if isFloating {
+                    Spacer()
+                }
             }
-        }.frame(maxWidth: .infinity)
-            .padding(.horizontal, SpenceKit.Constants.padding16)
-            .padding(.top, SpenceKit.Constants.padding12)
-            .background(Color.SpenceKit.PrimaryForeground)
+        }.frame(
+            maxHeight: (tabStyle == .tertiary ? 32 : 24) + SpenceKit.Constants.padding16 * 4
+        )
     }
 }
 
@@ -105,8 +174,16 @@ public struct TabBar: View {
             tabStyle: .primary,
             colorStyle: .CTA,
             tabs: [
-                Tab(title: "Home", icon: .init(systemName: "house.fill")),
-                Tab(title: "Search", icon: .init(systemName: "magnifyingglass.circle.fill"))
+                Tab(
+                    title: "Home",
+                    activeIcon: .init(systemName: "house.fill"),
+                    inactiveIcon: .init(systemName: "house")
+                ),
+                Tab(
+                    title: "Search",
+                    activeIcon: .init(systemName: "magnifyingglass.circle.fill"),
+                    inactiveIcon: .init(systemName: "magnifyingglass.circle")
+                )
             ]
         )
     }

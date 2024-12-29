@@ -14,6 +14,7 @@ public enum SpenceKitStyle: Int {
     case secondary = 2
     case tertiary = 3
     case lowest = 4
+    case destructive = 5
 }
 
 public enum SpenceKitSize: Int {

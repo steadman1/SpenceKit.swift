@@ -36,6 +36,10 @@ public struct IconButton<Content: View>: View {
             self.foreground = .SpenceKit.PrimaryText
             self.background = .SpenceKit.Background
             self.border = .SpenceKit.Border
+        case .destructive:
+            self.foreground = .SpenceKit.PrimaryDestructive
+            self.background = .SpenceKit.SecondaryDestructive
+            self.border = .SpenceKit.Clear
         default:
             self.foreground = .SpenceKit.PrimaryText
             self.background = .SpenceKit.Clear

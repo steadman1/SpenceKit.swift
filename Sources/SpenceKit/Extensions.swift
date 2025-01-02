@@ -169,7 +169,7 @@ public extension View {
             .stroke(color: strokeColor, width: font.size / 80)
     }
     
-    @MainActor func stroke(color: Color, width: CGFloat = 1) -> some View {
+    @MainActor func stroke(color: Color, width: CGFloat = SpenceKit.Constants.borderWidth) -> some View {
         modifier(StrokeModifier(strokeSize: width / 2, strokeColor: color))
     }
     

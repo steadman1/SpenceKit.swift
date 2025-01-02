@@ -63,7 +63,7 @@ public struct SearchBar<Content: View>: View {
                             Text(placeholder)
                                 .font(.SpenceKit.SansHeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
-                                .fixedSize(horizontal: true, vertical: true)
+                                .fixedSize(horizontal: false, vertical: true)
                                 .lineLimit(1)
                         }
                         TextField("", text: $query)
@@ -104,6 +104,7 @@ public struct SearchBar<Content: View>: View {
                     Icons.Airplane(with: .medium)
                 }
             }
+            SearchBar(.constant(""), placeholder: "Testing width and stuff—this should be truncated!!!!!")
             SearchBar(.constant("Testing"), style: .primary) {
                 IconButton(.lowest) {
                     

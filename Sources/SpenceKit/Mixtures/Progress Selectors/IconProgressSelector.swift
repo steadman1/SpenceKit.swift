@@ -176,7 +176,7 @@ public struct IconProgressSelector<ContentCompleted: View, ContentActive: View, 
 #Preview {
     VStack {
         if #available(iOS 16.0, *) {
-            ProgressSelector(.constant(3), style: .CTA, hasFinish: true, labels: ["one", "one", "one"])
+            ProgressSelector(.constant(3), style: .CTA, placeholder: "Finish", labels: ["one", "one", "one"])
         }
     }
 }

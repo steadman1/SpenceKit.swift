@@ -23,19 +23,21 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     private let contentCompleted: ContentCompleted
     private let contentFinish: ContentFinish
     private let hasFinish: Bool
+    private let placeholder: String?
     
     public init(
         _ selection: Binding<Int>,
         style: SpenceKitStyle,
         size: SpenceKitSize = .large,
-        hasFinish: Bool = false,
+        placeholder: String? = nil,
         labels: [String],
         padding: CGFloat = SpenceKit.Constants.padding16
     ) where ContentCompleted == AnyView, ContentActive == AnyView, ContentInactive == AnyView, ContentFinish == AnyView {
         self._selection = selection
         self.padding = padding
         self.style = style
-        self.hasFinish = hasFinish
+        self.placeholder = placeholder ?? "Finish"
+        self.hasFinish = placeholder != nil
         self.contentCompleted = {
             AnyView(
                 ForEach(Array(zip(labels.indices, labels)), id: \.0) { index, name in
@@ -89,13 +91,13 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
             switch size {
             case .large:
                 AnyView(
-                    LargeChip("arrow.up.right", "Finish", style: .CTA) {
+                    LargeChip("arrow.up.right", placeholder ?? "Finish", style: .CTA) {
                         ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
                     }
                 )
             default:
                 AnyView(
-                    SmallChip("arrow.up.right", "Finish", style: .CTA) {
+                    SmallChip("arrow.up.right", placeholder ?? "Finish", style: .CTA) {
                         ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
                     }
                 )
@@ -114,6 +116,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self._selection = selection
         self.padding = padding
         self.style = .lowest
+        self.placeholder = nil
         self.hasFinish = false
         self.contentCompleted = completed()
         self.contentActive = active()
@@ -133,6 +136,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self._selection = selection
         self.padding = padding
         self.style = .lowest
+        self.placeholder = nil
         self.hasFinish = true
         self.contentCompleted = completed()
         self.contentActive = active()
@@ -243,7 +247,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
 #Preview {
     @Previewable @State var selection = 0
     VStack {
-        ProgressSelector($selection, style: .CTA, hasFinish: true, labels: ["one", "one", "one"])
+        ProgressSelector($selection, style: .CTA, placeholder: "Done", labels: ["one", "one", "one"])
         ProgressSelector($selection) {
             LargeChip("Item 1", style: .CTA)
             LargeChip("Item 2", style: .primary)

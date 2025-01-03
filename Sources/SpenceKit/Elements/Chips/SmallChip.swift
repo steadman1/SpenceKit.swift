@@ -128,9 +128,11 @@ public struct SmallChip<Content: View>: View {
                 if #available(iOS 17.0, *) {
                     label
                         .foregroundStyle(foreground)
+                        .fixedSize(horizontal: true, vertical: false)
                 } else {
                     label
                         .foregroundColor(foreground)
+                        .fixedSize(horizontal: true, vertical: false)
                 }
             }
             .padding(.horizontal, SpenceKit.Constants.padding12)

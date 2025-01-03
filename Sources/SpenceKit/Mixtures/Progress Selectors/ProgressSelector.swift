@@ -292,7 +292,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
 #Preview {
     @Previewable @State var selection = 1
     VStack {
-        ProgressSelector($selection, style: .CTA, placeholder: "Done", skippable: true, labels: ["one", "one", "one"])
+        ProgressSelector($selection, style: .CTA, placeholder: "Done", skippable: true, labels: ["really long label example", "one", "one"])
         ProgressSelector($selection) {
             LargeChip("Item 1", style: .CTA)
             LargeChip("Item 2", style: .primary)

@@ -275,13 +275,15 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         }
     }
 
-    static func changeSelection(to index: Int, selection: Binding<Int>, skippable: Bool) {
-        withAnimation {
-            if (skippable && index > selection.wrappedValue)
-                || index < selection.wrappedValue {
-                
-                selection.wrappedValue = index
-            }
+    static func changeSelection(
+        to index: Int,
+        selection: Binding<Int>,
+        skippable: Bool
+    ) {
+        if (skippable && index > selection.wrappedValue)
+            || index < selection.wrappedValue {
+            
+            selection.wrappedValue = index
         }
     }
 }
@@ -290,7 +292,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
 #Preview {
     @Previewable @State var selection = 1
     VStack {
-        ProgressSelector($selection, style: .CTA, placeholder: "Done", skippable: false, labels: ["one", "one", "one"])
+        ProgressSelector($selection, style: .CTA, placeholder: "Done", skippable: true, labels: ["one", "one", "one"])
         ProgressSelector($selection) {
             LargeChip("Item 1", style: .CTA)
             LargeChip("Item 2", style: .primary)

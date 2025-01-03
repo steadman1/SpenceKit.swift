@@ -24,12 +24,14 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     private let contentFinish: ContentFinish
     private let hasFinish: Bool
     private let placeholder: String?
+    private let skippable: Bool
     
     public init(
         _ selection: Binding<Int>,
         style: SpenceKitStyle,
         size: SpenceKitSize = .large,
         placeholder: String? = nil,
+        skippable: Bool = true,
         labels: [String],
         padding: CGFloat = SpenceKit.Constants.padding16
     ) where ContentCompleted == AnyView, ContentActive == AnyView, ContentInactive == AnyView, ContentFinish == AnyView {
@@ -37,6 +39,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self.padding = padding
         self.style = style
         self.placeholder = placeholder ?? "Finish"
+        self.skippable = true
         self.hasFinish = placeholder != nil
         self.contentCompleted = {
             AnyView(
@@ -44,11 +47,19 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                     switch size {
                     case .large:
                         LargeChip("checkmark", name, style: .primary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     default:
                         SmallChip("checkmark", name, style: .primary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     }
                 }
@@ -60,11 +71,19 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                     switch size {
                     case .large:
                         LargeChip(name, style: .secondary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     default:
                         SmallChip(name, style: .secondary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     }
                     
@@ -77,11 +96,19 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                     switch size {
                     case .large:
                         LargeChip(name, style: .tertiary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     default:
                         SmallChip(name, style: .tertiary) {
-                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: index, selection: selection)
+                            ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                                to: index,
+                                selection: selection,
+                                skippable: skippable
+                            )
                         }
                     }
                 }
@@ -92,14 +119,22 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
             case .large:
                 AnyView(
                     LargeChip("arrow.up.right", placeholder ?? "Finish", style: .CTA) {
-                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
-                    }
+                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                            to: labels.count,
+                            selection: selection,
+                            skippable: skippable
+                        )
+                    }.disabled(!skippable)
                 )
             default:
                 AnyView(
                     SmallChip("arrow.up.right", placeholder ?? "Finish", style: .CTA) {
-                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(to: labels.count, selection: selection)
-                    }
+                        ProgressSelector<AnyView, AnyView, AnyView, AnyView>.changeSelection(
+                            to: labels.count,
+                            selection: selection,
+                            skippable: skippable
+                        )
+                    }.disabled(!skippable)
                 )
             }
         }() as ContentFinish
@@ -109,6 +144,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     public init(
         _ selection: Binding<Int>,
         padding: CGFloat = SpenceKit.Constants.padding16,
+        skippable: Bool = true,
         @ViewBuilder completed: @escaping () -> ContentCompleted,
         @ViewBuilder active: @escaping () -> ContentActive,
         @ViewBuilder inactive: @escaping () -> ContentInactive
@@ -118,6 +154,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self.style = .lowest
         self.placeholder = nil
         self.hasFinish = false
+        self.skippable = skippable
         self.contentCompleted = completed()
         self.contentActive = active()
         self.contentInactive = inactive()
@@ -128,6 +165,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
     public init(
         _ selection: Binding<Int>,
         padding: CGFloat = SpenceKit.Constants.padding16,
+        skippable: Bool = true,
         @ViewBuilder completed: @escaping () -> ContentCompleted,
         @ViewBuilder active: @escaping () -> ContentActive,
         @ViewBuilder inactive: @escaping () -> ContentInactive,
@@ -138,6 +176,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         self.style = .lowest
         self.placeholder = nil
         self.hasFinish = true
+        self.skippable = skippable
         self.contentCompleted = completed()
         self.contentActive = active()
         self.contentInactive = inactive()
@@ -236,18 +275,22 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
         }
     }
 
-    static func changeSelection(to index: Int, selection: Binding<Int>) {
+    static func changeSelection(to index: Int, selection: Binding<Int>, skippable: Bool) {
         withAnimation {
-            selection.wrappedValue = index
+            if (skippable && index > selection.wrappedValue)
+                || index < selection.wrappedValue {
+                
+                selection.wrappedValue = index
+            }
         }
     }
 }
 
 @available(iOS 17.0, *)
 #Preview {
-    @Previewable @State var selection = 0
+    @Previewable @State var selection = 1
     VStack {
-        ProgressSelector($selection, style: .CTA, placeholder: "Done", labels: ["one", "one", "one"])
+        ProgressSelector($selection, style: .CTA, placeholder: "Done", skippable: false, labels: ["one", "one", "one"])
         ProgressSelector($selection) {
             LargeChip("Item 1", style: .CTA)
             LargeChip("Item 2", style: .primary)

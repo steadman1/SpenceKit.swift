@@ -70,8 +70,10 @@ public struct SearchBar<Content: View>: View {
                             .font(.SpenceKit.SansHeadFont)
                     }
                     
-                    HelperButtons.ClearText {
-                        query = ""
+                    if !query.isEmpty {
+                        HelperButtons.ClearText {
+                            query = ""
+                        }
                     }
                     
                     switch style {

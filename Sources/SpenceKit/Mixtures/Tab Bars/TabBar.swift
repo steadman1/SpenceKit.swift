@@ -83,9 +83,6 @@ public struct TabBar: View {
                             HStack {
                                 Button {
                                     selection = index
-                                    withAnimation(Animation.SpenceKit.Default.quick) {
-                                        animate = index
-                                    }
                                 } label: {
                                     VStack {
                                         HStack(spacing: SpenceKit.Constants.spacing12) {
@@ -159,7 +156,11 @@ public struct TabBar: View {
             }
         }.frame(
             maxHeight: (tabStyle == .tertiary ? 32 : 24) + SpenceKit.Constants.padding16 * 3
-        )
+        ).onChange(of: selection) { newValue in
+            withAnimation(Animation.SpenceKit.Default.quick) {
+                animate = newValue
+            }
+        }
     }
 }
 

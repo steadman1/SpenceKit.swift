@@ -54,6 +54,35 @@ extension Color {
         public static let PrimaryText = Color(UIColor(resource: .init(name: "Colors/Text/PrimaryText", bundle: .module)))
         public static let SecondaryText = Color(UIColor(resource: .init(name: "Colors/Text/SecondaryText", bundle: .module)))
         public static let TertiaryText = Color(UIColor(resource: .init(name: "Colors/Text/TertiaryText", bundle: .module)))
+        
+        // Bundles
+        public static func standardColorBundle(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
+            switch style {
+            case .CTA:
+                return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
+            case .primary:
+                return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
+            case .secondary:
+                return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
+            case .tertiary:
+                return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
+            case .destructive:
+                return (.SpenceKit.PrimaryDestructive, .SpenceKit.SecondaryDestructive, .SpenceKit.Clear)
+            default:
+                return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
+            }
+        }
+        
+        public static func restrictedColorBundle(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
+            switch style {
+            case .CTA:
+                return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
+            case .primary:
+                return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
+            default:
+                return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
+            }
+        }
     }
 }
 
@@ -131,6 +160,12 @@ extension Font {
                                                     size: Font.SpenceKit.FontSkeleton.SerifCallout.size)
         public static let SerifCaptionFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifCaption.name,
                                                     size: Font.SpenceKit.FontSkeleton.SerifCaption.size)
+    }
+}
+
+extension RandomAccessCollection {
+    func enumerate() -> [(Int, Element)] {
+        return Array(zip(indices.map { $0 as! Int }, self)) as! [(Int, Element)]
     }
 }
 

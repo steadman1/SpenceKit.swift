@@ -21,7 +21,7 @@ public struct SmallChip<Content: View>: View {
         self.action = {}
         self.hasAction = false
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -38,7 +38,7 @@ public struct SmallChip<Content: View>: View {
         self.action = action
         self.hasAction = true
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -54,7 +54,7 @@ public struct SmallChip<Content: View>: View {
         self.action = {}
         self.hasAction = false
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -71,7 +71,7 @@ public struct SmallChip<Content: View>: View {
         self.action = action
         self.hasAction = true
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -89,7 +89,7 @@ public struct SmallChip<Content: View>: View {
         self.action = {}
         self.hasAction = false
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -108,7 +108,7 @@ public struct SmallChip<Content: View>: View {
         self.action = action
         self.hasAction = true
         
-        let colors = SmallChip.getColors(for: style)
+        let colors = Color.SpenceKit.standardColorBundle(for: style)
         self.foreground = colors.foreground
         self.background = colors.background
         self.border = colors.border
@@ -147,7 +147,9 @@ public struct SmallChip<Content: View>: View {
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
             .font(style == .lowest ? .SpenceKit.SansSubheadFont : .SpenceKit.SansSubheadlineFont)
-            .foregroundColor(SmallChip.getColors(for: style).foreground)
+            .foregroundColor(
+                Color.SpenceKit.standardColorBundle(for: style).foreground
+            )
     }
 
     @available(iOS 16.0, *)
@@ -155,22 +157,6 @@ public struct SmallChip<Content: View>: View {
         return HStack {
             SFIcon(systemName, size: .subhead)
             SmallChip.getTextLabel(for: text, with: style)
-        }
-    }
-    
-    // Helper function to set colors based on priority
-    private static func getColors(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
-        switch style {
-        case .CTA:
-            return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
-        case .primary:
-            return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
-        case .secondary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
-        case .tertiary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
-        default:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
         }
     }
 }

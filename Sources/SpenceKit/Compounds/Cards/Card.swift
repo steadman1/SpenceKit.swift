@@ -76,23 +76,9 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
             .font(.SpenceKit.SansHeadlineFont)
-            .foregroundColor(Card.getColors(for: style).foreground)
-    }
-    
-    // Helper function to set colors based on priority
-    private static func getColors(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
-        switch style {
-        case .CTA:
-            return (.SpenceKit.PrimaryCTA, .SpenceKit.SecondaryCTA, .SpenceKit.Clear)
-        case .primary:
-            return (.SpenceKit.PrimaryAccent, .SpenceKit.SecondaryAccent, .SpenceKit.Clear)
-        case .secondary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.PrimaryForeground, .SpenceKit.Clear)
-        case .tertiary:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Background, .SpenceKit.Border)
-        default:
-            return (.SpenceKit.PrimaryText, .SpenceKit.Clear, .SpenceKit.Clear)
-        }
+            .foregroundColor(
+                Color.SpenceKit.standardColorBundle(for: style).foreground
+            )
     }
 }
 

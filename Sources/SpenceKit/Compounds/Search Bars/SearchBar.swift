@@ -80,7 +80,8 @@ public struct SearchBar<Content: View>: View {
                     case .CTA:
                         label
                     case .primary:
-                        VDivider().padding(.vertical, SpenceKit.Constants.padding8)
+                        Divider(.vertical)
+                            .padding(.vertical, SpenceKit.Constants.padding8)
                         ZStack {
                             label
                                 .padding(.leading, SpenceKit.Constants.padding4)

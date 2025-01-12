@@ -59,7 +59,7 @@ public struct TabGroup: View {
                         }
                         
                         if index < tabs.count - 1 {
-                            HDivider()
+                            Divider(.horizontal)
                         }
                     }
                 }.frame(maxWidth: .infinity,

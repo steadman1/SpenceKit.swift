@@ -232,7 +232,7 @@ public struct ProgressSelector<ContentCompleted: View, ContentActive: View, Cont
                         .frame(width: proxy.maxWidth(index))
                     
                     if (index < indexed.count - 1) || hasFinish {
-                        HDivider()
+                        Divider(.horizontal)
                             .padding(.horizontal, SpenceKit.Constants.padding4)
                     }
                 }

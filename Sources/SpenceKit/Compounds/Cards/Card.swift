@@ -55,7 +55,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
                         contentFooter
                             .padding(SpenceKit.Constants.padding8)
                     case .primary:
-                        HDivider()
+                        Divider(.horizontal)
                         contentFooter
                             .padding([.horizontal, .bottom], SpenceKit.Constants.padding8)
                     default:

@@ -129,7 +129,7 @@ public struct IconProgressSelector<ContentCompleted: View, ContentActive: View, 
                         .frame(width: proxy.maxWidth(index))
                     
                     if (index < indexed.count - 1) || hasFinish {
-                        HDivider()
+                        Divider(.horizontal)
                             .padding(.horizontal, SpenceKit.Constants.padding4)
                     }
                 }

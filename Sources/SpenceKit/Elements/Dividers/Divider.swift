@@ -1,5 +1,5 @@
 //
-//  HDivider.swift
+//  Divider.swift
 //  SpenceKit
 //
 //  Created by Spencer Steadman on 10/21/24.

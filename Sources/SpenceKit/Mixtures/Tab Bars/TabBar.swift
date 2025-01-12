@@ -135,7 +135,7 @@ public struct TabBar: View {
                         .padding(.bottom, isFloating ? SpenceKit.Constants.padding12 : 0)
                     
                     if !isFloating {
-                        HDivider()
+                        Divider(.horizontal)
                     }
                 }.background(Color.SpenceKit.Background)
                     .clipShape(

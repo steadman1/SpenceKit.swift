@@ -49,6 +49,7 @@ public struct TabGroup: View {
                                 Text(tab.title)
                                     .font(Font.SpenceKit.SansBodyFont)
                                     .foregroundStyle(Color.SpenceKit.PrimaryText)
+                                    .multilineTextAlignment(.leading)
                                 
                                 Spacer()
                                 

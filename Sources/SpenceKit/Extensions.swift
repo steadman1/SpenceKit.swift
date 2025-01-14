@@ -88,30 +88,29 @@ extension Color {
 
 extension UIFont {
     public struct SpenceKit {
-        // Custom fonts with specified sizes
-        public static let SansXLargeTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size, weight: .bold)
-        public static let SansLargeTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansLargeTitle.size, weight: .bold)
-        public static let SansPrimaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size, weight: .bold)
-        public static let SansSecondaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSecondaryTitle.size, weight: .bold)
-        public static let SansTertiaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansTertiaryTitle.size, weight: .semibold)
-        public static let SansHeadlineFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHeadline.size, weight: .bold)
-        public static let SansHeadFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHead.size, weight: .medium)
-        public static let SansBodyFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansBody.size, weight: .medium)
-        public static let SansCalloutFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansCallout.size, weight: .medium)
-        public static let SansSubheadlineFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSubheadline.size, weight: .semibold)
-        public static let SansSubheadFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSubhead.size, weight: .medium)
-        public static let SansCaptionFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansCaption.size, weight: .medium)
-        public static let SansHintFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHint.size, weight: .medium)
-
-        public static let SerifXLargeTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.name, size: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.size)!
-        public static let SerifLargeTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifLargeTitle.name, size: Font.SpenceKit.FontSkeleton.SerifLargeTitle.size)!
-        public static let SerifPrimaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.size)!
-        public static let SerifSecondaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.size)!
-        public static let SerifTertiaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.size)!
-        public static let SerifBodyFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifBody.name, size: Font.SpenceKit.FontSkeleton.SerifBody.size)!
-        public static let SerifCalloutFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifCallout.name, size: Font.SpenceKit.FontSkeleton.SerifCallout.size)!
-        public static let SerifCaptionFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifCaption.name, size: Font.SpenceKit.FontSkeleton.SerifCaption.size)!
-
+        // Custom fonts with specified sizes using FontSkeleton
+        public static let SansXLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansXLargeTitle.uiFont
+        public static let SansLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansLargeTitle.uiFont
+        public static let SansPrimaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansPrimaryTitle.uiFont
+        public static let SansSecondaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansSecondaryTitle.uiFont
+        public static let SansTertiaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansTertiaryTitle.uiFont
+        public static let SansHeadlineFont: UIFont = Font.SpenceKit.FontSkeleton.SansHeadline.uiFont
+        public static let SansHeadFont: UIFont = Font.SpenceKit.FontSkeleton.SansHead.uiFont
+        public static let SansBodyFont: UIFont = Font.SpenceKit.FontSkeleton.SansBody.uiFont
+        public static let SansCalloutFont: UIFont = Font.SpenceKit.FontSkeleton.SansCallout.uiFont
+        public static let SansSubheadlineFont: UIFont = Font.SpenceKit.FontSkeleton.SansSubheadline.uiFont
+        public static let SansSubheadFont: UIFont = Font.SpenceKit.FontSkeleton.SansSubhead.uiFont
+        public static let SansCaptionFont: UIFont = Font.SpenceKit.FontSkeleton.SansCaption.uiFont
+        public static let SansHintFont: UIFont = Font.SpenceKit.FontSkeleton.SansHint.uiFont
+        
+        public static let SerifXLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SerifXLargeTitle.uiFont
+        public static let SerifLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SerifLargeTitle.uiFont
+        public static let SerifPrimaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.uiFont
+        public static let SerifSecondaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.uiFont
+        public static let SerifTertiaryTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.uiFont
+        public static let SerifBodyFont: UIFont = Font.SpenceKit.FontSkeleton.SerifBody.uiFont
+        public static let SerifCalloutFont: UIFont = Font.SpenceKit.FontSkeleton.SerifCallout.uiFont
+        public static let SerifCaptionFont: UIFont = Font.SpenceKit.FontSkeleton.SerifCaption.uiFont
     }
 }
 
@@ -120,85 +119,102 @@ extension Font {
         public struct FontSkeleton: Sendable {
             public let name: String
             public let size: CGFloat
+            public let uiFont: UIFont
+            public let font: Font
+
+            // Initializer that creates both UIFont and Font
+            public init(name: String, size: CGFloat, uiWeight: UIFont.Weight? = nil, weight: Font.Weight? = nil) {
+                self.name = name
+                self.size = size
+                if let uiWeight = uiWeight, let weight = weight {
+                    self.uiFont = UIFont.systemFont(ofSize: size, weight: uiWeight)
+                    self.font = Font.system(size: size, weight: weight)
+                } else if let uiWeight = uiWeight {
+                    self.uiFont = UIFont.systemFont(ofSize: size, weight: uiWeight)
+                    self.font = Font.custom(name, size: size)
+                } else if let weight = weight {
+                    self.uiFont = UIFont(name: name, size: size)!
+                    self.font = Font.system(size: size, weight: weight)
+                } else {
+                    self.uiFont = UIFont(name: name, size: size)!
+                    self.font = Font.custom(name, size: size)
+                }
+            }
+
+            // Define FontSkeletons for Sans Typography
+            public static let SansXLargeTitle = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 50, uiWeight: .bold, weight: .bold)
+            public static let SansLargeTitle = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 34, uiWeight: .bold, weight: .bold)
+            public static let SansPrimaryTitle = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 28, uiWeight: .bold, weight: .bold)
+            public static let SansSecondaryTitle = FontSkeleton(name: SpenceKitFont.Inter_Semibold.name, size: 22, uiWeight: .semibold, weight: .semibold)
+            public static let SansTertiaryTitle = FontSkeleton(name: SpenceKitFont.Inter_Semibold.name, size: 20, uiWeight: .semibold, weight: .semibold)
+            public static let SansHeadline = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 17, uiWeight: .bold, weight: .bold)
+            public static let SansHead = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 17, uiWeight: .medium, weight: .medium)
+            public static let SansBody = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 17, uiWeight: .medium, weight: .medium)
+            public static let SansCallout = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 16, uiWeight: .medium, weight: .medium)
+            public static let SansSubheadline = FontSkeleton(name: SpenceKitFont.Inter_Semibold.name, size: 15, uiWeight: .semibold, weight: .semibold)
+            public static let SansSubhead = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 15, uiWeight: .medium, weight: .medium)
+            public static let SansCaption = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 15, uiWeight: .medium, weight: .medium)
+            public static let SansHint = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 13, uiWeight: .medium, weight: .medium)
             
-            // Define Font Attributes for Sans Typography
-            public static let SansXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 50)
-            public static let SansLargeTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 34)
-            public static let SansPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 28)
-            public static let SansSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Semibold.name, size: 22)
-            public static let SansTertiaryTitle: FontSkeleton = .init(name: SpenceKitFont.Inter_Semibold.name, size: 20)
-            public static let SansHeadline: FontSkeleton = .init(name: SpenceKitFont.Inter_Bold.name, size: 17)
-            public static let SansHead: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 17)
-            public static let SansBody: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 17)
-            public static let SansCallout: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 16)
-            public static let SansSubheadline: FontSkeleton = .init(name: SpenceKitFont.Inter_Semibold.name, size: 15)
-            public static let SansSubhead: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 15)
-            public static let SansCaption: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 15)
-            public static let SansHint: FontSkeleton = .init(name: SpenceKitFont.Inter_Medium.name, size: 13)
-            
-            // Define Font Attributes for Serif Typography
-            public static let SerifXLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 52)
-            public static let SerifLargeTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 36)
-            public static let SerifPrimaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 30)
-            public static let SerifSecondaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 24)
-            public static let SerifTertiaryTitle: FontSkeleton = .init(name: SpenceKitFont.PPEditorialNew_RegularItalic.name, size: 22)
-            public static let SerifBody: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 18)
-            public static let SerifCallout: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 17)
-            public static let SerifCaption: FontSkeleton = .init(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 16)
+            // Define FontSkeletons for Serif Typography
+            public static let SerifXLargeTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 52)
+            public static let SerifLargeTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 36)
+            public static let SerifPrimaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 30)
+            public static let SerifSecondaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 24)
+            public static let SerifTertiaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_RegularItalic.name, size: 22)
+            public static let SerifBody = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 18)
+            public static let SerifCallout = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 17)
+            public static let SerifCaption = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 16)
         }
         
         // Custom fonts with specified sizes
-        public static let SansXLargeTitleFont: Font = .system(size: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size).weight(.bold)
-        public static let SansLargeTitleFont: Font = .system(size: Font.SpenceKit.FontSkeleton.SansLargeTitle.size).weight(.bold)
-        public static let SansPrimaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansPrimaryTitle.name,
-            size: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size).weight(.bold)
-        public static let SansSecondaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansSecondaryTitle.name,
-                                                          size: Font.SpenceKit.FontSkeleton.SansSecondaryTitle.size).weight(.bold)
-        public static let SansTertiaryTitleFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansTertiaryTitle.name,
-            size: Font.SpenceKit.FontSkeleton.SansTertiaryTitle.size).weight(.semibold)
-        public static let SansHeadlineFont: Font = .system( // Font.SpenceKit.FontSkeleton.SansHeadline.name,
-                                                    size: Font.SpenceKit.FontSkeleton.SansHeadline.size).weight(.bold)
-        public static let SansHeadFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansHead.name,
-            size: Font.SpenceKit.FontSkeleton.SansHead.size).weight(.medium)
-        public static let SansBodyFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansBody.name,
-                                                size: Font.SpenceKit.FontSkeleton.SansBody.size).weight(.medium)
-        public static let SansCalloutFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansCallout.name,
-                                                   size: Font.SpenceKit.FontSkeleton.SansCallout.size).weight(.medium)
-        public static let SansSubheadlineFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansSubheadline.name,
-                                                       size: Font.SpenceKit.FontSkeleton.SansSubheadline.size).weight(.semibold)
-        public static let SansSubheadFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansSubhead.name,
-                                                       size: Font.SpenceKit.FontSkeleton.SansSubhead.size).weight(.medium)
-        public static let SansCaptionFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansCaption.name,
-                                                   size: Font.SpenceKit.FontSkeleton.SansCaption.size).weight(.medium)
-        public static let SansHintFont: Font = .system( //Font.SpenceKit.FontSkeleton.SansHint.name,
-                                                size: Font.SpenceKit.FontSkeleton.SansHint.size).weight(.medium)
-        
-        public static let SerifXLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifXLargeTitle.name,
-                                                       size: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.size)
-        public static let SerifLargeTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifLargeTitle.name,
-                                                       size: Font.SpenceKit.FontSkeleton.SerifLargeTitle.size)
-        public static let SerifPrimaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.name,
-                                                  size: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.size)
-        public static let SerifSecondaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.name,
-                                                           size: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.size)
-        public static let SerifTertiaryTitleFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.name,
-                                                          size: Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.size)
-        public static let SerifBodyFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifBody.name,
-                                                 size: Font.SpenceKit.FontSkeleton.SerifBody.size)
-        public static let SerifCalloutFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifCallout.name,
-                                                    size: Font.SpenceKit.FontSkeleton.SerifCallout.size)
-        public static let SerifCaptionFont: Font = .custom(Font.SpenceKit.FontSkeleton.SerifCaption.name,
-                                                    size: Font.SpenceKit.FontSkeleton.SerifCaption.size)
+        public static let SansXLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SansXLargeTitle.font
+        public static let SansLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SansLargeTitle.font
+        public static let SansPrimaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SansPrimaryTitle.font
+        public static let SansSecondaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SansSecondaryTitle.font
+        public static let SansTertiaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SansTertiaryTitle.font
+        public static let SansHeadlineFont: Font = Font.SpenceKit.FontSkeleton.SansHeadline.font
+        public static let SansHeadFont: Font = Font.SpenceKit.FontSkeleton.SansHead.font
+        public static let SansBodyFont: Font = Font.SpenceKit.FontSkeleton.SansBody.font
+        public static let SansCalloutFont: Font = Font.SpenceKit.FontSkeleton.SansCallout.font
+        public static let SansSubheadlineFont: Font = Font.SpenceKit.FontSkeleton.SansSubheadline.font
+        public static let SansSubheadFont: Font = Font.SpenceKit.FontSkeleton.SansSubhead.font
+        public static let SansCaptionFont: Font = Font.SpenceKit.FontSkeleton.SansCaption.font
+        public static let SansHintFont: Font = Font.SpenceKit.FontSkeleton.SansHint.font
+
+        public static let SerifXLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifXLargeTitle.font
+        public static let SerifLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifLargeTitle.font
+        public static let SerifPrimaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.font
+        public static let SerifSecondaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.font
+        public static let SerifTertiaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.font
+        public static let SerifBodyFont: Font = Font.SpenceKit.FontSkeleton.SerifBody.font
+        public static let SerifCalloutFont: Font = Font.SpenceKit.FontSkeleton.SerifCallout.font
+        public static let SerifCaptionFont: Font = Font.SpenceKit.FontSkeleton.SerifCaption.font
     }
 }
 
 extension String {
-    public func stringSize(usingFont font: UIFont) -> CGSize {
-        let fontAttributes = [NSAttributedString.Key.font: font]
+    public func stringSize(usingFont font: UIFont, withTraits traits: UIFontDescriptor.SymbolicTraits = []) -> CGSize {
+        // Create a new UIFont with the specified traits
+        let updatedFont: UIFont
+        if traits.isEmpty {
+            updatedFont = font // Use the original font if no traits are specified
+        } else {
+            // Create a font descriptor with the traits
+            if let descriptorWithTraits = font.fontDescriptor.withSymbolicTraits(traits) {
+                updatedFont = UIFont(descriptor: descriptorWithTraits, size: font.pointSize)
+            } else {
+                updatedFont = font // Fallback to the original font if traits can't be applied
+            }
+        }
+
+        // Calculate the size using the updated font
+        let fontAttributes: [NSAttributedString.Key: Any] = [.font: updatedFont]
         let size = self.size(withAttributes: fontAttributes)
         return size
     }
 }
+
 
 extension Double {
     func format(decimalPlaces: Int = 2) -> String {

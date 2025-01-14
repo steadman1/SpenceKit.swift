@@ -86,6 +86,35 @@ extension Color {
     }
 }
 
+extension UIFont {
+    public struct SpenceKit {
+        // Custom fonts with specified sizes
+        public static let SansXLargeTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansXLargeTitle.size, weight: .bold)
+        public static let SansLargeTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansLargeTitle.size, weight: .bold)
+        public static let SansPrimaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansPrimaryTitle.size, weight: .bold)
+        public static let SansSecondaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSecondaryTitle.size, weight: .bold)
+        public static let SansTertiaryTitleFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansTertiaryTitle.size, weight: .semibold)
+        public static let SansHeadlineFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHeadline.size, weight: .bold)
+        public static let SansHeadFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHead.size, weight: .medium)
+        public static let SansBodyFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansBody.size, weight: .medium)
+        public static let SansCalloutFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansCallout.size, weight: .medium)
+        public static let SansSubheadlineFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSubheadline.size, weight: .semibold)
+        public static let SansSubheadFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansSubhead.size, weight: .medium)
+        public static let SansCaptionFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansCaption.size, weight: .medium)
+        public static let SansHintFont: UIFont = UIFont.systemFont(ofSize: Font.SpenceKit.FontSkeleton.SansHint.size, weight: .medium)
+
+        public static let SerifXLargeTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.name, size: Font.SpenceKit.FontSkeleton.SerifXLargeTitle.size)!
+        public static let SerifLargeTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifLargeTitle.name, size: Font.SpenceKit.FontSkeleton.SerifLargeTitle.size)!
+        public static let SerifPrimaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.size)!
+        public static let SerifSecondaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifSecondaryTitle.size)!
+        public static let SerifTertiaryTitleFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.name, size: Font.SpenceKit.FontSkeleton.SerifTertiaryTitle.size)!
+        public static let SerifBodyFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifBody.name, size: Font.SpenceKit.FontSkeleton.SerifBody.size)!
+        public static let SerifCalloutFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifCallout.name, size: Font.SpenceKit.FontSkeleton.SerifCallout.size)!
+        public static let SerifCaptionFont: UIFont = UIFont(name: Font.SpenceKit.FontSkeleton.SerifCaption.name, size: Font.SpenceKit.FontSkeleton.SerifCaption.size)!
+
+    }
+}
+
 extension Font {
     public struct SpenceKit {
         public struct FontSkeleton: Sendable {
@@ -162,6 +191,29 @@ extension Font {
                                                     size: Font.SpenceKit.FontSkeleton.SerifCaption.size)
     }
 }
+
+extension String {
+    public func stringSize(usingFont font: UIFont) -> CGSize {
+        let fontAttributes = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: fontAttributes)
+        return size
+    }
+}
+
+extension Double {
+    func format(decimalPlaces: Int = 2) -> String {
+        let formatString = "%.\(decimalPlaces)f"
+        let formatted = String(format: formatString, self)
+        
+        // Check if the formatted value ends in ".0"
+        if formatted.hasSuffix(".0") {
+            return String(formatted.dropLast(2)) // Remove ".0"
+        }
+        
+        return formatted // Return with decimals if applicable
+    }
+}
+
 
 extension RandomAccessCollection {
     func enumerate() -> [(Int, Element)] {

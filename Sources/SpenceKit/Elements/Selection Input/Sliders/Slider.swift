@@ -69,7 +69,7 @@ public struct Slider: View {
                         // Update slider value based on thumb's position
                         let newValue = min(max(0, gesture.location.x / geometry.size.width), 1) * (range.upperBound - range.lowerBound) + range.lowerBound
                         
-                        withAnimation(.bouncy(duration: 0.22, extraBounce: 0.05)) {
+                        withAnimation(.SpenceKit.Bouncy.normal) {
                             value.wrappedValue = newValue
                         }
                     }

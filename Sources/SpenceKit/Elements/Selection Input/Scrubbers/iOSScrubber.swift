@@ -40,55 +40,65 @@ public struct iOSScrubber: View {
     public var body: some View {
         GeometryReader { geometry in
             let activeWidth: CGFloat = animating * geometry.size.width
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .fill(Color.SpenceKit.ModeInverseAccent)
-                    .blendMode(.softLight)
-                    .opacity(0.65)
-                    .frame(
-                        width: geometry.size.width,
-                        height: isDragging ? draggingTrackHeight : defaultTrackHeight
-                    )
-                Rectangle()
-                    .fill(Color.SpenceKit.ModeInverseAccent)
-                    .blendMode(.softLight)
-                    .opacity(0.9)
-                    .frame(
-                        width: activeWidth,
-                        height: isDragging ? draggingTrackHeight : defaultTrackHeight
-                    )
-                Rectangle()
-                    .foregroundColor(Color.SpenceKit.ModeInverseAccent)
-                    .opacity(isDragging ? 1 : 0.45)
-                    .frame(
-                        width: activeWidth,
-                        height: isDragging ? draggingTrackHeight : defaultTrackHeight
-                    )
-            }
-            .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onEnded { gesture in
-                            withAnimation(.SpenceKit.Bouncy.normal) {
-                                isDragging = false
+            HStack {
+                ZStack(alignment: .leading) {
+                    Rectangle()
+                        .fill(Color.SpenceKit.ModeInverseAccent)
+                        .blendMode(.softLight)
+                        .opacity(0.65)
+                        .frame(
+                            width: geometry.size.width,
+                            height: isDragging ? draggingTrackHeight : defaultTrackHeight
+                        )
+                    Rectangle()
+                        .foregroundColor(Color.SpenceKit.ModeInverseAccent)
+                        .opacity(0.25)
+                        .blendMode(.lighten)
+                        .frame(
+                            width: geometry.size.width,
+                            height: isDragging ? draggingTrackHeight : defaultTrackHeight
+                        )
+                    Rectangle()
+                        .fill(Color.SpenceKit.ModeInverseAccent)
+                        .blendMode(.softLight)
+                        .opacity(0.9)
+                        .frame(
+                            width: activeWidth,
+                            height: isDragging ? draggingTrackHeight : defaultTrackHeight
+                        )
+                    Rectangle()
+                        .foregroundColor(Color.SpenceKit.ModeInverseAccent)
+                        .opacity(isDragging ? 1 : 0.4)
+                        .frame(
+                            width: activeWidth,
+                            height: isDragging ? draggingTrackHeight : defaultTrackHeight
+                        )
+                }
+                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onEnded { gesture in
+                                withAnimation(.SpenceKit.Bouncy.normal) {
+                                    isDragging = false
+                                }
+                                previousTranlationX = 0
+                                startGlideIfNeeded()
                             }
-                            previousTranlationX = 0
-                            startGlideIfNeeded()
-                        }
-                        .onChanged { gesture in
-                            withAnimation(.SpenceKit.Bouncy.normal) {
-                                isDragging = true
+                            .onChanged { gesture in
+                                withAnimation(.SpenceKit.Bouncy.normal) {
+                                    isDragging = true
+                                }
+                                velocityX = gesture.velocity.width
+                                let newValue = (gesture.translation.width - previousTranlationX) / geometry.size.width
+                                
+                                withAnimation(.SpenceKit.Bouncy.quick) {
+                                    animating = min(max(0, animating + newValue), 1)
+                                    if bindingType == .bindAlways { value = animating }
+                                }
+                                previousTranlationX = gesture.translation.width
                             }
-                            velocityX = gesture.velocity.width
-                            let newValue = (gesture.translation.width - previousTranlationX) / geometry.size.width
-                            
-                            withAnimation(.SpenceKit.Bouncy.quick) {
-                                animating = min(max(0, animating + newValue), 1)
-                                if bindingType == .bindAlways { value = animating }
-                            }
-                            previousTranlationX = gesture.translation.width
-                        }
-                )
+                    )
+            }.frame(height: draggingTrackHeight)
         }.frame(height: draggingTrackHeight)
             .onChange(of: value) { newValue in
                 if animating != newValue { animating = newValue }
@@ -128,14 +138,21 @@ public struct iOSScrubber: View {
     @Previewable @State var value: CGFloat = 0.4
     VStack {
         iOSScrubber($value)
-    }.frame(width: 300, height: 300)
+    }.frame(width: 300, height: 200)
         .padding(.horizontal, SpenceKit.Constants.padding24)
         .background(Color(red: 190/255, green: 166/255, blue: 248/255))
         .colorScheme(.light)
     VStack {
         iOSScrubber($value, bind: .bindAtRest)
-    }.frame(width: 300, height: 300)
+    }.frame(width: 300, height: 200)
         .padding(.horizontal, SpenceKit.Constants.padding24)
         .background(Color(red: 65/255, green: 46/255, blue: 156/255))
+        .colorScheme(.dark)
+    
+    VStack {
+        iOSScrubber($value, bind: .bindAtRest)
+    }.frame(width: 300, height: 300)
+        .padding(.horizontal, SpenceKit.Constants.padding24)
+        .background(.black)
         .colorScheme(.dark)
 }

@@ -58,18 +58,21 @@ public struct Slider: View {
     
     @ViewBuilder
     func thumbContentView(_ value: Binding<Double>, with geometry: GeometryProxy) -> some View {
-        Circle()
-            .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
-            .frame(width: thumbHeight, height: thumbHeight)
-            .background(Color.SpenceKit.Background)
-            .offset(x: CGFloat(value.wrappedValue / range.upperBound) * geometry.size.width)
+        ZStack {
+            Circle()
+                .foregroundStyle(Color.SpenceKit.Background)
+                .frame(width: thumbHeight, height: thumbHeight)
+            Circle()
+                .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
+                .frame(width: thumbHeight, height: thumbHeight)
+        }.offset(x: CGFloat(value.wrappedValue / range.upperBound) * geometry.size.width)
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
                         // Update slider value based on thumb's position
                         let newValue = min(max(0, gesture.location.x / geometry.size.width), 1) * (range.upperBound - range.lowerBound) + range.lowerBound
                         
-                        withAnimation(.SpenceKit.Bouncy.normal) {
+                        withAnimation(.SpenceKit.Bouncy.quick) {
                             value.wrappedValue = newValue
                         }
                     }

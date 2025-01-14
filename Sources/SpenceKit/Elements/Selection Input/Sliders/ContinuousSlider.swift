@@ -50,26 +50,29 @@ public struct ContinuousSlider: View {
     private let trackHeight: CGFloat = 16
     
     public var body: some View {
+        let valueDescription = (value * (range.upperBound - range.lowerBound) + range.lowerBound).format(decimalPlaces: decimalCount)
+        let stringSize = valueDescription.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
+        let lowerBoundSize = range.lowerBound.description.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
+        let upperBoundSize = range.upperBound.description.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
+        
         GeometryReader { geometry in
-            VStack(alignment: .leading) {
-                let valueDescription = (value * (range.upperBound - range.lowerBound) + range.lowerBound).format(decimalPlaces: decimalCount)
-                let stringSize = valueDescription.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold]).width
-                let offset = max(
-                    0,
-                    min(
-                        value * geometry.size.width - stringSize / 2,
-                        geometry.size.width - stringSize
-                    )
+            let offset = max(
+                0,
+                min(
+                    value * geometry.size.width - stringSize.width / 2,
+                    geometry.size.width - stringSize.width
                 )
+            )
+            VStack(alignment: .leading, spacing: SpenceKit.Constants.spacing4) {
                 if #available(iOS 16.0, *) {
                     Text(valueDescription)
-                        .font(Font.SpenceKit.SansBodyFont.weight(.bold))
+                        .font(Font.SpenceKit.SansHintFont)
                         .foregroundStyle(Color.SpenceKit.PrimaryText)
                         .fontWeight(.bold)
                         .offset(x: offset)
                 } else {
                     Text(valueDescription)
-                        .font(Font.SpenceKit.SansHintFont)
+                        .font(Font.SpenceKit.SansHintFont.weight(.bold))
                         .foregroundStyle(Color.SpenceKit.PrimaryText)
                         .offset(x: offset)
                 }
@@ -81,7 +84,13 @@ public struct ContinuousSlider: View {
                         .frame(width: max(activeWidth, trackHeight / 2), height: trackHeight)
                     RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                         .fill(Color.SpenceKit.PrimaryForeground)
-                        .frame(width: max(geometry.size.width - activeWidth, trackHeight), height: trackHeight)
+                        .frame(
+                            width: min(
+                                geometry.size.width - activeWidth,
+                                geometry.size.width - trackHeight / 2
+                            ),
+                            height: trackHeight
+                        ).opacity(activeWidth + trackHeight * 2 > geometry.size.width ? (geometry.size.width - activeWidth - trackHeight) / trackHeight : 1)
                 }.gesture(
                         DragGesture()
                             .onEnded { gesture in
@@ -110,7 +119,8 @@ public struct ContinuousSlider: View {
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                 }
             }
-        }
+        }.frame(
+            height: SpenceKit.Constants.spacing4 * 2 + stringSize.height + max(lowerBoundSize.height, upperBoundSize.height))
     }
     
     private func startGlideIfNeeded() {
@@ -144,4 +154,5 @@ public struct ContinuousSlider: View {
     @Previewable @State var from: CGFloat = 0
     @Previewable @State var to: CGFloat = 0.4
     ContinuousSlider($from, glideLength: .long, glideResistance: .low)
+        .padding(50)
 }

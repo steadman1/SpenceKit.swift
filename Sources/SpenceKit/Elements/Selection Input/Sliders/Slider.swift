@@ -54,6 +54,7 @@ public struct Slider: View {
                 thumbContentView($to, with: geometry)
             }
         }.frame(height: thumbHeight)
+            .padding(.vertical, SpenceKit.Constants.borderWidth)
     }
     
     @ViewBuilder

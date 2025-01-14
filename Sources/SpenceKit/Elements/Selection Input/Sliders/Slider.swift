@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-public struct DoubleContinuousSlider: View {
+public struct Slider: View {
     public enum Count: Int {
         case single = 0
         case double = 1
@@ -17,7 +17,7 @@ public struct DoubleContinuousSlider: View {
     @Binding private var from: Double
     @Binding private var to: Double
     
-    private let thumbCount: DoubleContinuousSlider.Count
+    private let thumbCount: Slider.Count
     
     public init(_ value: Binding<Double>) {
         self._from = .constant(0)
@@ -81,6 +81,6 @@ public struct DoubleContinuousSlider: View {
 #Preview {
     @Previewable @State var from: Double = 0
     @Previewable @State var to: Double = 0.4
-    DoubleContinuousSlider($from)
-    DoubleContinuousSlider(from: $from, to: $to)
+    Slider($from)
+    Slider(from: $from, to: $to)
 }

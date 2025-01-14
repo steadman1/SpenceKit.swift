@@ -51,9 +51,9 @@ public struct ContinuousSlider: View {
     
     public var body: some View {
         let valueDescription = (value * (range.upperBound - range.lowerBound) + range.lowerBound).format(decimalPlaces: decimalCount)
-        let stringSize = valueDescription.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
-        let lowerBoundSize = range.lowerBound.description.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
-        let upperBoundSize = range.upperBound.description.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold])
+        let stringSize = valueDescription.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [.traitBold])
+        let lowerBoundSize = range.lowerBound.description.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [])
+        let upperBoundSize = range.upperBound.description.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [])
         
         GeometryReader { geometry in
             let offset = max(

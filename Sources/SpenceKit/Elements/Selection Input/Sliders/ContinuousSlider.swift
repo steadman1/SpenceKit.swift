@@ -63,7 +63,7 @@ public struct ContinuousSlider: View {
                 )
                 if #available(iOS 16.0, *) {
                     Text(valueDescription)
-                        .font(Font.SpenceKit.SansBodyFont)
+                        .font(Font.SpenceKit.SansBodyFont.weight(.bold))
                         .foregroundStyle(Color.SpenceKit.PrimaryText)
                         .fontWeight(.bold)
                         .offset(x: offset)

@@ -32,6 +32,8 @@ extension Color {
         // Accents
         public static let PrimaryAccent = Color(UIColor(resource: .init(name: "Colors/Accent/PrimaryAccent", bundle: .module)))
         public static let SecondaryAccent = Color(UIColor(resource: .init(name: "Colors/Accent/SecondaryAccent", bundle: .module)))
+        public static let ModeAccent = Color(UIColor(resource: .init(name: "Colors/Accent/ModeAccent", bundle: .module)))
+        public static let ModeInverseAccent = Color(UIColor(resource: .init(name: "Colors/Accent/ModeInverseAccent", bundle: .module)))
         
         // Destructive
         public static let PrimaryDestructive = Color(UIColor(resource: .init(name: "Colors/Destructive/PrimaryDestructive", bundle: .module)))

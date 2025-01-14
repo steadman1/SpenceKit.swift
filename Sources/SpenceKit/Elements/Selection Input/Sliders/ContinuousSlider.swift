@@ -7,37 +7,42 @@
 
 import SwiftUI
 
-@available(iOS 17.0, *)
-public struct ContinuousSlider: View {
-    public enum Count: Int {
-        case single = 0
-        case double = 1
+public struct SingleContinuousSlider: View {
+    public enum GlideLength: Double {
+        case short = 0.6
+        case moderate = 0.8
+        case long = 0.95
     }
+    
+    public enum GlideResistance: Double {
+        case low = 20000
+        case moderate = 50000
+        case high = 100000
+    }
+    
     // Slider value binding
-    @Binding private var from: Double
-    @Binding private var to: Double
-    
-    private let thumbCount: ContinuousSlider.Count
-    
-    public init(_ value: Binding<Double>) {
-        self._from = .constant(0)
-        self._to = value
-        self.thumbCount = .single
+    @Binding private var value: CGFloat
+    public init(
+        _ value: Binding<CGFloat>,
+        glideLength: GlideLength = .moderate,
+        glideResistance: GlideResistance = .moderate
+    ) {
+        self._value = value
+        self.glideLength = glideLength
+        self.glideResistance = glideResistance
     }
     
-    public init(from: Binding<Double>, to: Binding<Double>) {
-        self._from = from
-        self._to = to
-        self.thumbCount = .double
-    }
+    @State private var previousTranlationX: CGFloat = 0
+    @State private var velocityX: CGFloat = 0
+    @State private var timer: Timer? = nil
     
-    private let range: ClosedRange<Double> = 0...1
-    private let thumbHeight: CGFloat = 20
-    private let trackHeight: CGFloat = 4
+    private let glideLength: GlideLength
+    private let glideResistance: GlideResistance
+    private let trackHeight: CGFloat = 20
     
     public var body: some View {
         GeometryReader { geometry in
-            let activeWidth: CGFloat = abs( CGFloat(to / range.upperBound) - CGFloat(from / range.upperBound) ) * geometry.size.width
+            let activeWidth: CGFloat = value * geometry.size.width
             ZStack(alignment: .leading) {
                 RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                     .fill(Color.SpenceKit.PrimaryForeground)
@@ -45,42 +50,58 @@ public struct ContinuousSlider: View {
                 
                 RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                     .fill(Color.SpenceKit.PrimaryAccent)
-                    .offset(x: CGFloat((to - from > 0 ? from : to) / range.upperBound) * geometry.size.width)
-                    .frame(width: max(activeWidth, 0), height: trackHeight)
-                
-                if thumbCount == .double {
-                    thumbContentView($from, with: geometry)
-                }
-                thumbContentView($to, with: geometry)
-            }
-        }.frame(height: thumbHeight)
-    }
-    
-    @ViewBuilder
-    func thumbContentView(_ value: Binding<Double>, with geometry: GeometryProxy) -> some View {
-        Circle()
-            .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
-            .frame(width: thumbHeight, height: thumbHeight)
-            .background(Color.SpenceKit.Background)
-            .offset(x: CGFloat(value.wrappedValue / range.upperBound) * geometry.size.width)
-            .gesture(
+                    .frame(width: max(activeWidth, trackHeight / 2), height: trackHeight)
+                Text(value.description)
+            }.gesture(
                 DragGesture()
+                    .onEnded { gesture in
+                        previousTranlationX = 0
+                        startGlideIfNeeded()
+                    }
                     .onChanged { gesture in
-                        // Update slider value based on thumb's position
-                        let newValue = min(max(0, gesture.location.x / geometry.size.width), 1) * (range.upperBound - range.lowerBound) + range.lowerBound
+                        velocityX = gesture.velocity.width
+                        let newValue = (gesture.translation.width - previousTranlationX) / geometry.size.width
+                        let factor = abs(gesture.location.x - value  * geometry.size.width)
                         
-                        withAnimation(.bouncy(duration: 0.22, extraBounce: 0.05)) {
-                            value.wrappedValue = newValue
+                        withAnimation {
+                            value = min(max(0, value + newValue * log10(factor + 1)), 1)
+//                            value = newValue
                         }
+                        previousTranlationX = gesture.translation.width
                     }
             )
+        }.frame(height: trackHeight)
+    }
+    
+    private func startGlideIfNeeded() {
+        guard abs(velocityX) > 0 else { return }
+
+        timer?.invalidate() // Ensure there's no existing timer running
+        timer = Timer.scheduledTimer(withTimeInterval: 1/60, repeats: true) { timer in
+            DispatchQueue.main.async {
+                if abs(velocityX) < 1 { // Stop if velocity is too small
+                    self.timer?.invalidate()
+                    self.timer = nil
+                    return
+                }
+
+                // Reduce velocity and update position
+                velocityX *= glideLength.rawValue
+                let delta = (velocityX) / glideResistance.rawValue // Adjust factor as needed
+                value = min(max(0, value + delta), 1) // Keep within 0 to 1 range
+
+                // Ensure UI updates smoothly
+                withAnimation {
+                    value = value
+                }
+            }
+        }
     }
 }
 
 @available(iOS 17.0, *)
 #Preview {
-    @Previewable @State var from: Double = 0
-    @Previewable @State var to: Double = 0.4
-    ContinuousSlider($from)
-    ContinuousSlider(from: $from, to: $to)
+    @Previewable @State var from: CGFloat = 0
+    @Previewable @State var to: CGFloat = 0.4
+    SingleContinuousSlider($from, glideLength: .moderate, glideResistance: .moderate)
 }

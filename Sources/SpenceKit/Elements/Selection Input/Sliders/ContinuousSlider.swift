@@ -27,11 +27,13 @@ public struct ContinuousSlider: View {
     
     public init(
         _ value: Binding<CGFloat>,
-        range: ClosedRange<Double> = 1...100,
-        decimalCount: Int = 0,
+        style: SpenceKitStyle = .CTA,
+        range: ClosedRange<Double> = 0...10000000,
+        decimalCount: Int = 1,
         glideLength: GlideLength = .moderate,
         glideResistance: GlideResistance = .moderate
     ) {
+        self.style = style
         self._value = value
         self.range = range
         self.decimalCount = decimalCount
@@ -43,6 +45,7 @@ public struct ContinuousSlider: View {
     @State private var velocityX: CGFloat = 0
     @State private var timer: Timer? = nil
     
+    private let style: SpenceKitStyle
     private let range: ClosedRange<Double>
     private let decimalCount: Int
     private let glideLength: GlideLength
@@ -54,7 +57,7 @@ public struct ContinuousSlider: View {
         let stringSize = valueDescription.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [.traitBold])
         let lowerBoundSize = range.lowerBound.description.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [])
         let upperBoundSize = range.upperBound.description.stringSize(usingFont: UIFont.SpenceKit.SansHintFont, withTraits: [])
-        
+        let primaryHeight = SpenceKit.Constants.spacing4 * 2 + trackHeight + stringSize.height + max(lowerBoundSize.height, upperBoundSize.height)
         GeometryReader { geometry in
             let offset = max(
                 0,
@@ -64,33 +67,63 @@ public struct ContinuousSlider: View {
                 )
             )
             VStack(alignment: .leading, spacing: SpenceKit.Constants.spacing4) {
-                if #available(iOS 16.0, *) {
-                    Text(valueDescription)
-                        .font(Font.SpenceKit.SansHintFont)
-                        .foregroundStyle(Color.SpenceKit.PrimaryText)
-                        .fontWeight(.bold)
-                        .offset(x: offset)
-                } else {
-                    Text(valueDescription)
-                        .font(Font.SpenceKit.SansHintFont.weight(.bold))
+                if style == .primary {
+                    valueText(valueDescription)
                         .foregroundStyle(Color.SpenceKit.PrimaryText)
                         .offset(x: offset)
                 }
                 
-                let activeWidth: CGFloat = value * geometry.size.width
+                let activeWidth: CGFloat = value * (geometry.size.width  - (style == .secondary ? upperBoundSize.width - 4: 0))
                 HStack(spacing: 0) {
-                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
-                        .fill(Color.SpenceKit.PrimaryAccent)
-                        .frame(width: max(activeWidth, trackHeight / 2), height: trackHeight)
-                    RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
-                        .fill(Color.SpenceKit.PrimaryForeground)
-                        .frame(
-                            width: min(
-                                geometry.size.width - activeWidth,
-                                geometry.size.width - trackHeight / 2
-                            ),
-                            height: trackHeight
-                        ).opacity(activeWidth + trackHeight * 2 > geometry.size.width ? (geometry.size.width - activeWidth - trackHeight) / trackHeight : 1)
+                    ZStack(alignment: .trailing) {
+                        RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                            .fill(style == .tertiary ? Color.SpenceKit.SecondaryAccent : Color.SpenceKit.PrimaryAccent)
+                            .frame(
+                                width: max(
+                                    activeWidth,
+                                    style != .primary
+                                    ? stringSize.width + 8
+                                    : trackHeight / 2
+                                ),
+                                height: trackHeight
+                            )
+                        if style != .primary {
+                            valueText(valueDescription)
+                                .fixedSize()
+                                .foregroundStyle(style == .secondary ? Color.SpenceKit.Background : Color.SpenceKit.PrimaryAccent)
+                                .padding(.horizontal, SpenceKit.Constants.padding4)
+                        }
+                    }
+                    let opacity = activeWidth + trackHeight * 2 > geometry.size.width ? (geometry.size.width - activeWidth - trackHeight) / trackHeight : 1
+                    ZStack(alignment: .trailing) {
+                        RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
+                            .fill(Color.SpenceKit.PrimaryForeground)
+                            .frame(
+                                width: min(
+                                    geometry.size.width - activeWidth,
+                                    geometry.size.width - (
+                                        style != .primary
+                                        ? stringSize.width + 8
+                                        : trackHeight / 2)
+                                ) - (style == .secondary ? upperBoundSize.width - 4 : 0),
+                                height: trackHeight
+                            )
+                        if style == .tertiary {
+                            Text(range.upperBound.format(decimalPlaces: 0))
+                                .fixedSize()
+                                .font(Font.SpenceKit.SansHintFont)
+                                .foregroundStyle(Color.SpenceKit.TertiaryText)
+                                .padding(.horizontal, SpenceKit.Constants.padding4)
+                        }
+                    }.opacity(opacity)
+                    
+                    if style == .secondary {
+                        Text(range.upperBound.format(decimalPlaces: 0))
+                            .fixedSize()
+                            .font(Font.SpenceKit.SansHintFont)
+                            .foregroundStyle(Color.SpenceKit.SecondaryText)
+                            .padding(.leading, SpenceKit.Constants.padding4)
+                    }
                 }.gesture(
                         DragGesture()
                             .onEnded { gesture in
@@ -100,7 +133,7 @@ public struct ContinuousSlider: View {
                             .onChanged { gesture in
                                 velocityX = gesture.velocity.width
                                 let newValue = (gesture.translation.width - previousTranlationX) / geometry.size.width
-                                let factor = abs(gesture.location.x - value  * geometry.size.width)
+                                let factor = abs(gesture.location.x - value * geometry.size.width)
                                 
                                 withAnimation(.SpenceKit.Bouncy.quick) {
                                     value = min(max(0, value + newValue * log10(factor)), 1)
@@ -108,19 +141,31 @@ public struct ContinuousSlider: View {
                                 previousTranlationX = gesture.translation.width
                             }
                         )
-                
-                HStack {
-                    Text(range.lowerBound.format(decimalPlaces: 0))
-                        .font(Font.SpenceKit.SansHintFont)
-                        .foregroundStyle(Color.SpenceKit.SecondaryText)
-                    Spacer()
-                    Text(range.upperBound.format(decimalPlaces: 0))
-                        .font(Font.SpenceKit.SansHintFont)
-                        .foregroundStyle(Color.SpenceKit.SecondaryText)
+                if style == .primary {
+                    HStack {
+                        Text(range.lowerBound.format(decimalPlaces: 0))
+                            .font(Font.SpenceKit.SansHintFont)
+                            .foregroundStyle(Color.SpenceKit.SecondaryText)
+                        Spacer()
+                        Text(range.upperBound.format(decimalPlaces: 0))
+                            .font(Font.SpenceKit.SansHintFont)
+                            .foregroundStyle(Color.SpenceKit.SecondaryText)
+                    }
                 }
             }
-        }.frame(
-            height: SpenceKit.Constants.spacing4 * 2 + stringSize.height + max(lowerBoundSize.height, upperBoundSize.height))
+        }.frame(height: style == .primary ? primaryHeight : trackHeight)
+    }
+    
+    @ViewBuilder
+    private func valueText(_ text: String) -> some View {
+        if #available(iOS 16.0, *) {
+            Text(text)
+                .font(Font.SpenceKit.SansHintFont)
+                .fontWeight(.bold)
+        } else {
+            Text(text)
+                .font(Font.SpenceKit.SansHintFont.weight(.bold))
+        }
     }
     
     private func startGlideIfNeeded() {
@@ -153,6 +198,9 @@ public struct ContinuousSlider: View {
 #Preview {
     @Previewable @State var from: CGFloat = 0
     @Previewable @State var to: CGFloat = 0.4
-    ContinuousSlider($from, glideLength: .long, glideResistance: .low)
-        .padding(50)
+    VStack {
+        ContinuousSlider($from, style: .primary, glideLength: .long, glideResistance: .low)
+        ContinuousSlider($from, style: .secondary, glideLength: .long, glideResistance: .low)
+        ContinuousSlider($from, style: .tertiary, glideLength: .long, glideResistance: .low)
+    }.padding(50)
 }

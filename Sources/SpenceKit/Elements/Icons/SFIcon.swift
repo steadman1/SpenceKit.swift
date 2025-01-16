@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Defines SFIcon for consistent Image(systemName: "placeholder")
 @available(iOS 16.0, *)
 public struct SFIcon: View {
     public init (_ systemName: String, size: SpenceKitSize) {

@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines ExpandingButton for expanding width button
 public struct ExpandingButton<Content: View>: View {
     public init(
         _ style: SpenceKitStyle = .primary,

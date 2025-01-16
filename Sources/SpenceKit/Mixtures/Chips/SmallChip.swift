@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines SmallChip for small RoundedRectangular Views
 public struct SmallChip<Content: View>: View {
     
     // Without action

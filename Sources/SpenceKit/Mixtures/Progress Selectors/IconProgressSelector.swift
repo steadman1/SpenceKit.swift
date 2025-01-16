@@ -11,6 +11,8 @@ import SwiftUI
 import ViewExtractor
 import MeasurementReader
 
+/// TODO
+/// Defines IconProgressSelection for step-based, linear View progression using Icons only
 @available(iOS 16.0, *)
 public struct IconProgressSelector<ContentCompleted: View, ContentActive: View, ContentInactive: View, ContentFinish: View>: View {
     

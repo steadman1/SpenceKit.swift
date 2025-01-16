@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// Very Similar to ContinuousSlider
+/// Defines a custom implementation of iOS 17's media scrubber slider
 public struct iOSScrubber: View {
     public enum ScrubberBinding {
         case bindAlways

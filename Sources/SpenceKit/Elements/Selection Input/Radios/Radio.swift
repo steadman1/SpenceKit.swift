@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines Radio for binary selection
 @available(iOS 16.0, *)
 public struct Radio: View {
     @Binding public var isActive: Bool

@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines Toggle for binary input
 public struct Toggle: View {
     
     @Binding public var isActive: Bool

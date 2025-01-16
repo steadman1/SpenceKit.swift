@@ -9,22 +9,63 @@ import SwiftUI
 import UIKit
 
 extension Animation {
+    /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
+        /// Bouncy animations
         public struct Bouncy {
-            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: 0)
-            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: 0.05)
-            public static let slow = Animation.bouncy(duration: 0.8, extraBounce: 0.1)
+            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: 0.15)
+            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: 0.1)
+            public static let slow = Animation.bouncy(duration: 0.8, extraBounce: 0.05)
         }
         
+        /// Standard easing animations
         public struct Default {
-            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: -0.1)
-            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: -0.1)
+            public static let quick = Animation.bouncy(duration: 0.2, extraBounce: -0.3)
+            public static let normal = Animation.bouncy(duration: 0.4, extraBounce: -0.2)
             public static let slow = Animation.bouncy(duration: 0.8, extraBounce: -0.1)
         }
     }
 }
 
+@available(iOS 17.0, *)
+#Preview {
+    @Previewable @State var state = false
+    
+    VStack {
+        Text("Bouncy.quick")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Bouncy.quick, value: state)
+        Text("Bouncy.normal")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Bouncy.normal, value: state)
+        Text("Bouncy.slow")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Bouncy.slow, value: state)
+        
+        Spacer().frame(height: 16)
+        
+        Text("Default.quick")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Default.quick, value: state)
+        Text("Default.normal")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Default.normal, value: state)
+        Text("Default.slow")
+            .fontWeight(.bold)
+            .offset(x: state ? -32 : 32)
+            .animation(.SpenceKit.Default.slow, value: state)
+    }.onTapGesture {
+        state.toggle()
+    }
+}
+
 extension Color {
+    /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
         public static let Border = Color(UIColor(resource: .init(name: "Colors/Border", bundle: .module)))
         public static let Clear = Color(UIColor(resource: .init(name: "Colors/Clear", bundle: .module)))
@@ -58,6 +99,7 @@ extension Color {
         public static let TertiaryText = Color(UIColor(resource: .init(name: "Colors/Text/TertiaryText", bundle: .module)))
         
         // Bundles
+        /// Returns grounding for the "Standard" Color set
         public static func standardColorBundle(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
             switch style {
             case .CTA:
@@ -75,6 +117,7 @@ extension Color {
             }
         }
         
+        /// Returns grounding for the "Restricted" Color set—similar to "Standard" but without accenting
         public static func restrictedColorBundle(for style: SpenceKitStyle) -> (foreground: Color, background: Color, border: Color) {
             switch style {
             case .CTA:
@@ -89,6 +132,7 @@ extension Color {
 }
 
 extension UIFont {
+    /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
         // Custom fonts with specified sizes using FontSkeleton
         public static let SansXLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansXLargeTitle.uiFont
@@ -117,7 +161,9 @@ extension UIFont {
 }
 
 extension Font {
+    /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
+        /// Defines "Skeleton" values for Font and UIFont implementations to follow
         public struct FontSkeleton: Sendable {
             public let name: String
             public let size: CGFloat
@@ -196,7 +242,12 @@ extension Font {
 }
 
 extension String {
-    public func stringSize(usingFont font: UIFont, withTraits traits: UIFontDescriptor.SymbolicTraits = []) -> CGSize {
+    /// Calculates the size of String given constraints and Font traits
+    public func stringSize(
+        usingFont font: UIFont,
+        withTraits traits: UIFontDescriptor.SymbolicTraits = [],
+        constrainedTo constraints: CGSize? = nil
+    ) -> CGSize {
         // Create a new UIFont with the specified traits
         let updatedFont: UIFont
         if traits.isEmpty {
@@ -209,16 +260,30 @@ extension String {
                 updatedFont = font // Fallback to the original font if traits can't be applied
             }
         }
-
-        // Calculate the size using the updated font
+        
+        // Set font attributes
         let fontAttributes: [NSAttributedString.Key: Any] = [.font: updatedFont]
-        let size = self.size(withAttributes: fontAttributes)
-        return size
+        
+        // If constraints are provided, use boundingRect to calculate the size
+        if let constraints = constraints {
+            let boundingRect = self.boundingRect(
+                with: constraints,
+                options: [.usesLineFragmentOrigin, .usesFontLeading],
+                attributes: fontAttributes,
+                context: nil
+            )
+            return CGSize(width: ceil(boundingRect.width), height: ceil(boundingRect.height))
+        } else {
+            // Default behavior without constraints
+            let size = self.size(withAttributes: fontAttributes)
+            return CGSize(width: ceil(size.width), height: ceil(size.height))
+        }
     }
 }
 
 
 extension Double {
+    /// Formats Double as String removing insignificant zeros
     func format(decimalPlaces: Int = 2) -> String {
         let formatString = "%.\(decimalPlaces)f"
         let formatted = String(format: formatString, self)
@@ -234,8 +299,17 @@ extension Double {
 
 
 extension RandomAccessCollection {
+    /// Returns a ForEach-usable tuple with (index, element) for each element in array
     func enumerate() -> [(Int, Element)] {
         return Array(zip(indices.map { $0 as! Int }, self)) as! [(Int, Element)]
+    }
+}
+
+extension EnvironmentValues {
+    /// Defines value storage for use with .cornerRadius View modifier
+    public var cornerRadius: CornerRadiusModel? {
+        get { self[CornerRadiusKey.self] }
+        set { self[CornerRadiusKey.self] = newValue }
     }
 }
 
@@ -276,6 +350,24 @@ public extension View {
     
     @MainActor func stroke(color: Color, width: CGFloat = SpenceKit.Constants.borderWidth) -> some View {
         modifier(StrokeModifier(strokeSize: width / 2, strokeColor: color))
+    }
+    
+    @MainActor func border() -> some View {
+        modifier(StrokeModifier(strokeSize: SpenceKit.Constants.borderWidth / 2, strokeColor: Color.SpenceKit.Border))
+    }
+    
+    @MainActor func roundBorder(_ cornerRadius: CGFloat) -> some View {
+        self
+            .background(Color.SpenceKit.Background)
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+            .border()
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius + SpenceKit.Constants.borderWidth))
+    }
+    
+    /// Defines modifier to pass CGFloat to child using cornerRadius EnvironmentValue
+    func cornerRadius(_ cornerRadius: CGFloat) -> some View {
+        self.environment(\.cornerRadius, CornerRadiusModel(cornerRadius))
+            .modifier(CornerRadiusModifier(cornerRadius: CornerRadiusModel(cornerRadius)))
     }
     
     func left() -> some View {

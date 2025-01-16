@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+/// TODO
+/// Defines SteppedSlider for piecewise range-based input
 /*
  @available(iOS 17.0, *)
  public struct SteppedSlider: View {

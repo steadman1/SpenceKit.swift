@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines SearchBar for text search
 @available(iOS 16.0, *)
 public struct SearchBar<Content: View>: View {
     
@@ -47,12 +48,11 @@ public struct SearchBar<Content: View>: View {
         GeometryReader { geometry in
             ZStack {
                 RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
-                    .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
                     .frame(maxWidth: .infinity)
                     .frame(height: 64)
                     .foregroundStyle(Color.SpenceKit.Background)
                     .background(Color.SpenceKit.Background)
-                    .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
+                    .roundBorder(SpenceKit.Constants.cornerRadiusMAX)
                 
                 HStack {
                     Icons.MagnifyingGlass(with: .large)

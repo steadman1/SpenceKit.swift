@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Defines ContinuousSlider for continous range-based input—sister View of Slider
 public struct ContinuousSlider: View {
     public enum GlideLength: Double {
         case none = 0
@@ -28,7 +29,7 @@ public struct ContinuousSlider: View {
     public init(
         _ value: Binding<CGFloat>,
         style: SpenceKitStyle = .CTA,
-        range: ClosedRange<Double> = 0...10000000,
+        range: ClosedRange<Double> = 0...10,
         decimalCount: Int = 1,
         glideLength: GlideLength = .moderate,
         glideResistance: GlideResistance = .moderate

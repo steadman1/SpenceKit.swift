@@ -10,6 +10,7 @@
 import SwiftUI
 import ViewExtractor
 
+/// Defines Card for title-body, title-body-chip, or title-body-button paired content
 public struct Card<ContentBody: View, ContentFooter: View>: View {
     
     public init(
@@ -22,7 +23,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
         self.contentFooter = footer()
     }
 
-//    TODO: MAKE THIS WORK
+//    TODO
 //    public init(
 //        @ViewBuilder body: @escaping () -> ContentBody,
 //        @ViewBuilder chips: @escaping () -> ContentFooter
@@ -65,10 +66,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
                 }.frame(maxWidth: geometry.size.width,
                         maxHeight: geometry.size.height)
                     .background(Color.SpenceKit.Background)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    .stroke(color: Color.SpenceKit.Border,
-                            width: SpenceKit.Constants.borderWidth)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius + SpenceKit.Constants.borderWidth))
+                    .roundBorder(cornerRadius)
             }
         }
     }
@@ -112,6 +110,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
             }
         } footer: {
             HStack {
+                LargeChip("Option 1", style: .CTA)
                 LargeChip("Option 1", style: .CTA)
             }
         }.frame(width: 200, height: 300)

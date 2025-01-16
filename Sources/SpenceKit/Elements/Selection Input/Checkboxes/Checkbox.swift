@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines Checkbox for binary input
 @available(iOS 16.0, *)
 public struct Checkbox: View {
     public enum State {

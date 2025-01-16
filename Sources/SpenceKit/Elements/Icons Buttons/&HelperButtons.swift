@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 
 // Static helper buttons instances for quick access
+/// Defines HelperButtons for static access to common HelperButton Views
 public final class HelperButtons {
     @MainActor @available(iOS 16.0, *)
     public static func ClearText(action: @escaping () -> Void) -> some View {

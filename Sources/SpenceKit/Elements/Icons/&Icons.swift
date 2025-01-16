@@ -9,6 +9,7 @@ import SwiftUI
 import Foundation
 
 // Static icon instances for quick access
+/// Defines Icons for static access to common Icons
 public final class Icons {
     @MainActor @available(iOS 16.0, *)
     public static func Airplane(with size: SpenceKitSize) -> some View {

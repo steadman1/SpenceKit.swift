@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines IconButton for Circular Button Views
 public struct IconButton<Content: View>: View {
     public init(
         _ style: SpenceKitStyle = .primary,

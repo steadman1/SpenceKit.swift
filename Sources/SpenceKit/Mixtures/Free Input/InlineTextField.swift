@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Defines InlineTextField for inline text input
 public struct InlineTextField<IdentifierContent: View, HelperContent: View>: View {
     
     @Binding public var text: String
@@ -21,22 +22,9 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     
     public init(
         _ placeholder: String,
-        _ text: Binding<String>
-    ) where IdentifierContent == EmptyView, HelperContent == EmptyView {
-        self.placeholder = placeholder
-        self._text = text
-        self.title = ""
-        self.description = ""
-        self.identifier = EmptyView()
-        self.hasIdentifier = false
-        self.helperButton = EmptyView()
-    }
-    
-    public init(
-        _ placeholder: String,
         _ text: Binding<String>,
-        title: String,
-        description: String
+        title: String = "",
+        description: String = ""
     ) where IdentifierContent == EmptyView, HelperContent == EmptyView {
         self.placeholder = placeholder
         self._text = text
@@ -50,8 +38,8 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     public init(
         _ placeholder: String,
         _ text: Binding<String>,
-        title: String,
-        description: String,
+        title: String = "",
+        description: String = "",
         @ViewBuilder helperButton: @escaping () -> HelperContent
     ) where IdentifierContent == EmptyView {
         self.placeholder = placeholder
@@ -66,8 +54,8 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
     public init(
         _ placeholder: String,
         _ text: Binding<String>,
-        title: String,
-        description: String,
+        title: String = "",
+        description: String = "",
         @ViewBuilder identifier: @escaping () -> IdentifierContent,
         @ViewBuilder helperButton: @escaping () -> HelperContent
     ) {
@@ -80,12 +68,28 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
         self.helperButton = helperButton()
     }
     
+    public init(
+        _ placeholder: String,
+        _ text: Binding<String>,
+        title: String = "",
+        description: String = "",
+        @ViewBuilder identifier: @escaping () -> IdentifierContent
+    ) where HelperContent == EmptyView {
+        self.placeholder = placeholder
+        self._text = text
+        self.title = title
+        self.description = description
+        self.identifier = identifier()
+        self.hasIdentifier = true
+        self.helperButton = EmptyView()
+    }
+    
     public var body: some View {
         VStack(spacing: 0) {
             if !title.isEmpty {
                 HStack {
                     Text(title)
-                        .font(.SpenceKit.SansHeadlineFont)
+                        .font(.SpenceKit.SansHintFont)
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                         .padding(.bottom, SpenceKit.Constants.padding8)
                     Spacer()
@@ -110,16 +114,28 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 
                 Spacer()
                 
-                helperButton
-                    .padding(.trailing, SpenceKit.Constants.padding16)
+                HStack {
+                    if #available(iOS 16.0, *) {
+                        Image(systemName: "keyboard.chevron.compact.down")
+                            .font(.SpenceKit.SansHintFont)
+                            .foregroundColor(Color.SpenceKit.PrimaryText)
+                            .opacity(isFocused ? 1 : 0)
+                            .offset(x: isFocused ? 0 : 12)
+                            .animation(
+                                .SpenceKit.Bouncy.quick,
+                                value: isFocused
+                            )
+                            .onTapGesture {
+                                isFocused = false
+                            }
+                    }
+                    
+                    helperButton
+                }.padding(.trailing, SpenceKit.Constants.padding12)
                 
             }.frame(maxWidth: .infinity)
                 .frame(height: 48)
-                .background(Color.SpenceKit.Background)
-                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX))
-                .stroke(color: Color.SpenceKit.Border,
-                     width: SpenceKit.Constants.borderWidth)
-                .clipShape(RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX + SpenceKit.Constants.borderWidth * 2))
+                .roundBorder(SpenceKit.Constants.cornerRadiusMAX)
             
             HStack {
                 if !description.isEmpty {
@@ -131,17 +147,6 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 }
                 
                 Spacer()
-                
-                if isFocused, #available(iOS 16.0, *) {
-                    Button {
-                        isFocused = false
-                    } label: {
-                        Image(systemName: "keyboard.chevron.compact.down")
-                            .font(.SpenceKit.SansHintFont)
-                            .foregroundColor(Color.SpenceKit.PrimaryText)
-                    
-                    }
-                }
             }.padding(.top, SpenceKit.Constants.padding8)
         }
     }

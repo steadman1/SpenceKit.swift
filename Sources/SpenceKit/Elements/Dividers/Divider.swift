@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines Divider for a visually consistent expanding divider
 public struct Divider: View {
     
     private let axis: Axis

@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Defines TabGroup for vertically stacking tab selection
 public struct TabGroup: View {
     private let title: String?
     private let tabs: [Tab]
@@ -68,10 +69,7 @@ public struct TabGroup: View {
                     .padding(.vertical, SpenceKit.Constants.padding4)
                     .padding(.horizontal, SpenceKit.Constants.padding16)
                     .background(Color.SpenceKit.Background)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-                    .stroke(color: Color.SpenceKit.Border,
-                            width: SpenceKit.Constants.borderWidth)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius + SpenceKit.Constants.borderWidth))
+                    .roundBorder(cornerRadius)
             }
         }
     }
@@ -82,15 +80,15 @@ public struct TabGroup: View {
         title: "General",
         tabs: [
             Tab(
-                title: "Tab 1",
+                "Tab 1",
                 icon: .init(systemName: "paintbrush")
                ),
             Tab(
-                title: "Tab 2",
+                "Tab 2",
                 icon: .init(systemName: "paintbrush")
                ),
             Tab(
-                title: "Tab 3",
+                "Tab 3",
                 icon: .init(systemName: "paintbrush")
                ),
         ]
@@ -100,11 +98,11 @@ public struct TabGroup: View {
         title: "Specific",
         tabs: [
             Tab(
-                title: "Tab 1",
+                "Tab 1",
                 icon: .init(systemName: "paintbrush")
                ),
             Tab(
-                title: "Tab 2",
+                "Tab 2",
                 icon: .init(systemName: "paintbrush")
                ),
             

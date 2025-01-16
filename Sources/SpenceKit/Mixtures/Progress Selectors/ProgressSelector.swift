@@ -11,6 +11,7 @@ import SwiftUI
 import ViewExtractor
 import MeasurementReader
 
+/// Defines ProgressSelector for step-based, linear View progression
 @available(iOS 16.0, *)
 public struct ProgressSelector<ContentCompleted: View, ContentActive: View, ContentInactive: View, ContentFinish: View>: View {
     

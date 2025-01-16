@@ -9,6 +9,7 @@
 
 import SwiftUI
 
+/// Defines HelperButton for small Circular Button Views
 public struct HelperButton<Content: View>: View {
     public init(
         _ style: SpenceKitStyle = .primary,

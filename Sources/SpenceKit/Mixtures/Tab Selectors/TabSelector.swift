@@ -11,6 +11,7 @@ import SwiftUI
 import ViewExtractor
 import MeasurementReader
 
+/// Defines TabSelector for Inline tab selection
 @available(iOS 16.0, *)
 public struct TabSelector<ContentInactive: View, ContentActive: View>: View {
     
@@ -23,20 +24,20 @@ public struct TabSelector<ContentInactive: View, ContentActive: View>: View {
     public init(
         _ selection: Binding<Int>,
         style: SpenceKitStyle,
-        labels: [String]
+        tabs: [Tab]
     ) where ContentInactive == AnyView, ContentActive == AnyView {
         self._selection = selection
         self.style = style
         self.contentInactive = {
             AnyView(
-                ForEach(labels, id: \.self) { name in
+                ForEach(tabs.map { $0.title }, id: \.self) { name in
                     SmallChip(name, style: .lowest)
                 }
             )
         }() as ContentInactive
         self.contentActive = {
             AnyView(
-                ForEach(labels, id: \.self) { name in
+                ForEach(tabs.map { $0.title }, id: \.self) { name in
                     SmallChip(name, style: style)
                 }
             )
@@ -113,7 +114,15 @@ public struct TabSelector<ContentInactive: View, ContentActive: View>: View {
     @Previewable @State var selectedTab: Int = 0
     
     VStack {
-        TabSelector($selectedTab, style: .CTA, labels: ["One", "Two", "Three"])
+        TabSelector(
+            $selectedTab,
+            style: .CTA,
+            tabs: [
+                Tab("One"),
+                Tab("Two"),
+                Tab("Three")
+            ]
+        )
         TabSelector($selectedTab) {
             LargeChip("Item 1", style: .CTA)
             LargeChip("Item 2", style: .primary)

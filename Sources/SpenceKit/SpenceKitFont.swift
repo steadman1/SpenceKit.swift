@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Creates Fonts for registration using .xcasset name
 public struct SpenceKitFont: Sendable {
 
     public let name: String

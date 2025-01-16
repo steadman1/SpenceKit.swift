@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// Defines single and double-thumbed Slider for continous range-based input
 public struct Slider: View {
     public enum Count: Int {
         case single = 0

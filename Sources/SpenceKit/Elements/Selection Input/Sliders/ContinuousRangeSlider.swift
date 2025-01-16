@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+/// Defines ContinuousRangeSlider for continuous range-based input—try not to use this!
 @available(*, deprecated, message: "visually buggy, so not officially supported—also not sure what this would even be used for lmao")
 public struct ContinuousRangeSlider: View {
     private enum ThumbPosition: Int {
@@ -51,9 +52,9 @@ public struct ContinuousRangeSlider: View {
                 let activeWidth: CGFloat = abs(to - from) * geometry.size.width
                 
                 let toDescription = (to * (range.upperBound - range.lowerBound) + range.lowerBound).format(decimalPlaces: decimalCount)
-                let toStringSize = toDescription.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold]).width
+                let toStringSize = toDescription.stringSize(usingFont: UIFont.SpenceKit.SansHeadFont, withTraits: [.traitBold]).width
                 let fromDescription = (from * (range.upperBound - range.lowerBound) + range.lowerBound).format(decimalPlaces: decimalCount)
-                let fromStringSize = toDescription.stringSize(usingFont: UIFont.SpenceKit.SansBodyFont, withTraits: [.traitBold]).width
+                let fromStringSize = toDescription.stringSize(usingFont: UIFont.SpenceKit.SansHeadFont, withTraits: [.traitBold]).width
                 
                 let toOffset = max(
                     0,
@@ -78,7 +79,7 @@ public struct ContinuousRangeSlider: View {
                     Group {
                         if #available(iOS 16.0, *) {
                             Text(toDescription)
-                                .font(Font.SpenceKit.SansBodyFont)
+                                .font(Font.SpenceKit.SansHeadFont)
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .fontWeight(.bold)
                                 .offset(x: toOffset)
@@ -93,7 +94,7 @@ public struct ContinuousRangeSlider: View {
                     Group {
                         if #available(iOS 16.0, *) {
                             Text(fromDescription)
-                                .font(Font.SpenceKit.SansBodyFont)
+                                .font(Font.SpenceKit.SansHeadFont)
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .fontWeight(.bold)
                                 .offset(x: fromOffset)

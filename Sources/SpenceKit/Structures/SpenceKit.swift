@@ -7,7 +7,9 @@
 
 import Foundation
 
+/// Contains SpenceKit related structures and objects
 public struct SpenceKit {
+    /// Defines integral constants for the SpenceKit design system
     public struct Constants {
         // corner radius
         public static let cornerRadiusMAX: CGFloat = 1024

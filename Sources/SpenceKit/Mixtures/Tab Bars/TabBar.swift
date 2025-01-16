@@ -11,6 +11,7 @@ import SwiftUI
 import ViewExtractor
 import MeasurementReader
 
+/// Defines TabBar for universal tab selection within an app—fixed to bottom
 @available(iOS 16.0, *)
 public struct TabBar: View {
     
@@ -176,12 +177,12 @@ public struct TabBar: View {
             colorStyle: .CTA,
             tabs: [
                 Tab(
-                    title: "Home",
+                    "Home",
                     activeIcon: .init(systemName: "house.fill"),
                     inactiveIcon: .init(systemName: "house")
                 ),
                 Tab(
-                    title: "Search",
+                    "Search",
                     activeIcon: .init(systemName: "magnifyingglass.circle.fill"),
                     inactiveIcon: .init(systemName: "magnifyingglass.circle")
                 )

@@ -27,43 +27,6 @@ extension Animation {
     }
 }
 
-@available(iOS 17.0, *)
-#Preview {
-    @Previewable @State var state = false
-    
-    VStack {
-        Text("Bouncy.quick")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Bouncy.quick, value: state)
-        Text("Bouncy.normal")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Bouncy.normal, value: state)
-        Text("Bouncy.slow")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Bouncy.slow, value: state)
-        
-        Spacer().frame(height: 16)
-        
-        Text("Default.quick")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Default.quick, value: state)
-        Text("Default.normal")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Default.normal, value: state)
-        Text("Default.slow")
-            .fontWeight(.bold)
-            .offset(x: state ? -32 : 32)
-            .animation(.SpenceKit.Default.slow, value: state)
-    }.onTapGesture {
-        state.toggle()
-    }
-}
-
 extension Color {
     /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
@@ -410,7 +373,7 @@ public struct StrokeModifier: ViewModifier {
             )
     }
 
-    func mask(content: Content) -> some View {
+    private func mask(content: Content) -> some View {
         Canvas { context, size in
             context.addFilter(.alphaThreshold(min: 0.01))
             if let resolvedView = context.resolveSymbol(id: id) {

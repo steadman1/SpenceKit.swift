@@ -16,3 +16,4 @@ public struct CornerRadiusModifier: ViewModifier {
             .environment(\.cornerRadius, cornerRadius)
     }
 }
+

@@ -8,8 +8,6 @@
 #if canImport(SwiftUI)
 
 import SwiftUI
-import ViewExtractor
-import MeasurementReader
 
 /// Defines TabBar for universal tab selection within an app—fixed to bottom
 @available(iOS 16.0, *)

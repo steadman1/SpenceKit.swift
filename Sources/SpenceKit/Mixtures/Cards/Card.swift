@@ -8,7 +8,6 @@
 #if canImport(SwiftUI)
 
 import SwiftUI
-import ViewExtractor
 
 /// Defines Card for title-body, title-body-chip, or title-body-button paired content
 public struct Card<ContentBody: View, ContentFooter: View>: View {

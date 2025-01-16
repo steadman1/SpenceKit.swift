@@ -6,6 +6,8 @@
 //
 
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines single and double-thumbed Slider for continous range-based input
@@ -89,3 +91,6 @@ public struct Slider: View {
     Slider($from)
     Slider(from: $from, to: $to)
 }
+
+
+#endif

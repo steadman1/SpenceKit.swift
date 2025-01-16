@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/21/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines SFIcon for consistent Image(systemName: "placeholder")
@@ -24,3 +26,5 @@ public struct SFIcon: View {
             .fontWeight(.black)
     }
 }
+
+#endif

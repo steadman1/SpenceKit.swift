@@ -5,7 +5,9 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
-import SwiftUI
+#if canImport(SwiftUICore)
+
+import SwiftUICore
 
 /// Creates Fonts for registration using .xcasset name
 public struct SpenceKitFont: Sendable {
@@ -38,3 +40,5 @@ public struct SpenceKitFont: Sendable {
     
     public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times-New-Roman-Condensed")
 }
+
+#endif

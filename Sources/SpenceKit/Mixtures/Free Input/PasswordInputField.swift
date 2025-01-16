@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines PasswordInputField for password input
@@ -140,3 +142,6 @@ public struct PasswordInputField: View {
     PasswordInputField($text, title: "Password")
 }
 
+
+
+#endif

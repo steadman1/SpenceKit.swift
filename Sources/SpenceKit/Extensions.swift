@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(SwiftUI) && canImport(UIKit)
+
 import SwiftUI
 import UIKit
 
@@ -386,3 +388,5 @@ public struct StrokeModifier: ViewModifier {
         }
     }
 }
+
+#endif

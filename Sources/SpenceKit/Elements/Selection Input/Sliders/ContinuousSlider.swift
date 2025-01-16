@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/28/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines ContinuousSlider for continous range-based input—sister View of Slider
@@ -205,3 +207,6 @@ public struct ContinuousSlider: View {
         ContinuousSlider($from, style: .tertiary, glideLength: .long, glideResistance: .low)
     }.padding(50)
 }
+
+
+#endif

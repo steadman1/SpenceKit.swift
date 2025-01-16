@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/21/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 import Foundation
 
@@ -55,3 +57,6 @@ public final class HelperButtons {
         }
     }
 }
+
+
+#endif

@@ -6,6 +6,8 @@
 //
 
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines Tab as a Universal String, Image, and Action structure
@@ -99,3 +101,5 @@ public struct Tab: Identifiable {
         self.action = { }
     }
 }
+
+#endif

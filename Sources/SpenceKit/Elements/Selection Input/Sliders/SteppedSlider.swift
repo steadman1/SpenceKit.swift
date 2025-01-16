@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/28/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// TODO
@@ -46,3 +48,6 @@ import SwiftUI
      SteppedSlider(from: $from, to: $to)
  }
  */
+
+
+#endif

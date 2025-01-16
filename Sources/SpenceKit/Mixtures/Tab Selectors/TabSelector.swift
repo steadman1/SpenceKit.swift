@@ -5,11 +5,11 @@
 //  Created by Spencer Steadman on 10/23/24.
 //
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && canImport(MeasurementReader) && canImport(ViewExtractor)
 
 import SwiftUI
-import ViewExtractor
 import MeasurementReader
+import ViewExtractor
 
 /// Defines TabSelector for Inline tab selection
 @available(iOS 16.0, *)

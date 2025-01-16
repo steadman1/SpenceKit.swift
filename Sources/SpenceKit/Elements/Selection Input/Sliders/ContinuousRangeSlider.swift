@@ -6,6 +6,8 @@
 //
 
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines ContinuousRangeSlider for continuous range-based input—try not to use this!
@@ -273,3 +275,5 @@ public struct ContinuousRangeSlider: View {
         glideResistance: .low
     )
 }
+
+#endif

@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/22/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 import Foundation
 
@@ -36,3 +38,5 @@ public final class Icons {
     Icons.Airplane(with: .head)
         .foregroundStyle(Color.SpenceKit.PrimaryText)
 }
+
+#endif

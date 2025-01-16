@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 1/11/25.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines TabGroup for vertically stacking tab selection
@@ -109,3 +111,6 @@ public struct TabGroup: View {
         ]
     ).padding(.horizontal, 16)
 }
+
+
+#endif

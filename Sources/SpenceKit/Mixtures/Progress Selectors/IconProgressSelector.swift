@@ -5,11 +5,12 @@
 //  Created by Spencer Steadman on 10/25/24.
 //
 
-#if canImport(SwiftUI)
+#if canImport(SwiftUI) && canImport(MeasurementReader) && canImport(ViewExtractor)
 
 import SwiftUI
-import ViewExtractor
 import MeasurementReader
+import ViewExtractor
+
 
 /// TODO
 /// Defines IconProgressSelection for step-based, linear View progression using Icons only

@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 1/14/25.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines a custom implementation of iOS 17's media scrubber slider
@@ -156,3 +158,5 @@ public struct iOSScrubber: View {
         .background(.black)
         .colorScheme(.dark)
 }
+
+#endif

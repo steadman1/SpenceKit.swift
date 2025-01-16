@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 1/16/25.
 //
 
+#if canImport(SwiftUICore)
+
 import SwiftUICore
 
 /// Defines CornerRadiusReader to read CGFloat value passed in from a parent View
@@ -25,3 +27,5 @@ public struct CornerRadiusReader<Content: View>: View {
         }
     }
 }
+
+#endif

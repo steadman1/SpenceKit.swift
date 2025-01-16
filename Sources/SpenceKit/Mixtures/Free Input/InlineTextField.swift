@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines InlineTextField for inline text input
@@ -165,3 +167,6 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
         }
     }
 }
+
+
+#endif

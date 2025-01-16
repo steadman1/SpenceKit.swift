@@ -24,6 +24,25 @@ Permission is hereby granted to any individual or entity (the "User") who has pu
 
 7. **Disclaimer**:
    - THE SOFTWARE IS PROVIDED "AS IS," WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   
+This software includes the following third-party open-source components:
+
+1. ViewExtractor
+   - Repository: https://github.com/GeorgeElsham/ViewExtractor
+   - License: MIT License
+
+   MIT License
+   Copyright (c) 2021 George Elsham
+   Permission is hereby granted, free of charge, to any person obtaining a copy of this software...
+   
+1. MeasurementReader
+   - Repository: https://github.com/vinceplusplus/measurement-reader
+   - License: MIT License
+
+   MIT License
+   Copyright (c) 2022 Vincent Cheung
+   Permission is hereby granted, free of charge, to any person obtaining a copy of this software...
+
 
 By using this Software, you agree to these terms. Violations of these terms may result in the termination of your license and/or legal action.
 

@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(UIKit) && canImport(CoreGraphics) && canImport(CoreText)
+
 import UIKit
 import CoreGraphics
 import CoreText
@@ -22,3 +24,5 @@ public func registerFont(named name: String) throws {
     throw FontError.failedToRegisterFont
    }
 }
+
+#endif

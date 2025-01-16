@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(SwiftUICore)
+
 import Foundation
 import SwiftUICore
 
@@ -50,3 +52,5 @@ public enum SpenceKitSize: Int {
         }
     }
 }
+
+#endif

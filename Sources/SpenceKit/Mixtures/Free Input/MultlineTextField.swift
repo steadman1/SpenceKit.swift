@@ -5,6 +5,8 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
+#if canImport(SwiftUI)
+
 import SwiftUI
 
 /// Defines MultilineTextField for multiline text input
@@ -200,3 +202,6 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
         Spacer()
     }
 }
+
+
+#endif

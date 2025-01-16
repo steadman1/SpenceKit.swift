@@ -17,8 +17,6 @@
 ### Requirements
 
 - **iOS 16.0+**
-- **Xcode 14.0+**
-- Swift Package Manager (SPM) or manual integration.
 
 ---
 

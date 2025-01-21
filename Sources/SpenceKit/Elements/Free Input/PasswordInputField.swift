@@ -38,7 +38,7 @@ public struct PasswordInputField: View {
             if !title.isEmpty {
                 HStack {
                     Text(title)
-                        .font(.SpenceKit.SansHintFont)
+                        .font(.SpenceKit.HeadFont)
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                         .padding(.bottom, SpenceKit.Constants.padding8)
                     Spacer()
@@ -52,12 +52,12 @@ public struct PasswordInputField: View {
                 ZStack(alignment: .leading) {
                     if text.isEmpty {
                         Text(placeholder.isEmpty ? "Required" : placeholder)
-                            .font(.SpenceKit.SansHeadFont)
+                            .font(.SpenceKit.HeadFont)
                             .foregroundColor(Color.SpenceKit.TertiaryText)
                     }
                     
                     SecureField("", text: $text)
-                        .font(.SpenceKit.SansHeadFont)
+                        .font(.SpenceKit.HeadFont)
                         .focused($isFocused)
                         .opacity(hidingText ? 1 : 0)
                         .autocorrectionDisabled(true)
@@ -66,7 +66,7 @@ public struct PasswordInputField: View {
                         #endif
                     
                     TextField("", text: $text)
-                        .font(.SpenceKit.SansHeadFont)
+                        .font(.SpenceKit.HeadFont)
                         .focused($isFocused)
                         .opacity(hidingText ? 0 : 1)
                         .autocorrectionDisabled(true)
@@ -80,7 +80,7 @@ public struct PasswordInputField: View {
                 
                 HStack {
                     Image(systemName: "keyboard.chevron.compact.down")
-                        .font(.SpenceKit.SansHintFont)
+                        .font(.SpenceKit.HintFont)
                         .foregroundColor(Color.SpenceKit.PrimaryText)
                         .opacity(isFocused ? 1 : 0)
                         .offset(x: isFocused ? 0 : 12)
@@ -125,7 +125,7 @@ public struct PasswordInputField: View {
                 if !description.isEmpty {
                     HStack {
                         Text(description)
-                            .font(.SpenceKit.SansSubheadFont)
+                            .font(.SpenceKit.SubheadFont)
                             .foregroundStyle(Color.SpenceKit.TertiaryText)
                     }
                 }

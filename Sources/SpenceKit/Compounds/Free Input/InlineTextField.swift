@@ -91,7 +91,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
             if !title.isEmpty {
                 HStack {
                     Text(title)
-                        .font(.SpenceKit.SansHintFont)
+                        .font(.SpenceKit.HintFont)
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                         .padding(.bottom, SpenceKit.Constants.padding8)
                     Spacer()
@@ -105,11 +105,11 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 ZStack(alignment: .leading) {
                     if text.isEmpty {
                         Text(placeholder.isEmpty ? "Enter text" : placeholder)
-                            .font(.SpenceKit.SansHeadFont)
+                            .font(.SpenceKit.HeadFont)
                             .foregroundColor(Color.SpenceKit.TertiaryText)
                     }
                     TextField("", text: $text)
-                        .font(.SpenceKit.SansHeadFont)
+                        .font(.SpenceKit.HeadFont)
                         .focused($isFocused)
                 }.padding(.horizontal,
                           SpenceKit.Constants.padding16 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0) )
@@ -119,7 +119,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 HStack {
                     if #available(iOS 16.0, *) {
                         Image(systemName: "keyboard.chevron.compact.down")
-                            .font(.SpenceKit.SansHintFont)
+                            .font(.SpenceKit.HintFont)
                             .foregroundColor(Color.SpenceKit.PrimaryText)
                             .opacity(isFocused ? 1 : 0)
                             .offset(x: isFocused ? 0 : 12)
@@ -143,7 +143,7 @@ public struct InlineTextField<IdentifierContent: View, HelperContent: View>: Vie
                 if !description.isEmpty {
                     HStack {
                         Text(description)
-                            .font(.SpenceKit.SansSubheadFont)
+                            .font(.SpenceKit.SubheadFont)
                             .foregroundStyle(Color.SpenceKit.TertiaryText)
                     }
                 }

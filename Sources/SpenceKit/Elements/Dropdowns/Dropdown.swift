@@ -37,7 +37,7 @@ public struct Dropdown: View {
             } label: {
                 HStack {
                     Text(selection < 0 ? placeholder : tabs[selection].title)
-                        .font(Font.SpenceKit.SansBodyFont)
+                        .font(Font.SpenceKit.HeadlineFont)
                         .foregroundStyle(
                             selection < 0
                                 ? Color.SpenceKit.SecondaryText

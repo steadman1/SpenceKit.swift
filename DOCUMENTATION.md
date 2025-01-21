@@ -32,15 +32,74 @@ If you have questions or need to purchase a license, please contact support@mypa
 
 ---
 
+
+# SpenceKit Initialization
+
+## Using `SKSingleton` for shared parameters
+
+The `SKSingleton` singleton class allows customization of SpenceKit using a shared class instance.
+## Attributes
+
+- `typography`: Typography theme for the app—see Figma typography overview!
+    - `sans` : all sans Fonts
+    - `serifTitleSansBody`: Serif title fonts with sans body fonts
+    - `sansTitleSerifBody`: Sans title fonts with serif body fonts **excluding required sans body fonts**
+    - `sansSerif`: all serif fonts **excluding required sans body fonts**
+
+## Usage
+
+### Example 1: Sans-Serif typography theme (default) & SwiftUI app setup
+
+```swift
+@main  
+struct MyApp: App {
+
+    init() {
+        SKSingleton.typography = Font.SpenceKit.TypographyTheme.sansSerif
+    }
+    
+    var body: some Scene {  
+        WindowGroup {  
+            SomeView()
+        }  
+    }  
+}
+```
+
+### Example 2: Serif Title with Sans Body typography theme
+
+```swift
+SKSingleton.typography = Font.SpenceKit.TypographyTheme.serifTitleSansBody
+```
+
+### Example 3: Using the typography theme within your app
+
+```swift
+Text("sample text")
+    .font(Font.SpenceKit.BodyFont)
+```
+
+See the `Font.SpenceKit` structure located in Extensions.swift 
+### Example 4: Using the typography theme within your app
+
+```swift
+Text("sample text")
+    .font(Font.SpenceKit.PrimaryTitleFont)
+```
+
+
 # Elements
+
+SpenceKit `Elements` are a subset of Views made using Swift UI primitives and never include @ViewBuilder parameters. 
 
 ## `Divider` View
 
 A visually consistent, customizable divider that expands along the specified axis to separate content in horizontal or vertical layouts.
 
 ---
-### Figma
+### Preview on Figma
 
+ [SpenceKit Divider Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=523-169&t=Dst1yPDRjPShsn0T-1)
 
 ---
 
@@ -118,7 +177,11 @@ Divider(.vertical)
 A customizable wrapper around `Image(systemName:)` for consistent rendering of SF Symbols with flexible sizing.
 
 ---
+### Preview on Figma
 
+ [SpenceKit SFIcon Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=561-300&t=Dst1yPDRjPShsn0T-1)
+
+---
 ### Declaration
 
 ```swift
@@ -192,13 +255,16 @@ SFIcon("checkmark.circle.fill", size: .head)
 ---
 
 
-
 ## `Radio` View
 
 A circular binary selection component designed for toggling between active and inactive states.
 
 ---
+### Preview on Figma
 
+ [SpenceKit Radio Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=561-183&t=Dst1yPDRjPShsn0T-1)
+
+---
 ### Declaration
 
 ```swift
@@ -273,7 +339,11 @@ Radio($isActive)
 A compact binary toggle component designed for seamless switching between active and inactive states.
 
 ---
+### Preview on Figma
 
+ [SpenceKit Toggle Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-343&t=Dst1yPDRjPShsn0T-1)
+
+---
 ### Declaration
 
 ```swift
@@ -342,14 +412,873 @@ Toggle($isActive)
 
 
 ---
+
+## `Checkbox` View
+
+A binary or tri-state input component with customizable states: unchecked, checked, and indeterminate. Designed for flexibility and modern UI interactions.
+
+---
+### Preview on Figma
+
+ [SpenceKit Checkbox Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-351&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+@available(iOS 16.0, *)
+public struct Checkbox: View
+````
+
+#### Type: Compound
+
+- Combines **Elements** (e.g., `RoundedRectangle`, `onTapGesture`).
+- Incorporates **Compounds** (e.g., `SFIcon`).
+
+---
+
+### Enums
+
+#### `Checkbox.State`
+
+Defines the possible states of the checkbox:
+
+- `.unchecked`: The default state.
+- `.checked`: The checkbox is selected.
+- `.indeterminate`: Represents an intermediate or undefined state.
+
+---
+
+### Initializers
+
+#### `Checkbox with Binding State`
+
+Creates a `Checkbox` with a bound state.
+
+```swift
+public init(
+    _ state: Binding<Checkbox.State>
+)
+```
+
+##### Parameters
+
+- `state`: A binding to the current state of the checkbox (`.unchecked`, `.checked`, `.indeterminate`).
+
+---
+
+### Usage
+
+#### Example 1: Binary Checkbox
+
+```swift
+@State private var state: Checkbox.State = .unchecked
+
+Checkbox($state)
+```
+
+#### Example 2: Tri-State Checkbox
+
+```swift
+@State private var state: Checkbox.State = .indeterminate
+
+Checkbox($state)
+```
+
+---
+
+### Features
+
+- **Tri-State Support**: Handles `.unchecked`, `.checked`, and `.indeterminate` states.
+- **Dynamic Colors**: Adjusts colors dynamically based on the current state.
+- **Interactive Feedback**: Includes smooth animations when toggling states.
+- **Compact Design**: A small, square design suitable for dense UIs.
+
+---
+
+### Notes
+
+- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent colors, sizes, and animations.
+- **Interactive Behavior**: Toggling state is enabled via `onTapGesture` with animated transitions.
+- **Compatibility**: Available for iOS 16.0 and later.
+
+---
+
+### Related
+
+- **Views**: `RoundedRectangle`, `SFIcon`
+- **Modifiers**: `.background`, `.clipShape`, `.onTapGesture`
+- **Components**: `SpenceKit.Constants`, `SpenceKitStyle`
+
+---
+
+## `PasswordInputField` View
+
+A secure and interactive password input field with customizable placeholder, title, description, and visibility toggle functionality.
+
+---
+### Preview on Figma
+
+ [SpenceKit PasswordInputField Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-359&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+@available(iOS 16.0, *)
+public struct PasswordInputField: View
+````
+
+#### Type: Compound
+
+- Combines **Elements** (e.g., `TextField`, `SecureField`, `Image`, `RoundedRectangle`).
+- Incorporates **Compounds** (e.g., `HelperButtons.Peek`, `HelperButtons.Hide`).
+
+---
+
+### Initializers
+
+#### 1. `PasswordInputField with Placeholder, Title, and Description`
+
+Creates a `PasswordInputField` with a text binding, optional placeholder, title, and description.
+
+```swift
+public init(
+    _ text: Binding<String>,
+    placeholder: String = "",
+    title: String = "",
+    description: String = ""
+)
+```
+
+##### Parameters
+
+- `text`: A binding to the secure input text.
+- `placeholder`: _(Optional)_ The placeholder text displayed when the field is empty. Defaults to an empty string.
+- `title`: _(Optional)_ A title displayed above the password field. Defaults to an empty string.
+- `description`: _(Optional)_ A description displayed below the password field. Defaults to an empty string.
+
+---
+
+### Usage
+
+#### Example 1: Basic `PasswordInputField`
+
+```swift
+PasswordInputField($text, placeholder: "Enter your password")
+```
+
+#### Example 2: With Title and Description
+
+```swift
+PasswordInputField(
+    $text,
+    placeholder: "Enter password",
+    title: "Password",
+    description: "Must be at least 8 characters long"
+)
+```
+
+---
+
+### Features
+
+- **Secure Input**: Toggles between `SecureField` and `TextField` for hidden or visible text entry.
+- **Customizable Labels**: Supports optional placeholder, title, and description for better context.
+- **Visibility Toggle**: Includes a button to show or hide the entered password.
+- **Keyboard Dismissal**: Provides a compact keyboard dismissal button when the field is focused.
+- **Strength Indicator**: Displays a visual strength indicator based on the entered password length.
+
+---
+
+### Notes
+
+- **Focus Management**: Automatically manages focus state and allows users to dismiss the keyboard with a tap.
+- **Accessibility**: Ensures the visibility toggle is accessible and intuitive for all users.
+- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent design language.
+
+---
+
+### Related
+
+- **Views**: `TextField`, `SecureField`, `Image`, `RoundedRectangle`
+- **Modifiers**: `.focused`, `.foregroundStyle`, `.padding`
+- **Components**: `HelperButtons.Peek`, `HelperButtons.Hide`
+
+---
+
+## `TabBar` View
+
+A customizable bottom tab bar for universal tab selection within an app. Supports floating and non-floating configurations, dynamic layouts, and responsive styling.
+
+---
+### Preview on Figma
+
+ [SpenceKit TabBar Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-367&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+@available(iOS 16.0, *)
+public struct TabBar: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Divider`).
+- Incorporates **Compounds** (e.g., `RoundedRectangle`, `Spacer`).
+
+---
+
+### Initializers
+
+#### `TabBar with Configurable Tabs`
+
+Creates a `TabBar` with a binding to the selected tab, style, color scheme, and tab definitions.
+
+```swift
+public init(
+    _ selection: Binding<Int>,
+    tabStyle: SpenceKitStyle = .primary,
+    colorStyle: SpenceKitStyle = .primary,
+    usesSpacers: Bool = true,
+    tabs: [Tab]
+)
+```
+
+##### Parameters
+
+- `selection`: A binding to the currently selected tab index.
+- `tabStyle`: _(Optional)_ The style of the tabs. Options include `.primary`, `.secondary`, `.tertiary`, etc. Defaults to `.primary`.
+- `colorStyle`: _(Optional)_ Defines the color scheme for active and inactive states. Defaults to `.primary`.
+- `usesSpacers`: _(Optional)_ Whether to use spacers between tabs. Defaults to `true`.
+- `tabs`: An array of `Tab` objects defining the tabs' content.
+
+---
+
+### Usage
+
+#### Example 1: Basic `TabBar`
+
+```swift
+TabBar(
+    $selectedTab,
+    tabs: [
+        Tab(
+            "Home",
+            activeIcon: .init(systemName: "house.fill"),
+            inactiveIcon: .init(systemName: "house")
+        ),
+        Tab(
+            "Search",
+            activeIcon: .init(systemName: "magnifyingglass.circle.fill"),
+            inactiveIcon: .init(systemName: "magnifyingglass.circle")
+        )
+    ]
+)
+```
+
+#### Example 2: `TabBar` with Custom Styles
+
+```swift
+TabBar(
+    $selectedTab,
+    tabStyle: .primary,
+    colorStyle: .CTA,
+    tabs: [
+        Tab(
+            "Profile",
+            activeIcon: .init(systemName: "person.fill"),
+            inactiveIcon: .init(systemName: "person")
+        ),
+        Tab(
+            "Settings",
+            activeIcon: .init(systemName: "gearshape.fill"),
+            inactiveIcon: .init(systemName: "gearshape")
+        )
+    ]
+)
+```
+
+---
+
+### Features
+
+- **Dynamic Layout**: Adapts to the available screen width, supporting both floating and non-floating configurations.
+- **Configurable Tabs**: Allows for flexible tab definitions with customizable icons and labels.
+- **Responsive Styling**: Includes support for various styles and color schemes using `SpenceKitStyle`.
+- **Active State Animation**: Smooth transitions between active and inactive states.
+
+---
+
+### Notes
+
+- **Floating Configuration**: When the screen width exceeds `440`, the tab bar appears as a floating component with rounded edges.
+- **Styling Dependency**: Leverages `SpenceKit.Constants` for consistent padding, spacing, and colors.
+- **Accessibility**: Tabs are accessible with visual and text-based feedback for active and inactive states.
+
+---
+
+### Related
+
+- **Views**: `Button`, `Text`, `Image`, `Divider`
+- **Modifiers**: `.padding`, `.clipShape`, `.background`
+- **Components**: `Tab`
+
+---
+## `TabGroup` View
+
+A vertically stacked tab selection component designed for grouping related tabs under an optional title. Tabs include icons, titles, and actions for seamless interaction.
+
+---
+### Preview on Figma
+
+ [SpenceKit TabGroup Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-383&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+public struct TabGroup: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Divider`).
+- Incorporates **Compounds** (e.g., `RoundedRectangle`, `CornerRadiusReader`).
+
+---
+
+### Initializers
+
+#### `TabGroup with Title and Tabs`
+
+Creates a `TabGroup` with an optional title and a list of tabs.
+
+```swift
+public init(
+    title: String? = nil,
+    tabs: [Tab]
+)
+```
+
+##### Parameters
+
+- `title`: _(Optional)_ A title displayed above the tab group. Defaults to `nil`.
+- `tabs`: An array of `Tab` objects defining the tabs' content and actions.
+
+---
+
+### Usage
+
+#### Example 1: `TabGroup` with Title
+
+```swift
+TabGroup(
+    title: "General",
+    tabs: [
+        Tab(
+            "Home",
+            icon: .init(systemName: "house")
+        ),
+        Tab(
+            "Settings",
+            icon: .init(systemName: "gearshape")
+        )
+    ]
+)
+```
+
+#### Example 2: `TabGroup` without Title
+
+```swift
+TabGroup(
+    tabs: [
+        Tab(
+            "Profile",
+            icon: .init(systemName: "person")
+        ),
+        Tab(
+            "Notifications",
+            icon: .init(systemName: "bell")
+        )
+    ]
+)
+```
+
+---
+
+### Features
+
+- **Grouped Tabs**: Organizes related tabs into a vertical stack with optional titles for clarity.
+- **Customizable Actions**: Each tab can trigger a specific action on selection.
+- **Icon and Label Support**: Tabs include icons and text for better usability and design consistency.
+- **Dividers**: Separates tabs visually with horizontal dividers for a clean layout.
+
+---
+
+### Notes
+
+- **Dynamic Layout**: The height of the `TabGroup` adjusts automatically based on the number of tabs.
+- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent spacing, fonts, and colors.
+- **Accessible Design**: Ensures icons and labels are visually and functionally distinct.
+
+---
+
+### Related
+
+- **Views**: `Button`, `Text`, `Image`, `Divider`
+- **Modifiers**: `.padding`, `.clipShape`, `.frame`
+- **Components**: `Tab`
+
+---
+
+## `iOSScrubber` View
+
+A custom implementation of iOS 16's media scrubber slider, designed for smooth, interactive control over a bounded range. Includes support for dynamic binding modes and animated feedback.
+
+---
+### Declaration
+
+```swift
+public struct iOSScrubber: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `Rectangle`, `RoundedRectangle`).
+- Incorporates **Compounds** (e.g., `DragGesture`).
+
+---
+
+### Enums
+
+#### `iOSScrubber.ScrubberBinding`
+
+Defines the binding mode for the scrubber:
+
+- `.bindAlways`: Updates the bound value continuously during interaction.
+- `.bindAtRest`: Updates the bound value only after interaction ends.
+
+---
+
+### Initializers
+
+#### `iOSScrubber with Binding Value`
+
+Creates an `iOSScrubber` slider with a bound value and binding mode.
+
+```swift
+public init(
+    _ value: Binding<CGFloat>,
+    bind: ScrubberBinding = .bindAlways
+)
+```
+
+##### Parameters
+
+- `value`: A binding to the slider's value. Should be a `CGFloat` between `0.0` and `1.0`.
+- `bind`: _(Optional)_ The binding mode for the slider. Defaults to `.bindAlways`.
+
+---
+
+### Usage
+
+#### Example 1: Always-Binding Scrubber
+
+```swift
+@State private var value: CGFloat = 0.5
+
+iOSScrubber($value)
+```
+
+#### Example 2: Bind-At-Rest Scrubber
+
+```swift
+@State private var value: CGFloat = 0.75
+
+iOSScrubber($value, bind: .bindAtRest)
+```
+
+---
+
+### Features
+
+- **Dynamic Binding Modes**: Choose between continuous updates (`.bindAlways`) or updates only at rest (`.bindAtRest`).
+- **Smooth Animations**: Provides responsive feedback during interaction with a bouncy easing effect.
+- **Velocity-Based Glide**: Supports momentum-based continuation when releasing the scrubber.
+- **Custom Track Design**: Includes an interactive track that changes size and opacity based on user interaction.
+- **Range Constraints**: Ensures the value remains within the range `[0.0, 1.0]`.
+
+---
+
+### Notes
+
+- **Styling Dependency**: Utilizes `SpenceKit.Constants` for consistent spacing, corner radius, and color themes.
+- **GeometryReader Integration**: Adjusts dynamically to the parent view's size.
+- **Performance Considerations**: Uses a timer to handle velocity-based animations.
+
+---
+
+### Related
+
+- **Views**: `Rectangle`, `RoundedRectangle`
+- **Gestures**: `DragGesture`
+- **Modifiers**: `.frame`, `.background`, `.onTapGesture`
+
+---
+## `ContinuousSlider` View
+
+A customizable continuous slider for smooth range-based input. Provides various styles, dynamic animations, and optional glide behavior for user interactions.
+
+---
+### Preview on Figma
+
+ [SpenceKit ContinuousSlider Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=561-253&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+public struct ContinuousSlider: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `RoundedRectangle`, `Text`).
+- Incorporates **Compounds** (e.g., `DragGesture`).
+
+---
+
+### Enums
+
+#### `ContinuousSlider.GlideLength`
+
+Defines the glide behavior's length:
+
+- `.none`: No glide effect.
+- `.short`: Short glide distance.
+- `.moderate`: Moderate glide distance.
+- `.long`: Long glide distance.
+
+#### `ContinuousSlider.GlideResistance`
+
+Defines the resistance applied during the glide effect:
+
+- `.low`: Minimal resistance for faster glides.
+- `.moderate`: Medium resistance.
+- `.high`: High resistance for slower glides.
+- `.infinity`: Infinite resistance disables glide.
+
+---
+
+### Initializers
+
+#### `ContinuousSlider with Binding Value`
+
+Creates a `ContinuousSlider` with a binding to the slider's value.
+
+```swift
+public init(
+    _ value: Binding<CGFloat>,
+    style: SpenceKitStyle = .CTA,
+    range: ClosedRange<Double> = 0...10,
+    decimalCount: Int = 1,
+    glideLength: GlideLength = .moderate,
+    glideResistance: GlideResistance = .moderate
+)
+```
+
+##### Parameters
+
+- `value`: A binding to the slider's value, constrained between `0.0` and `1.0`.
+- `style`: _(Optional)_ Visual style of the slider (`.primary`, `.secondary`, `.tertiary`, `.CTA`). Defaults to `.CTA`.
+- `range`: _(Optional)_ The numerical range the slider maps to. Defaults to `0...10`.
+- `decimalCount`: _(Optional)_ Number of decimal places displayed. Defaults to `1`.
+- `glideLength`: _(Optional)_ Length of the glide effect. Defaults to `.moderate`.
+- `glideResistance`: _(Optional)_ Resistance applied during the glide. Defaults to `.moderate`.
+
+---
+
+### Usage
+
+#### Example 1: Primary Style Slider
+
+```swift
+@State private var value: CGFloat = 0.5
+
+ContinuousSlider($value, style: .primary, range: 0...100, decimalCount: 2)
+```
+
+#### Example 2: Secondary Style with Glide
+
+```swift
+@State private var value: CGFloat = 0.3
+
+ContinuousSlider($value, style: .secondary, glideLength: .long, glideResistance: .low)
+```
+
+---
+
+### Features
+
+- **Dynamic Styling**: Supports `.primary`, `.secondary`, `.tertiary`, and `.CTA` styles for different use cases.
+- **Range Mapping**: Maps normalized values (`0.0` to `1.0`) to a specified numerical range.
+- **Glide Effect**: Adds smooth momentum-based motion when releasing the slider.
+- **Responsive Feedback**: Provides real-time value updates with animated transitions.
+- **Decimal Precision**: Customizable number of decimal places for the displayed value.
+
+---
+
+### Notes
+
+- **Styling Dependency**: Leverages `SpenceKit.Constants` for consistent dimensions, colors, and animations.
+- **Gesture Handling**: Incorporates `DragGesture` for seamless interaction.
+- **Performance Considerations**: Glide behavior uses a `Timer` for smooth updates.
+
+---
+
+### Related
+
+- **Views**: `RoundedRectangle`, `Text`
+- **Gestures**: `DragGesture`
+- **Modifiers**: `.frame`, `.foregroundStyle`, `.padding`
+
+---
+
+## `Slider` View
+
+A customizable slider for continuous range-based input, supporting both single-thumb and double-thumb configurations.
+
+---
+### Preview on Figma
+
+ [SpenceKit Slider Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=561-264&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+public struct Slider: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `RoundedRectangle`, `Circle`).
+- Incorporates **Compounds** (e.g., `DragGesture`).
+
+---
+
+### Enums
+
+#### `Slider.Count`
+
+Defines the number of thumbs on the slider:
+
+- `.single`: Single thumb for basic input.
+- `.double`: Two thumbs for range-based input.
+
+---
+
+### Initializers
+
+#### `Single-Thumb Slider`
+
+Creates a `Slider` with a single thumb for basic continuous input.
+
+```swift
+public init(
+    _ value: Binding<Double>
+)
+```
+
+##### Parameters
+
+- `value`: A binding to the slider's value, constrained between `0.0` and `1.0`.
+
+#### `Double-Thumb Slider`
+
+Creates a `Slider` with two thumbs for specifying a range.
+
+```swift
+public init(
+    from: Binding<Double>,
+    to: Binding<Double>
+)
+```
+
+##### Parameters
+
+- `from`: A binding to the starting value of the range.
+- `to`: A binding to the ending value of the range.
+
+---
+
+### Usage
+
+#### Example 1: Single-Thumb Slider
+
+```swift
+@State private var value: Double = 0.5
+
+Slider($value)
+```
+
+#### Example 2: Double-Thumb Slider
+
+```swift
+@State private var from: Double = 0.2
+@State private var to: Double = 0.8
+
+Slider(from: $from, to: $to)
+```
+
+---
+
+### Features
+
+- **Single and Double Thumbs**: Supports basic single-value input or range selection with two thumbs.
+- **Dynamic Track**: Active track dynamically adjusts to reflect the selected range.
+- **Responsive Interaction**: Provides smooth and precise value updates via `DragGesture`.
+- **Styling Consistency**: Adapts colors and dimensions based on `SpenceKit.Constants`.
+
+---
+
+### Notes
+
+- **Range Constraints**: Values are clamped to the range `[0.0, 1.0]`.
+- **Animation**: Includes bouncy animations for thumb interactions.
+- **Styling Dependency**: Utilizes `SpenceKit.Constants` for consistent corner radius, border widths, and colors.
+
+---
+
+### Related
+
+- **Views**: `RoundedRectangle`, `Circle`
+- **Gestures**: `DragGesture`
+- **Modifiers**: `.offset`, `.frame`, `.stroke`
+
+---
+## `Dropdown` View
+
+A dropdown menu for tab selection with customizable placeholder and tab options. Supports seamless interaction and dynamic state management.
+
+---
+### Preview on Figma
+
+ [SpenceKit Dropdown Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=562-433&t=Dst1yPDRjPShsn0T-1)
+
+---
+### Declaration
+
+```swift
+@available(iOS 16.0, *)
+public struct Dropdown: View
+````
+
+#### Type: Mixture
+
+- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Picker`).
+- Incorporates **Compounds** (e.g., `Menu`, `Tab`).
+
+---
+
+### Initializers
+
+#### `Dropdown with Binding Selection`
+
+Creates a `Dropdown` with a binding to the selected index, a placeholder, and an array of tabs.
+
+```swift
+public init(
+    _ selection: Binding<Int>,
+    placeholder: String = "Select...",
+    tabs: [Tab]
+)
+```
+
+##### Parameters
+
+- `selection`: A binding to the selected tab index. Use `-1` for no initial selection.
+- `placeholder`: _(Optional)_ Placeholder text displayed when no selection is made. Defaults to `"Select..."`.
+- `tabs`: An array of `Tab` objects representing the dropdown options.
+
+---
+
+### Usage
+
+#### Example 1: Basic Dropdown
+
+```swift
+@State private var selection = -1
+
+Dropdown(
+    $selection,
+    tabs: [
+        Tab("Option 1"),
+        Tab("Option 2"),
+        Tab("Option 3")
+    ]
+)
+```
+
+#### Example 2: Dropdown with Custom Placeholder
+
+```swift
+@State private var selection = -1
+
+Dropdown(
+    $selection,
+    placeholder: "Choose an option",
+    tabs: [
+        Tab("Choice A"),
+        Tab("Choice B"),
+        Tab("Choice C")
+    ]
+)
+```
+
+---
+
+### Features
+
+- **Dynamic State Management**: Reflects the current selection and updates on user interaction.
+- **Customizable Placeholder**: Displays placeholder text until a selection is made.
+- **Menu Integration**: Uses `Menu` and `Picker` for dropdown functionality.
+- **Compact Design**: Fits seamlessly within compact UIs while maintaining clarity.
+
+---
+
+### Notes
+
+- **Responsive Design**: Adapts height and width based on font size and available space.
+- **Styling Dependency**: Uses `SpenceKit.Constants` for consistent fonts, colors, and dimensions.
+- **Compatibility**: Available for iOS 16.0 and later.
+
+---
+
+### Related
+
+- **Views**: `Menu`, `Picker`, `Button`, `Text`, `Image`
+- **Modifiers**: `.foregroundStyle`, `.padding`, `.roundBorder`
+- **Components**: `Tab`
+
+---
+
 # Compounds
 
+SpenceKit `Compounds` are a subset of Views made using a combination of both Element(s) & Primitive(s) and/or has a View Building parameter. For more info about View Building, see [@ViewBuilder docs](https://developer.apple.com/documentation/swiftui/viewbuilder)
 ## `HelperButton` View
 
 A small, circular button designed for lightweight interactions. Highly customizable with support for dynamic actions and content.
 
 ---
+### Preview on Figma
 
+ [SpenceKit HelperButton Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-654&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -439,7 +1368,11 @@ HelperButton(.tertiary) {
 A circular button designed for interactive actions, supporting multiple styles and customizable content.
 
 ---
+### Preview on Figma
 
+ [SpenceKit IconButton Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-318&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -531,108 +1464,16 @@ IconButton(.destructive) {
 ---
 
 
-## `Checkbox` View
-
-A binary or tri-state input component with customizable states: unchecked, checked, and indeterminate. Designed for flexibility and modern UI interactions.
-
----
-
-### Declaration
-
-```swift
-@available(iOS 16.0, *)
-public struct Checkbox: View
-````
-
-#### Type: Compound
-
-- Combines **Elements** (e.g., `RoundedRectangle`, `onTapGesture`).
-- Incorporates **Compounds** (e.g., `SFIcon`).
-
----
-
-### Enums
-
-#### `Checkbox.State`
-
-Defines the possible states of the checkbox:
-
-- `.unchecked`: The default state.
-- `.checked`: The checkbox is selected.
-- `.indeterminate`: Represents an intermediate or undefined state.
-
----
-
-### Initializers
-
-#### `Checkbox with Binding State`
-
-Creates a `Checkbox` with a bound state.
-
-```swift
-public init(
-    _ state: Binding<Checkbox.State>
-)
-```
-
-##### Parameters
-
-- `state`: A binding to the current state of the checkbox (`.unchecked`, `.checked`, `.indeterminate`).
-
----
-
-### Usage
-
-#### Example 1: Binary Checkbox
-
-```swift
-@State private var state: Checkbox.State = .unchecked
-
-Checkbox($state)
-```
-
-#### Example 2: Tri-State Checkbox
-
-```swift
-@State private var state: Checkbox.State = .indeterminate
-
-Checkbox($state)
-```
-
----
-
-### Features
-
-- **Tri-State Support**: Handles `.unchecked`, `.checked`, and `.indeterminate` states.
-- **Dynamic Colors**: Adjusts colors dynamically based on the current state.
-- **Interactive Feedback**: Includes smooth animations when toggling states.
-- **Compact Design**: A small, square design suitable for dense UIs.
-
----
-
-### Notes
-
-- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent colors, sizes, and animations.
-- **Interactive Behavior**: Toggling state is enabled via `onTapGesture` with animated transitions.
-- **Compatibility**: Available for iOS 16.0 and later.
-
----
-
-### Related
-
-- **Views**: `RoundedRectangle`, `SFIcon`
-- **Modifiers**: `.background`, `.clipShape`, `.onTapGesture`
-- **Components**: `SpenceKit.Constants`, `SpenceKitStyle`
-
----
-
----
-
----
-# Mixtures
 ## `Card` View
 
 The `Card` view is a versatile container used to define paired content, such as a title-body combination, with customizable footers (chips or buttons). It supports different styles defined by `SpenceKitStyle`.
+
+---
+### Preview on Figma
+
+ [SpenceKit Card Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-360&t=qX2O40tvnik5nS45-1)
+
+---
 
 ### Declaration
 
@@ -750,7 +1591,11 @@ private static func getTextLabel(for text: String, with style: SpenceKitStyle) -
 A customizable search bar for text input with optional placeholder text, label, and styling. Supports dynamic content and interaction.
 
 ---
+### Preview on Figma
 
+ [SpenceKit SearchBar Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-401&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -873,7 +1718,11 @@ SearchBar(.constant("Example"), style: .primary) {
 A versatile rounded rectangular view that can display text, icons, or custom content with optional actions. Designed for both simple and complex use cases.
 
 ---
+### Preview on Figma
 
+ [SpenceKit LargeChip Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-444&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1068,7 +1917,11 @@ LargeChip(.primary) {
 A compact rounded rectangular view designed for displaying concise content such as text, icons, or custom labels. Supports optional actions and flexible styling.
 
 ---
+### Preview on Figma
 
+ [SpenceKit SmallChip Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-486&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1264,7 +2117,11 @@ SmallChip(.primary) {
 A versatile button with dynamic width expansion, customizable content, and multiple style options. Ideal for creating visually consistent and accessible buttons across layouts.
 
 ---
+### Preview on Figma
 
+ [SpenceKit ExpandingButton Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-528&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1360,7 +2217,11 @@ ExpandingButton(.CTA) {
 An inline text input field with customizable placeholders, titles, descriptions, and optional identifier and helper button support.
 
 ---
+### Preview on Figma
 
+ [SpenceKit InlineTextField Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-570&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1528,7 +2389,11 @@ InlineTextField(
 A flexible multiline text input component with customizable placeholder, title, description, character limit, and optional identifier and helper button support.
 
 ---
+### Preview on Figma
 
+ [SpenceKit MultilineTextField Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-612&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1699,105 +2564,28 @@ MultilineTextField(
 
 ---
 
-## `PasswordInputField` View
-
-A secure and interactive password input field with customizable placeholder, title, description, and visibility toggle functionality.
-
----
-
-### Declaration
-
-```swift
-@available(iOS 16.0, *)
-public struct PasswordInputField: View
-````
-
-#### Type: Compound
-
-- Combines **Elements** (e.g., `TextField`, `SecureField`, `Image`, `RoundedRectangle`).
-- Incorporates **Compounds** (e.g., `HelperButtons.Peek`, `HelperButtons.Hide`).
-
----
-
-### Initializers
-
-#### 1. `PasswordInputField with Placeholder, Title, and Description`
-
-Creates a `PasswordInputField` with a text binding, optional placeholder, title, and description.
-
-```swift
-public init(
-    _ text: Binding<String>,
-    placeholder: String = "",
-    title: String = "",
-    description: String = ""
-)
-```
-
-##### Parameters
-
-- `text`: A binding to the secure input text.
-- `placeholder`: _(Optional)_ The placeholder text displayed when the field is empty. Defaults to an empty string.
-- `title`: _(Optional)_ A title displayed above the password field. Defaults to an empty string.
-- `description`: _(Optional)_ A description displayed below the password field. Defaults to an empty string.
-
----
-
-### Usage
-
-#### Example 1: Basic `PasswordInputField`
-
-```swift
-PasswordInputField($text, placeholder: "Enter your password")
-```
-
-#### Example 2: With Title and Description
-
-```swift
-PasswordInputField(
-    $text,
-    placeholder: "Enter password",
-    title: "Password",
-    description: "Must be at least 8 characters long"
-)
-```
-
----
-
-### Features
-
-- **Secure Input**: Toggles between `SecureField` and `TextField` for hidden or visible text entry.
-- **Customizable Labels**: Supports optional placeholder, title, and description for better context.
-- **Visibility Toggle**: Includes a button to show or hide the entered password.
-- **Keyboard Dismissal**: Provides a compact keyboard dismissal button when the field is focused.
-- **Strength Indicator**: Displays a visual strength indicator based on the entered password length.
-
----
-
-### Notes
-
-- **Focus Management**: Automatically manages focus state and allows users to dismiss the keyboard with a tap.
-- **Accessibility**: Ensures the visibility toggle is accessible and intuitive for all users.
-- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent design language.
-
----
-
-### Related
-
-- **Views**: `TextField`, `SecureField`, `Image`, `RoundedRectangle`
-- **Modifiers**: `.focused`, `.foregroundStyle`, `.padding`
-- **Components**: `HelperButtons.Peek`, `HelperButtons.Hide`
-
----
 
 ## TODO: `IconProgressSelector` View
+
+🚧 work in progress! 🚧
+
+---
+### Preview on Figma
+
+ [SpenceKit IconProgressSelector Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-695&t=qX2O40tvnik5nS45-1)
+
+---
 
 ## `ProgressSelector` View
 
 A flexible, step-based linear progression component for navigating multi-step processes. Supports custom styling, labels, skippable steps, and optional finish actions.
 
 ---
+### Preview on Figma
 
+ [SpenceKit ProgressSelector Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-653&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -1956,231 +2744,16 @@ ProgressSelector($selection) {
 
 ---
 
-## `TabBar` View
-
-A customizable bottom tab bar for universal tab selection within an app. Supports floating and non-floating configurations, dynamic layouts, and responsive styling.
-
----
-
-### Declaration
-
-```swift
-@available(iOS 16.0, *)
-public struct TabBar: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Divider`).
-- Incorporates **Compounds** (e.g., `RoundedRectangle`, `Spacer`).
-
----
-
-### Initializers
-
-#### `TabBar with Configurable Tabs`
-
-Creates a `TabBar` with a binding to the selected tab, style, color scheme, and tab definitions.
-
-```swift
-public init(
-    _ selection: Binding<Int>,
-    tabStyle: SpenceKitStyle = .primary,
-    colorStyle: SpenceKitStyle = .primary,
-    usesSpacers: Bool = true,
-    tabs: [Tab]
-)
-```
-
-##### Parameters
-
-- `selection`: A binding to the currently selected tab index.
-- `tabStyle`: _(Optional)_ The style of the tabs. Options include `.primary`, `.secondary`, `.tertiary`, etc. Defaults to `.primary`.
-- `colorStyle`: _(Optional)_ Defines the color scheme for active and inactive states. Defaults to `.primary`.
-- `usesSpacers`: _(Optional)_ Whether to use spacers between tabs. Defaults to `true`.
-- `tabs`: An array of `Tab` objects defining the tabs' content.
-
----
-
-### Usage
-
-#### Example 1: Basic `TabBar`
-
-```swift
-TabBar(
-    $selectedTab,
-    tabs: [
-        Tab(
-            "Home",
-            activeIcon: .init(systemName: "house.fill"),
-            inactiveIcon: .init(systemName: "house")
-        ),
-        Tab(
-            "Search",
-            activeIcon: .init(systemName: "magnifyingglass.circle.fill"),
-            inactiveIcon: .init(systemName: "magnifyingglass.circle")
-        )
-    ]
-)
-```
-
-#### Example 2: `TabBar` with Custom Styles
-
-```swift
-TabBar(
-    $selectedTab,
-    tabStyle: .primary,
-    colorStyle: .CTA,
-    tabs: [
-        Tab(
-            "Profile",
-            activeIcon: .init(systemName: "person.fill"),
-            inactiveIcon: .init(systemName: "person")
-        ),
-        Tab(
-            "Settings",
-            activeIcon: .init(systemName: "gearshape.fill"),
-            inactiveIcon: .init(systemName: "gearshape")
-        )
-    ]
-)
-```
-
----
-
-### Features
-
-- **Dynamic Layout**: Adapts to the available screen width, supporting both floating and non-floating configurations.
-- **Configurable Tabs**: Allows for flexible tab definitions with customizable icons and labels.
-- **Responsive Styling**: Includes support for various styles and color schemes using `SpenceKitStyle`.
-- **Active State Animation**: Smooth transitions between active and inactive states.
-
----
-
-### Notes
-
-- **Floating Configuration**: When the screen width exceeds `440`, the tab bar appears as a floating component with rounded edges.
-- **Styling Dependency**: Leverages `SpenceKit.Constants` for consistent padding, spacing, and colors.
-- **Accessibility**: Tabs are accessible with visual and text-based feedback for active and inactive states.
-
----
-
-### Related
-
-- **Views**: `Button`, `Text`, `Image`, `Divider`
-- **Modifiers**: `.padding`, `.clipShape`, `.background`
-- **Components**: `Tab`
-
----
-## `TabGroup` View
-
-A vertically stacked tab selection component designed for grouping related tabs under an optional title. Tabs include icons, titles, and actions for seamless interaction.
-
----
-
-### Declaration
-
-```swift
-public struct TabGroup: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Divider`).
-- Incorporates **Compounds** (e.g., `RoundedRectangle`, `CornerRadiusReader`).
-
----
-
-### Initializers
-
-#### `TabGroup with Title and Tabs`
-
-Creates a `TabGroup` with an optional title and a list of tabs.
-
-```swift
-public init(
-    title: String? = nil,
-    tabs: [Tab]
-)
-```
-
-##### Parameters
-
-- `title`: _(Optional)_ A title displayed above the tab group. Defaults to `nil`.
-- `tabs`: An array of `Tab` objects defining the tabs' content and actions.
-
----
-
-### Usage
-
-#### Example 1: `TabGroup` with Title
-
-```swift
-TabGroup(
-    title: "General",
-    tabs: [
-        Tab(
-            "Home",
-            icon: .init(systemName: "house")
-        ),
-        Tab(
-            "Settings",
-            icon: .init(systemName: "gearshape")
-        )
-    ]
-)
-```
-
-#### Example 2: `TabGroup` without Title
-
-```swift
-TabGroup(
-    tabs: [
-        Tab(
-            "Profile",
-            icon: .init(systemName: "person")
-        ),
-        Tab(
-            "Notifications",
-            icon: .init(systemName: "bell")
-        )
-    ]
-)
-```
-
----
-
-### Features
-
-- **Grouped Tabs**: Organizes related tabs into a vertical stack with optional titles for clarity.
-- **Customizable Actions**: Each tab can trigger a specific action on selection.
-- **Icon and Label Support**: Tabs include icons and text for better usability and design consistency.
-- **Dividers**: Separates tabs visually with horizontal dividers for a clean layout.
-
----
-
-### Notes
-
-- **Dynamic Layout**: The height of the `TabGroup` adjusts automatically based on the number of tabs.
-- **Styling Dependency**: Adheres to `SpenceKit.Constants` for consistent spacing, fonts, and colors.
-- **Accessible Design**: Ensures icons and labels are visually and functionally distinct.
-
----
-
-### Related
-
-- **Views**: `Button`, `Text`, `Image`, `Divider`
-- **Modifiers**: `.padding`, `.clipShape`, `.frame`
-- **Components**: `Tab`
-
----
-
 ## `TabSelector` View
 
 An inline tab selection component for horizontally displaying tabs with active and inactive states. Tabs are fully customizable, supporting dynamic layouts and transitions.
 
 ---
+### Preview on Figma
 
+ [SpenceKit TabSelector Preview](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=564-170&t=qX2O40tvnik5nS45-1)
+
+---
 ### Declaration
 
 ```swift
@@ -2295,428 +2868,16 @@ TabSelector($selectedTab) {
 
 ---
 
-## `Dropdown` View
-
-A dropdown menu for tab selection with customizable placeholder and tab options. Supports seamless interaction and dynamic state management.
-
----
-
-### Declaration
-
-```swift
-@available(iOS 16.0, *)
-public struct Dropdown: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `Button`, `Text`, `Image`, `Picker`).
-- Incorporates **Compounds** (e.g., `Menu`, `Tab`).
-
----
-
-### Initializers
-
-#### `Dropdown with Binding Selection`
-
-Creates a `Dropdown` with a binding to the selected index, a placeholder, and an array of tabs.
-
-```swift
-public init(
-    _ selection: Binding<Int>,
-    placeholder: String = "Select...",
-    tabs: [Tab]
-)
-```
-
-##### Parameters
-
-- `selection`: A binding to the selected tab index. Use `-1` for no initial selection.
-- `placeholder`: _(Optional)_ Placeholder text displayed when no selection is made. Defaults to `"Select..."`.
-- `tabs`: An array of `Tab` objects representing the dropdown options.
-
----
-
-### Usage
-
-#### Example 1: Basic Dropdown
-
-```swift
-@State private var selection = -1
-
-Dropdown(
-    $selection,
-    tabs: [
-        Tab("Option 1"),
-        Tab("Option 2"),
-        Tab("Option 3")
-    ]
-)
-```
-
-#### Example 2: Dropdown with Custom Placeholder
-
-```swift
-@State private var selection = -1
-
-Dropdown(
-    $selection,
-    placeholder: "Choose an option",
-    tabs: [
-        Tab("Choice A"),
-        Tab("Choice B"),
-        Tab("Choice C")
-    ]
-)
-```
-
----
-
-### Features
-
-- **Dynamic State Management**: Reflects the current selection and updates on user interaction.
-- **Customizable Placeholder**: Displays placeholder text until a selection is made.
-- **Menu Integration**: Uses `Menu` and `Picker` for dropdown functionality.
-- **Compact Design**: Fits seamlessly within compact UIs while maintaining clarity.
-
----
-
-### Notes
-
-- **Responsive Design**: Adapts height and width based on font size and available space.
-- **Styling Dependency**: Uses `SpenceKit.Constants` for consistent fonts, colors, and dimensions.
-- **Compatibility**: Available for iOS 16.0 and later.
-
----
-
-### Related
-
-- **Views**: `Menu`, `Picker`, `Button`, `Text`, `Image`
-- **Modifiers**: `.foregroundStyle`, `.padding`, `.roundBorder`
-- **Components**: `Tab`
-
----
-## `iOSScrubber` View
-
-A custom implementation of iOS 16's media scrubber slider, designed for smooth, interactive control over a bounded range. Includes support for dynamic binding modes and animated feedback.
-
----
-
-### Declaration
-
-```swift
-public struct iOSScrubber: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `Rectangle`, `RoundedRectangle`).
-- Incorporates **Compounds** (e.g., `DragGesture`).
-
----
-
-### Enums
-
-#### `iOSScrubber.ScrubberBinding`
-
-Defines the binding mode for the scrubber:
-
-- `.bindAlways`: Updates the bound value continuously during interaction.
-- `.bindAtRest`: Updates the bound value only after interaction ends.
-
----
-
-### Initializers
-
-#### `iOSScrubber with Binding Value`
-
-Creates an `iOSScrubber` slider with a bound value and binding mode.
-
-```swift
-public init(
-    _ value: Binding<CGFloat>,
-    bind: ScrubberBinding = .bindAlways
-)
-```
-
-##### Parameters
-
-- `value`: A binding to the slider's value. Should be a `CGFloat` between `0.0` and `1.0`.
-- `bind`: _(Optional)_ The binding mode for the slider. Defaults to `.bindAlways`.
-
----
-
-### Usage
-
-#### Example 1: Always-Binding Scrubber
-
-```swift
-@State private var value: CGFloat = 0.5
-
-iOSScrubber($value)
-```
-
-#### Example 2: Bind-At-Rest Scrubber
-
-```swift
-@State private var value: CGFloat = 0.75
-
-iOSScrubber($value, bind: .bindAtRest)
-```
-
----
-
-### Features
-
-- **Dynamic Binding Modes**: Choose between continuous updates (`.bindAlways`) or updates only at rest (`.bindAtRest`).
-- **Smooth Animations**: Provides responsive feedback during interaction with a bouncy easing effect.
-- **Velocity-Based Glide**: Supports momentum-based continuation when releasing the scrubber.
-- **Custom Track Design**: Includes an interactive track that changes size and opacity based on user interaction.
-- **Range Constraints**: Ensures the value remains within the range `[0.0, 1.0]`.
-
----
-
-### Notes
-
-- **Styling Dependency**: Utilizes `SpenceKit.Constants` for consistent spacing, corner radius, and color themes.
-- **GeometryReader Integration**: Adjusts dynamically to the parent view's size.
-- **Performance Considerations**: Uses a timer to handle velocity-based animations.
-
----
-
-### Related
-
-- **Views**: `Rectangle`, `RoundedRectangle`
-- **Gestures**: `DragGesture`
-- **Modifiers**: `.frame`, `.background`, `.onTapGesture`
-
----
-## `ContinuousSlider` View
-
-A customizable continuous slider for smooth range-based input. Provides various styles, dynamic animations, and optional glide behavior for user interactions.
-
----
-
-### Declaration
-
-```swift
-public struct ContinuousSlider: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `RoundedRectangle`, `Text`).
-- Incorporates **Compounds** (e.g., `DragGesture`).
-
----
-
-### Enums
-
-#### `ContinuousSlider.GlideLength`
-
-Defines the glide behavior's length:
-
-- `.none`: No glide effect.
-- `.short`: Short glide distance.
-- `.moderate`: Moderate glide distance.
-- `.long`: Long glide distance.
-
-#### `ContinuousSlider.GlideResistance`
-
-Defines the resistance applied during the glide effect:
-
-- `.low`: Minimal resistance for faster glides.
-- `.moderate`: Medium resistance.
-- `.high`: High resistance for slower glides.
-- `.infinity`: Infinite resistance disables glide.
-
----
-
-### Initializers
-
-#### `ContinuousSlider with Binding Value`
-
-Creates a `ContinuousSlider` with a binding to the slider's value.
-
-```swift
-public init(
-    _ value: Binding<CGFloat>,
-    style: SpenceKitStyle = .CTA,
-    range: ClosedRange<Double> = 0...10,
-    decimalCount: Int = 1,
-    glideLength: GlideLength = .moderate,
-    glideResistance: GlideResistance = .moderate
-)
-```
-
-##### Parameters
-
-- `value`: A binding to the slider's value, constrained between `0.0` and `1.0`.
-- `style`: _(Optional)_ Visual style of the slider (`.primary`, `.secondary`, `.tertiary`, `.CTA`). Defaults to `.CTA`.
-- `range`: _(Optional)_ The numerical range the slider maps to. Defaults to `0...10`.
-- `decimalCount`: _(Optional)_ Number of decimal places displayed. Defaults to `1`.
-- `glideLength`: _(Optional)_ Length of the glide effect. Defaults to `.moderate`.
-- `glideResistance`: _(Optional)_ Resistance applied during the glide. Defaults to `.moderate`.
-
----
-
-### Usage
-
-#### Example 1: Primary Style Slider
-
-```swift
-@State private var value: CGFloat = 0.5
-
-ContinuousSlider($value, style: .primary, range: 0...100, decimalCount: 2)
-```
-
-#### Example 2: Secondary Style with Glide
-
-```swift
-@State private var value: CGFloat = 0.3
-
-ContinuousSlider($value, style: .secondary, glideLength: .long, glideResistance: .low)
-```
-
----
-
-### Features
-
-- **Dynamic Styling**: Supports `.primary`, `.secondary`, `.tertiary`, and `.CTA` styles for different use cases.
-- **Range Mapping**: Maps normalized values (`0.0` to `1.0`) to a specified numerical range.
-- **Glide Effect**: Adds smooth momentum-based motion when releasing the slider.
-- **Responsive Feedback**: Provides real-time value updates with animated transitions.
-- **Decimal Precision**: Customizable number of decimal places for the displayed value.
-
----
-
-### Notes
-
-- **Styling Dependency**: Leverages `SpenceKit.Constants` for consistent dimensions, colors, and animations.
-- **Gesture Handling**: Incorporates `DragGesture` for seamless interaction.
-- **Performance Considerations**: Glide behavior uses a `Timer` for smooth updates.
-
----
-
-### Related
-
-- **Views**: `RoundedRectangle`, `Text`
-- **Gestures**: `DragGesture`
-- **Modifiers**: `.frame`, `.foregroundStyle`, `.padding`
-
----
-
-## `Slider` View
-
-A customizable slider for continuous range-based input, supporting both single-thumb and double-thumb configurations.
-
----
-
-### Declaration
-
-```swift
-public struct Slider: View
-````
-
-#### Type: Mixture
-
-- Combines **Elements** (e.g., `RoundedRectangle`, `Circle`).
-- Incorporates **Compounds** (e.g., `DragGesture`).
-
----
-
-### Enums
-
-#### `Slider.Count`
-
-Defines the number of thumbs on the slider:
-
-- `.single`: Single thumb for basic input.
-- `.double`: Two thumbs for range-based input.
-
----
-
-### Initializers
-
-#### `Single-Thumb Slider`
-
-Creates a `Slider` with a single thumb for basic continuous input.
-
-```swift
-public init(
-    _ value: Binding<Double>
-)
-```
-
-##### Parameters
-
-- `value`: A binding to the slider's value, constrained between `0.0` and `1.0`.
-
-#### `Double-Thumb Slider`
-
-Creates a `Slider` with two thumbs for specifying a range.
-
-```swift
-public init(
-    from: Binding<Double>,
-    to: Binding<Double>
-)
-```
-
-##### Parameters
-
-- `from`: A binding to the starting value of the range.
-- `to`: A binding to the ending value of the range.
-
----
-
-### Usage
-
-#### Example 1: Single-Thumb Slider
-
-```swift
-@State private var value: Double = 0.5
-
-Slider($value)
-```
-
-#### Example 2: Double-Thumb Slider
-
-```swift
-@State private var from: Double = 0.2
-@State private var to: Double = 0.8
-
-Slider(from: $from, to: $to)
-```
-
----
-
-### Features
-
-- **Single and Double Thumbs**: Supports basic single-value input or range selection with two thumbs.
-- **Dynamic Track**: Active track dynamically adjusts to reflect the selected range.
-- **Responsive Interaction**: Provides smooth and precise value updates via `DragGesture`.
-- **Styling Consistency**: Adapts colors and dimensions based on `SpenceKit.Constants`.
-
----
-
-### Notes
-
-- **Range Constraints**: Values are clamped to the range `[0.0, 1.0]`.
-- **Animation**: Includes bouncy animations for thumb interactions.
-- **Styling Dependency**: Utilizes `SpenceKit.Constants` for consistent corner radius, border widths, and colors.
-
----
-
-### Related
-
-- **Views**: `RoundedRectangle`, `Circle`
-- **Gestures**: `DragGesture`
-- **Modifiers**: `.offset`, `.frame`, `.stroke`
-
----
 ## TODO: `SteppedSlider` View
 
+🚧 work in progress! 🚧
+
+---
+### Preview on Figma
+
+ [SpenceKit SteppedSlider Preview](hhttps://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=567-737&t=qX2O40tvnik5nS45-1)
+
+---
 ---
 # Classes
 

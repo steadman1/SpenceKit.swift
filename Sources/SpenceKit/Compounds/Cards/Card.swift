@@ -72,7 +72,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
     
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
-            .font(.SpenceKit.SansHeadlineFont)
+            .font(.SpenceKit.HeadlineFont)
             .foregroundColor(
                 Color.SpenceKit.standardColorBundle(for: style).foreground
             )
@@ -85,9 +85,9 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
     VStack {
         Card(SpenceKitStyle.CTA) {
             Text("Testing Card")
-                .font(.SpenceKit.SerifPrimaryTitleFont)
+                .font(.SpenceKit.PrimaryTitleFont)
             Text("lorem impsum placeholder text to text body of card.")
-                .font(.SpenceKit.SansBodyFont)
+                .font(.SpenceKit.BodyFont)
         } footer: {
             ExpandingButton(.CTA) {
                 print()
@@ -95,7 +95,7 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
                 HStack {
                     SFIcon("checkmark", size: .head)
                     Text("Done")
-                        .font(.SpenceKit.SansHeadlineFont)
+                        .font(.SpenceKit.HeadlineFont)
                 }
             }.cornerRadius(SpenceKit.Constants.cornerRadius16)
         }.frame(width: 200, height: 300)
@@ -103,9 +103,9 @@ public struct Card<ContentBody: View, ContentFooter: View>: View {
         Card(SpenceKitStyle.primary) {
             VStack {
                 Text("Testing Card")
-                    .font(.SpenceKit.SerifPrimaryTitleFont)
+                    .font(Font.SpenceKit.PrimaryTitleFont)
                 Text("lorem impsum placeholder text to text body of card.")
-                    .font(.SpenceKit.SansBodyFont)
+                    .font(Font.SpenceKit.BodyFont)
             }
         } footer: {
             HStack {

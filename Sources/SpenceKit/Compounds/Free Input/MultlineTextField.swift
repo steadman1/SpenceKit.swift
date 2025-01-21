@@ -106,7 +106,7 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
                 if !title.isEmpty {
                     HStack {
                         Text(title)
-                            .font(.SpenceKit.SansHintFont)
+                            .font(.SpenceKit.HintFont)
                             .foregroundStyle(Color.SpenceKit.SecondaryText)
                             .padding(.bottom, SpenceKit.Constants.padding8)
                         Spacer()
@@ -119,7 +119,7 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
                     
                     ZStack(alignment: .topLeading) {
                         TextEditor(text: $text)
-                            .font(.SpenceKit.SansHeadFont)
+                            .font(.SpenceKit.HeadFont)
                             .focused($isFocused)
                             .padding(.top, SpenceKit.Constants.padding4)
                             .padding(.horizontal, SpenceKit.Constants.padding12 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0))
@@ -131,7 +131,7 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
                         
                         if text.isEmpty {
                             Text(placeholder.isEmpty ? "Enter text" : placeholder)
-                                .font(.SpenceKit.SansHeadFont)
+                                .font(.SpenceKit.HeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
                                 .padding(.top, SpenceKit.Constants.padding8 + 4)
                                 .padding(.horizontal, SpenceKit.Constants.padding12 + 5 - (hasIdentifier ? SpenceKit.Constants.padding8 : 0))
@@ -145,7 +145,7 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
                         
                         if #available(iOS 16.0, *) {
                             Image(systemName: "keyboard.chevron.compact.down")
-                                .font(.SpenceKit.SansHintFont)
+                                .font(.SpenceKit.HintFont)
                                 .foregroundColor(Color.SpenceKit.PrimaryText)
                                 .opacity(isFocused ? 1 : 0)
                                 .offset(y: isFocused ? 0 : 12)
@@ -170,13 +170,13 @@ public struct MultilineTextField<IdentifierContent: View, HelperContent: View>: 
                 
                 HStack {
                     Text(description)
-                        .font(.SpenceKit.SansSubheadFont)
+                        .font(.SpenceKit.SubheadFont)
                         .foregroundColor(Color.SpenceKit.TertiaryText)
                     
                     Spacer()
                     
                     Text("\(text.count)/\(maxCharacters)")
-                        .font(.SpenceKit.SansSubheadFont)
+                        .font(.SpenceKit.SubheadFont)
                         .foregroundColor(Color.SpenceKit.TertiaryText)
                 }
                 .padding(.top, SpenceKit.Constants.padding8)

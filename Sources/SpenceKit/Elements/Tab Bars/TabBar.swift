@@ -88,25 +88,14 @@ public struct TabBar: View {
                                             (isActive ? tab.activeIcon : tab.inactiveIcon)
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .frame(
-                                                    width: tabStyle == .tertiary ? 32 : 24,
-                                                    height: tabStyle == .tertiary ? 32 : 24
-                                                )
+                                                .frame(width: 24, height: 24)
                                             if isActive && tabStyle == .primary {
                                                 Text(tab.title)
-                                                    .font(Font.SpenceKit.SansHeadlineFont)
+                                                    .font(Font.SpenceKit.HeadlineFont)
                                             }
                                         }.foregroundStyle(
                                             isActive ? foregroundActive : foregroundInactive
                                         )
-                                        
-                                        if tabStyle == .tertiary {
-                                            Text(tab.title)
-                                                .font(Font.SpenceKit.SansHintFont)
-                                                .foregroundStyle(
-                                                    isActive ? foregroundActive : foregroundInactive
-                                                )
-                                        }
                                     }
                                 }
                             }.padding(SpenceKit.Constants.padding12)
@@ -114,7 +103,7 @@ public struct TabBar: View {
                                     .trailing,
                                     tabStyle == .primary ? SpenceKit.Constants.padding4 : 0
                                 )
-                                .background(isActive && tabStyle != .tertiary ? background : Color.SpenceKit.Clear)
+                                .background(isActive ? background : Color.SpenceKit.Clear)
                                 .clipShape(
                                     RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                                 ).stroke(
@@ -154,7 +143,7 @@ public struct TabBar: View {
                 }
             }
         }.frame(
-            maxHeight: (tabStyle == .tertiary ? 32 : 24) + SpenceKit.Constants.padding16 * 3
+            maxHeight: 24 + SpenceKit.Constants.padding16 * 3
         ).onChange(of: selection) { newValue in
             withAnimation(Animation.SpenceKit.Default.quick) {
                 animate = newValue
@@ -172,7 +161,7 @@ public struct TabBar: View {
         TabBar(
             $selectedTab,
             tabStyle: .primary,
-            colorStyle: .CTA,
+            colorStyle: .primary,
             tabs: [
                 Tab(
                     "Home",

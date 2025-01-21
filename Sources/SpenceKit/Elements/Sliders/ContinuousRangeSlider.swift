@@ -81,13 +81,13 @@ public struct ContinuousRangeSlider: View {
                     Group {
                         if #available(iOS 16.0, *) {
                             Text(toDescription)
-                                .font(Font.SpenceKit.SansHeadFont)
+                                .font(Font.SpenceKit.HeadFont)
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .fontWeight(.bold)
                                 .offset(x: toOffset)
                         } else {
                             Text(toDescription)
-                                .font(Font.SpenceKit.SansHintFont.weight(.bold))
+                                .font(Font.SpenceKit.HintFont.weight(.bold))
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .offset(x: toOffset)
                         }
@@ -96,13 +96,13 @@ public struct ContinuousRangeSlider: View {
                     Group {
                         if #available(iOS 16.0, *) {
                             Text(fromDescription)
-                                .font(Font.SpenceKit.SansHeadFont)
+                                .font(Font.SpenceKit.HeadFont)
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .fontWeight(.bold)
                                 .offset(x: fromOffset)
                         } else {
                             Text(fromDescription)
-                                .font(Font.SpenceKit.SansHintFont.weight(.bold))
+                                .font(Font.SpenceKit.HintFont.weight(.bold))
                                 .foregroundStyle(Color.SpenceKit.PrimaryText)
                                 .offset(x: fromOffset)
                         }
@@ -184,11 +184,11 @@ public struct ContinuousRangeSlider: View {
                 
                 HStack {
                     Text(range.lowerBound.format(decimalPlaces: 0))
-                        .font(Font.SpenceKit.SansHintFont)
+                        .font(Font.SpenceKit.HintFont)
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                     Spacer()
                     Text(range.upperBound.format(decimalPlaces: 0))
-                        .font(Font.SpenceKit.SansHintFont)
+                        .font(Font.SpenceKit.HintFont)
                         .foregroundStyle(Color.SpenceKit.SecondaryText)
                 }
             }

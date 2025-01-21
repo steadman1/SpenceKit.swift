@@ -147,7 +147,7 @@ public struct LargeChip<Content: View>: View {
     
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
-                    .font(style == .lowest ? .SpenceKit.SansHeadFont : .SpenceKit.SansHeadlineFont)
+            .font(style == .lowest ? .SpenceKit.HeadFont : .SpenceKit.HeadlineFont)
                     .foregroundColor(
                         Color.SpenceKit.standardColorBundle(for: style).foreground
                     )
@@ -173,7 +173,7 @@ public struct LargeChip<Content: View>: View {
             LargeChip(SpenceKitStyle(rawValue: index)!) {
                 SFIcon("checkmark", size: .head)
                 Text("Headline")
-                    .font(Font.SpenceKit.SansHeadlineFont)
+                    .font(Font.SpenceKit.HeadlineFont)
             }
         }
     }

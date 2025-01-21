@@ -99,6 +99,47 @@ extension Color {
 extension UIFont {
     /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
+        // Adjusted Font
+        public static func XLargeTitleFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.XLargeTitle).uiFont
+        }
+        public static func LargeTitleFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.LargeTitle).uiFont
+        }
+        public static func PrimaryTitleFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.PrimaryTitle).uiFont
+        }
+        public static func SecondaryTitleFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.SecondaryTitle).uiFont
+        }
+        public static func TertiaryTitleFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.TertiaryTitle).uiFont
+        }
+        public static func HeadlineFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Headline).uiFont
+        }
+        public static func HeadFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Head).uiFont
+        }
+        public static func BodyFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Body).uiFont
+        }
+        public static func CalloutFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Callout).uiFont
+        }
+        public static func SubheadlineFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Subheadline).uiFont
+        }
+        public static func SubheadFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Subhead).uiFont
+        }
+        public static func CaptionFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Caption).uiFont
+        }
+        public static func HintFont() -> UIFont {
+            Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Hint).uiFont
+        }
+        
         // Custom fonts with specified sizes using FontSkeleton
         public static let SansXLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansXLargeTitle.uiFont
         public static let SansLargeTitleFont: UIFont = Font.SpenceKit.FontSkeleton.SansLargeTitle.uiFont
@@ -128,13 +169,36 @@ extension UIFont {
 extension Font {
     /// Contains SpenceKit related structures and objects
     public struct SpenceKit {
+        public enum TypographyTheme: Sendable {
+            case sans
+            case serifTitleSansBody
+            case sansTitleSerifBody
+            case sansSerif
+        }
+        
+        public enum FontType {
+            case XLargeTitle
+            case LargeTitle
+            case PrimaryTitle
+            case SecondaryTitle
+            case TertiaryTitle
+            case Headline
+            case Head
+            case Body
+            case Callout
+            case Subheadline
+            case Subhead
+            case Caption
+            case Hint
+        }
+        
         /// Defines "Skeleton" values for Font and UIFont implementations to follow
         public struct FontSkeleton: Sendable {
             public let name: String
             public let size: CGFloat
             public let uiFont: UIFont
             public let font: Font
-
+            
             // Initializer that creates both UIFont and Font
             public init(name: String, size: CGFloat, uiWeight: UIFont.Weight? = nil, weight: Font.Weight? = nil) {
                 self.name = name
@@ -153,7 +217,7 @@ extension Font {
                     self.font = Font.custom(name, size: size)
                 }
             }
-
+            
             // Define FontSkeletons for Sans Typography
             public static let SansXLargeTitle = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 50, uiWeight: .bold, weight: .bold)
             public static let SansLargeTitle = FontSkeleton(name: SpenceKitFont.Inter_Bold.name, size: 34, uiWeight: .bold, weight: .bold)
@@ -178,7 +242,94 @@ extension Font {
             public static let SerifBody = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 18)
             public static let SerifCallout = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 17)
             public static let SerifCaption = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 16)
+            
+            public static func font(_ theme: Font.SpenceKit.TypographyTheme, fontType: Font.SpenceKit.FontType) -> FontSkeleton {
+                switch fontType {
+                case .XLargeTitle:
+                    switch theme {
+                    case .sansTitleSerifBody, .sans:
+                        return SansXLargeTitle
+                    case .serifTitleSansBody, .sansSerif:
+                        return SerifXLargeTitle
+                    }
+                case .LargeTitle:
+                    switch theme {
+                    case .sansTitleSerifBody, .sans:
+                        return SansLargeTitle
+                    case .serifTitleSansBody, .sansSerif:
+                        return SerifLargeTitle
+                    }
+                case .PrimaryTitle:
+                    switch theme {
+                    case .sansTitleSerifBody, .sans:
+                        return SansPrimaryTitle
+                    case .serifTitleSansBody, .sansSerif:
+                        return SerifPrimaryTitle
+                    }
+                case .SecondaryTitle:
+                    switch theme {
+                    case .sansTitleSerifBody, .sans:
+                        return SansSecondaryTitle
+                    case .serifTitleSansBody, .sansSerif:
+                        return SerifSecondaryTitle
+                    }
+                case .TertiaryTitle:
+                    switch theme {
+                    case .sansTitleSerifBody, .sans:
+                        return SansTertiaryTitle
+                    case .serifTitleSansBody, .sansSerif:
+                        return SerifTertiaryTitle
+                    }
+                case .Headline:
+                    return SansHeadline
+                case .Body:
+                    switch theme {
+                    case .sans, .serifTitleSansBody:
+                        return SansBody
+                    case .sansTitleSerifBody, .sansSerif:
+                        return SerifBody
+                    }
+                case .Head:
+                    return SansHead
+                case .Callout:
+                    switch theme {
+                    case .serifTitleSansBody, .sans:
+                        return SansCallout
+                    case .sansTitleSerifBody, .sansSerif:
+                        return SerifCallout
+                    }
+                case .Subheadline:
+                    return SansSubheadline
+                case .Subhead:
+                    return SansSubhead
+                case .Caption:
+                    switch theme {
+                    case .serifTitleSansBody, .sans:
+                        return SansCaption
+                    case .sansTitleSerifBody, .sansSerif:
+                        return SerifCaption
+                    }
+                case .Hint:
+                    return SansHint
+                }
+            }
+
         }
+        
+        // Adjusted Font
+        public static let XLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.XLargeTitle).font
+        public static let LargeTitleFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.LargeTitle).font
+        public static let PrimaryTitleFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.PrimaryTitle).font
+        public static let SecondaryTitleFont: Font =  Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.SecondaryTitle).font
+        public static let TertiaryTitleFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.TertiaryTitle).font
+        public static let HeadlineFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Headline).font
+        public static let HeadFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Head).font
+        public static let BodyFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Body).font
+        public static let CalloutFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Callout).font
+        public static let SubheadlineFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Subheadline).font
+        public static let SubheadFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Subhead).font
+        public static let CaptionFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Caption).font
+        public static let HintFont: Font = Font.SpenceKit.FontSkeleton.font(SKSingleton.shared.typography, fontType: Font.SpenceKit.FontType.Hint).font
         
         // Custom fonts with specified sizes
         public static let SansXLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SansXLargeTitle.font
@@ -194,7 +345,7 @@ extension Font {
         public static let SansSubheadFont: Font = Font.SpenceKit.FontSkeleton.SansSubhead.font
         public static let SansCaptionFont: Font = Font.SpenceKit.FontSkeleton.SansCaption.font
         public static let SansHintFont: Font = Font.SpenceKit.FontSkeleton.SansHint.font
-
+        
         public static let SerifXLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifXLargeTitle.font
         public static let SerifLargeTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifLargeTitle.font
         public static let SerifPrimaryTitleFont: Font = Font.SpenceKit.FontSkeleton.SerifPrimaryTitle.font
@@ -307,21 +458,21 @@ public struct CenterAligned: ViewModifier {
 }
 
 public extension View {
-    @MainActor func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
+    func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
         self
             .font(.custom(font.name, size: font.size))
             .stroke(color: strokeColor, width: font.size / 80)
     }
     
-    @MainActor func stroke(color: Color, width: CGFloat = SpenceKit.Constants.borderWidth) -> some View {
+    func stroke(color: Color, width: CGFloat = SpenceKit.Constants.borderWidth) -> some View {
         modifier(StrokeModifier(strokeSize: width / 2, strokeColor: color))
     }
     
-    @MainActor func border() -> some View {
+    func border() -> some View {
         modifier(StrokeModifier(strokeSize: SpenceKit.Constants.borderWidth / 2, strokeColor: Color.SpenceKit.Border))
     }
     
-    @MainActor func roundBorder(_ cornerRadius: CGFloat) -> some View {
+    func roundBorder(_ cornerRadius: CGFloat) -> some View {
         self
             .background(Color.SpenceKit.Background)
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))

@@ -61,13 +61,13 @@ public struct SearchBar<Content: View>: View {
                     ZStack(alignment: .leading) {
                         if query.isEmpty {
                             Text(placeholder)
-                                .font(.SpenceKit.SansHeadFont)
+                                .font(.SpenceKit.HeadFont)
                                 .foregroundColor(Color.SpenceKit.TertiaryText)
                                 .fixedSize(horizontal: false, vertical: true)
                                 .lineLimit(1)
                         }
                         TextField("", text: $query)
-                            .font(.SpenceKit.SansHeadFont)
+                            .font(.SpenceKit.HeadFont)
                     }
                     
                     if !query.isEmpty {

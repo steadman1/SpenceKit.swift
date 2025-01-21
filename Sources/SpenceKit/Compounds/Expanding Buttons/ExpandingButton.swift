@@ -1,16 +1,16 @@
 //
-//  File.swift
+//  ExpandingButton.swift
 //  SpenceKit
 //
-//  Created by Spencer Steadman on 10/19/24.
+//  Created by Spencer Steadman on 10/20/24.
 //
 
 #if canImport(SwiftUI)
 
 import SwiftUI
 
-/// Defines IconButton for Circular Button Views
-public struct IconButton<Content: View>: View {
+/// Defines ExpandingButton for expanding width button
+public struct ExpandingButton<Content: View>: View {
     public init(
         _ style: SpenceKitStyle = .primary,
         action: @escaping () -> Void,
@@ -37,22 +37,12 @@ public struct IconButton<Content: View>: View {
             self.foreground = .SpenceKit.PrimaryText
             self.background = .SpenceKit.Background
             self.border = .SpenceKit.Border
-        case .destructive:
-            self.foreground = .SpenceKit.PrimaryDestructive
-            self.background = .SpenceKit.SecondaryDestructive
-            self.border = .SpenceKit.Clear
         default:
             self.foreground = .SpenceKit.PrimaryText
             self.background = .SpenceKit.Clear
             self.border = .SpenceKit.Clear
         }
-        
-        self.minWidth = style == .lowest ? 0 : 48 - (style == .tertiary ? SpenceKit.Constants.borderWidth : 0)
-        self.minHeight = self.minWidth
     }
-    private let minWidth: CGFloat
-    private let minHeight: CGFloat
-    
     private let style: SpenceKitStyle
     private let foreground: Color
     private let background: Color
@@ -61,19 +51,33 @@ public struct IconButton<Content: View>: View {
     private let label: () -> Content
     
     public var body: some View {
-        Button(action: action) {
-            if #available(iOS 17.0, *) {
-                label()
-                    .foregroundStyle(foreground)
-            } else {
-                label()
-                    .foregroundColor(foreground)
-            }
-        }.frame(minWidth: minWidth,
-                minHeight: minHeight)
-            .background(background)
-            .clipShape(RoundedRectangle(cornerRadius: minWidth > 0 ? SpenceKit.Constants.cornerRadiusMAX : 0))
-            .stroke(color: border, width: SpenceKit.Constants.borderWidth)
+        CornerRadiusReader { radius in
+            let cornerRadius = radius > 0 ? radius : SpenceKit.Constants.cornerRadius24
+            ZStack {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(border, lineWidth: SpenceKit.Constants.borderWidth * 2)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 64)
+                    .foregroundStyle(background)
+                    .background(background)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+                
+                Button(action: action) {
+                    if #available(iOS 17.0, *) {
+                        label()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .foregroundStyle(foreground)
+                    } else {
+                        label()
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 64)
+                            .foregroundColor(foreground)
+                    }
+                }
+            }.background(Color.SpenceKit.Background)
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        }
     }
 }
 
@@ -81,11 +85,11 @@ public struct IconButton<Content: View>: View {
 #Preview {
     VStack {
         ForEach(0..<5) { index in
-            IconButton(SpenceKitStyle(rawValue: index)!) {
+            ExpandingButton(SpenceKitStyle(rawValue: index)!) {
                 print()
             } label: {
                 Text("hello")
-                    .font(Font.SpenceKit.SansHeadlineFont)
+                    .font(Font.SpenceKit.HeadlineFont)
 //                Image(systemName: "arrow.up.right")
 //                    .fontWeight(.black)
             }
@@ -94,3 +98,4 @@ public struct IconButton<Content: View>: View {
 }
 
 #endif
+

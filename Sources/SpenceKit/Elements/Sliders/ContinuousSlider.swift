@@ -114,7 +114,7 @@ public struct ContinuousSlider: View {
                         if style == .tertiary {
                             Text(range.upperBound.format(decimalPlaces: 0))
                                 .fixedSize()
-                                .font(Font.SpenceKit.SansHintFont)
+                                .font(Font.SpenceKit.HintFont)
                                 .foregroundStyle(Color.SpenceKit.TertiaryText)
                                 .padding(.horizontal, SpenceKit.Constants.padding4)
                         }
@@ -123,7 +123,7 @@ public struct ContinuousSlider: View {
                     if style == .secondary {
                         Text(range.upperBound.format(decimalPlaces: 0))
                             .fixedSize()
-                            .font(Font.SpenceKit.SansHintFont)
+                            .font(Font.SpenceKit.HintFont)
                             .foregroundStyle(Color.SpenceKit.SecondaryText)
                             .padding(.leading, SpenceKit.Constants.padding4)
                     }
@@ -147,11 +147,11 @@ public struct ContinuousSlider: View {
                 if style == .primary {
                     HStack {
                         Text(range.lowerBound.format(decimalPlaces: 0))
-                            .font(Font.SpenceKit.SansHintFont)
+                            .font(Font.SpenceKit.HintFont)
                             .foregroundStyle(Color.SpenceKit.SecondaryText)
                         Spacer()
                         Text(range.upperBound.format(decimalPlaces: 0))
-                            .font(Font.SpenceKit.SansHintFont)
+                            .font(Font.SpenceKit.HintFont)
                             .foregroundStyle(Color.SpenceKit.SecondaryText)
                     }
                 }
@@ -163,11 +163,11 @@ public struct ContinuousSlider: View {
     private func valueText(_ text: String) -> some View {
         if #available(iOS 16.0, *) {
             Text(text)
-                .font(Font.SpenceKit.SansHintFont)
+                .font(Font.SpenceKit.HintFont)
                 .fontWeight(.bold)
         } else {
             Text(text)
-                .font(Font.SpenceKit.SansHintFont.weight(.bold))
+                .font(Font.SpenceKit.HintFont.weight(.bold))
         }
     }
     

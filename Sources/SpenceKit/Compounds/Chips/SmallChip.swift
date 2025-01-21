@@ -147,7 +147,7 @@ public struct SmallChip<Content: View>: View {
     
     private static func getTextLabel(for text: String, with style: SpenceKitStyle) -> Text {
         return Text(text)
-            .font(style == .lowest ? .SpenceKit.SansSubheadFont : .SpenceKit.SansSubheadlineFont)
+            .font(style == .lowest ? .SpenceKit.SubheadFont : .SpenceKit.SubheadlineFont)
             .foregroundColor(
                 Color.SpenceKit.standardColorBundle(for: style).foreground
             )
@@ -174,7 +174,7 @@ public struct SmallChip<Content: View>: View {
                 HStack {
                     SFIcon("checkmark", size: .head)
                     Text("Subheadline")
-                        .font(Font.SpenceKit.SansSubheadlineFont)
+                        .font(Font.SpenceKit.SubheadlineFont)
                 }
 //                Image(systemName: "arrow.up.right")
 //                    .fontWeight(.black)

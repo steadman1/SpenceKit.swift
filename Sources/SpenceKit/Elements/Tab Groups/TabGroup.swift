@@ -27,7 +27,7 @@ public struct TabGroup: View {
             VStack(alignment: .leading) {
                 if title != nil {
                     Text(title!)
-                        .font(Font.SpenceKit.SansHintFont)
+                        .font(Font.SpenceKit.HintFont)
                         .foregroundStyle(Color.SpenceKit.TertiaryText)
                 }
                 VStack(alignment: .leading, spacing: SpenceKit.Constants.spacing4) {
@@ -39,7 +39,7 @@ public struct TabGroup: View {
                                 let padding = SpenceKit.Constants.padding16
                                 ZStack {
                                     tab.activeIcon
-                                        .font(Font.SpenceKit.SansHeadlineFont)
+                                        .font(Font.SpenceKit.HeadlineFont)
                                         .foregroundStyle(Color.SpenceKit.PrimaryAccent)
                                         .padding(padding)
                                 }.frame(
@@ -50,17 +50,17 @@ public struct TabGroup: View {
                                     
                                 
                                 Text(tab.title)
-                                    .font(Font.SpenceKit.SansBodyFont)
+                                    .font(Font.SpenceKit.HeadFont)
                                     .foregroundStyle(Color.SpenceKit.PrimaryText)
                                     .multilineTextAlignment(.leading)
                                 
                                 Spacer()
                                 
                                 Image(systemName: "chevron.right")
-                                    .font(Font.SpenceKit.SansHeadlineFont)
+                                    .font(Font.SpenceKit.HeadlineFont)
                                     .foregroundStyle(Color.SpenceKit.TertiaryText)
                             }.frame(height: TabGroup.TAB_HEIGHT)
-                        }
+                        }.padding(.horizontal, SpenceKit.Constants.padding16)
                         
                         if index < tabs.count - 1 {
                             Divider(.horizontal)
@@ -69,7 +69,6 @@ public struct TabGroup: View {
                 }.frame(maxWidth: .infinity,
                            maxHeight: CGFloat(tabs.count) * TabGroup.TAB_HEIGHT + CGFloat(tabs.count) * SpenceKit.Constants.borderWidth + CGFloat(tabs.count * 2 - 1) * SpenceKit.Constants.spacing4)
                     .padding(.vertical, SpenceKit.Constants.padding4)
-                    .padding(.horizontal, SpenceKit.Constants.padding16)
                     .background(Color.SpenceKit.Background)
                     .roundBorder(cornerRadius)
             }

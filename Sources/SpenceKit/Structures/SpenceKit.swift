@@ -2,12 +2,14 @@
 //  SpenceKit.swift
 //  SpenceKit
 //
-//  Created by Spencer Steadman on 10/19/24.
+//  Created by Spencer Steadman on 1/16/25.
 //
 
-import Foundation
+#if canImport(CoreGraphics)
 
-/// Contains SpenceKit related structures and objects
+import CoreGraphics
+
+/// Defines SpenceKit structures and objects
 public struct SpenceKit {
     /// Defines integral constants for the SpenceKit design system
     public struct Constants {
@@ -36,3 +38,5 @@ public struct SpenceKit {
         public static let borderWidth: CGFloat = 2
     }
 }
+
+#endif

@@ -21,28 +21,37 @@ public struct Radio: View {
     let ACTIVE_BORDER_WIDTH: CGFloat = 6
     
     public var body: some View {
-        Circle()
-            .stroke(
-                isActive ? Color.SpenceKit.PrimaryAccent : Color.SpenceKit.Border,
-                lineWidth: isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth
-            )
-            .frame(
-                width: 24 - (isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth),
-                height: 24 - (isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth)
-            )
-            .background(Color.SpenceKit.Background)
-            .onTapGesture {
-                withAnimation(.bouncy(duration: 0.22, extraBounce: 0.05)) {
-                    isActive.toggle()
+        ZStack {
+            Circle()
+                .stroke(
+                    isActive ? Color.SpenceKit.PrimaryAccent : Color.SpenceKit.Border,
+                    lineWidth: isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth
+                )
+                .frame(
+                    width: 24 - (isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth),
+                    height: 24 - (isActive ? ACTIVE_BORDER_WIDTH : SpenceKit.Constants.borderWidth)
+                )
+                .background(Color.SpenceKit.Background)
+                .onTapGesture {
+                    withAnimation(.bouncy(duration: 0.22, extraBounce: 0.05)) {
+                        isActive.toggle()
+                    }
                 }
-            }
+        }.frame(
+            width: 24 - SpenceKit.Constants.borderWidth,
+            height: 24 - SpenceKit.Constants.borderWidth
+        )
     }
 }
 
 @available(iOS 17.0, *)
 #Preview {
     @Previewable @State var state = true
-    Radio($state)
+    VStack {
+        Text("Test")
+        Radio($state)
+        Text("Test")
+    }
 }
 
 #endif

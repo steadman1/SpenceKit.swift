@@ -26,10 +26,10 @@ public struct ContinuousSlider: View {
     }
     
     // Slider value binding
-    @Binding private var value: CGFloat
+    @Binding private var value: Double
     
     public init(
-        _ value: Binding<CGFloat>,
+        _ value: Binding<Double>,
         style: SpenceKitStyle = .CTA,
         range: ClosedRange<Double> = 0...10,
         decimalCount: Int = 1,
@@ -199,8 +199,8 @@ public struct ContinuousSlider: View {
 
 @available(iOS 17.0, *)
 #Preview {
-    @Previewable @State var from: CGFloat = 0
-    @Previewable @State var to: CGFloat = 0.4
+    @Previewable @State var from: Double = 0
+    @Previewable @State var to: Double = 0.4
     VStack {
         ContinuousSlider($from, style: .primary, glideLength: .long, glideResistance: .low)
         ContinuousSlider($from, style: .secondary, glideLength: .long, glideResistance: .low)

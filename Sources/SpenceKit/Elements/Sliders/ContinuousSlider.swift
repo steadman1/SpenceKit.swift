@@ -102,13 +102,16 @@ public struct ContinuousSlider: View {
                         RoundedRectangle(cornerRadius: SpenceKit.Constants.cornerRadiusMAX)
                             .fill(Color.SpenceKit.PrimaryForeground)
                             .frame(
-                                width: min(
-                                    geometry.size.width - activeWidth,
-                                    geometry.size.width - (
-                                        style != .primary
-                                        ? stringSize.width + 8
-                                        : trackHeight / 2)
-                                ) - (style == .secondary ? upperBoundSize.width - 4 : 0),
+                                width: max(
+                                    min(
+                                        geometry.size.width - activeWidth,
+                                        geometry.size.width - (
+                                            style != .primary
+                                            ? stringSize.width + 8
+                                            : trackHeight / 2)
+                                    ) - (style == .secondary ? upperBoundSize.width - 4 : 0),
+                                    0
+                                ),
                                 height: trackHeight
                             )
                         if style == .tertiary {

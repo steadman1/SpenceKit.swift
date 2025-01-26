@@ -69,7 +69,7 @@ public struct Slider: View {
             Circle()
                 .stroke(Color.SpenceKit.Border, lineWidth: SpenceKit.Constants.borderWidth * 2)
                 .frame(width: thumbHeight, height: thumbHeight)
-        }.offset(x: CGFloat(value.wrappedValue / range.upperBound) * geometry.size.width)
+        }.offset(x: CGFloat(value.wrappedValue / range.upperBound) * (geometry.size.width - thumbHeight))
             .gesture(
                 DragGesture()
                     .onChanged { gesture in
@@ -88,8 +88,11 @@ public struct Slider: View {
 #Preview {
     @Previewable @State var from: Double = 0
     @Previewable @State var to: Double = 0.4
+    Text("from: \(from)—to: \(to)")
     Slider($from)
+        .padding(.horizontal, 16)
     Slider(from: $from, to: $to)
+        .padding(.horizontal, 16)
 }
 
 

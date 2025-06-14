@@ -5,9 +5,9 @@
 //  Created by Spencer Steadman on 1/16/25.
 //
 
-#if canImport(SwiftUICore)
+#if canImport(SwiftUI)
 
-import SwiftUICore
+import SwiftUI
 
 /// Defines an EnvironmentKey for optional CornerRadiusModel
 public struct CornerRadiusKey: @preconcurrency EnvironmentKey {

@@ -5,10 +5,10 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
-#if canImport(SwiftUICore)
+#if canImport(SwiftUI)
 
 import Foundation
-import SwiftUICore
+import SwiftUI
 
 /// Universal enum determining either/both Color and functionality of SpenceKit Views
 public enum SpenceKitStyle: Int {

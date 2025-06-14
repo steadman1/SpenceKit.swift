@@ -5,9 +5,9 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
-#if canImport(SwiftUICore)
+#if canImport(SwiftUI)
 
-import SwiftUICore
+import SwiftUI
 
 /// Creates Fonts for registration using .xcasset name
 public struct SpenceKitFont: Sendable {

@@ -14,6 +14,52 @@ https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=673-205&t=
 Linked below is a custom OpenAI GPT with full access to this documentation for assistance with understanding and developing SwiftUI Views that make full use of SpenceKit.
 https://chatgpt.com/g/g-67893e24f09881918c232c76d8f3e0f7-spencekit-swift
 
+---
+
+# Table of Contents
+
+- [SpenceKit Initialization](#spencekit-initialization)
+- [Elements](#elements)
+    - [Divider](#divider-view)
+    - [SFIcon](#sficon-view)
+    - [Radio](#radio-view)
+    - [Toggle](#toggle-view)
+    - [Checkbox](#checkbox-view)
+    - [PasswordInputField](#passwordinputfield-view)
+    - [TabBar](#tabbar-view)
+    - [TabGroup](#tabgroup-view)
+    - [iOSScrubber](#iosscrubber-view)
+    - [ContinuousSlider](#continuousslider-view)
+    - [Slider](#slider-view)
+    - [Dropdown](#dropdown-view)
+- [Compounds](#compounds)
+    - [HelperButton](#helperbutton-view)
+    - [IconButton](#iconbutton-view)
+    - [Card](#card-view)
+    - [SearchBar](#searchbar-view)
+    - [LargeChip](#largechip-view)
+    - [SmallChip](#smallchip-view)
+    - [ExpandingButton](#expandingbutton-view)
+    - [InlineTextField](#inlinetextfield-view)
+    - [MultilineTextField](#multilinetextfield-view)
+    - [ProgressSelector](#progressselector-view)
+    - [TabSelector](#tabselector-view)
+- [Classes](#classes)
+    - [Icons](#icons-class)
+    - [HelperButtons](#helperbuttons-class)
+- [Structures](#structures)
+    - [SpenceKit](#spencekit)
+    - [Tab](#tab)
+    - [Icon](#icon)
+- [Enums](#standalone-enums)
+    - [SpenceKitStyle](#spencekitstyle)
+    - [SpenceKitSize](#spencekitsize)
+- [Extensions & Functions](#extensions--functions)
+- [View Modifiers](#view-modifiers)
+- [StrokeModifier](#strokemodifier)
+
+---
+
 # License
 
 Copyright 2025 Spencer Steadman

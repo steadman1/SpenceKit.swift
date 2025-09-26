@@ -235,14 +235,14 @@ extension Font {
             public static let SansHint = FontSkeleton(name: SpenceKitFont.Inter_Medium.name, size: 13, uiWeight: .medium, weight: .medium)
             
             // Define FontSkeletons for Serif Typography
-            public static let SerifXLargeTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 52)
-            public static let SerifLargeTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 36)
-            public static let SerifPrimaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 30)
-            public static let SerifSecondaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_Regular.name, size: 24)
-            public static let SerifTertiaryTitle = FontSkeleton(name: SpenceKitFont.PPEditorialNew_RegularItalic.name, size: 22)
-            public static let SerifBody = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 18)
-            public static let SerifCallout = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 17)
-            public static let SerifCaption = FontSkeleton(name: SpenceKitFont.TimesNewRomanCondensed.name, size: 16)
+            public static let SerifXLargeTitle = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 52)
+            public static let SerifLargeTitle = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 36)
+            public static let SerifPrimaryTitle = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 30)
+            public static let SerifSecondaryTitle = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 24)
+            public static let SerifTertiaryTitle = FontSkeleton(name: SpenceKitFont.LibreCaslon_RegularItalic.name, size: 22)
+            public static let SerifBody = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 18)
+            public static let SerifCallout = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 17)
+            public static let SerifCaption = FontSkeleton(name: SpenceKitFont.LibreCaslon_Regular.name, size: 16)
             
             public static func font(_ theme: Font.SpenceKit.TypographyTheme, fontType: Font.SpenceKit.FontType) -> FontSkeleton {
                 switch fontType {

@@ -24,22 +24,18 @@ public struct SpenceKitFont: Sendable {
         }
     }
 
-    public static let PPEditorialNew_LightItalic = SpenceKitFont(named: "PPEditorialNew-UltralightItalic")
-    public static let PPEditorialNew_RegularItalic = SpenceKitFont(named: "PPEditorialNew-Italic")
-    public static let PPEditorialNew_BoldItalic = SpenceKitFont(named: "PPEditorialNew-UltraboldItalic")
+    public static let LibreCaslon_RegularItalic = SpenceKitFont(named: "LibreCaslonCondensed-RegularItalic")
+    public static let LibreCaslon_MediumItalic = SpenceKitFont(named: "LibreCaslonCondensed-MediumItalic")
+    public static let LibreCaslon_BoldItalic = SpenceKitFont(named: "LibreCaslonCondensed-BoldItalic")
     
-    public static let PPEditorialNew_Light = SpenceKitFont(named: "PPEditorialNew-Ultralight")
-    public static let PPEditorialNew_Regular = SpenceKitFont(named: "PPEditorialNew-Regular")
-    public static let PPEditorialNew_Bold = SpenceKitFont(named: "PPEditorialNew-Ultrabold")
+    public static let LibreCaslon_Regular = SpenceKitFont(named: "LibreCaslonCondensed-Regular")
+    public static let LibreCaslon_Medium = SpenceKitFont(named: "LibreCaslonCondensed-Medium")
+    public static let LibreCaslon_Bold = SpenceKitFont(named: "LibreCaslonCondensed-Bold")
     
     
     public static let Inter_Medium = SpenceKitFont(named: "Inter-Medium")
     public static let Inter_Semibold = SpenceKitFont(named: "Inter-Semibold")
     public static let Inter_Bold = SpenceKitFont(named: "Inter-Bold")
-    
-    
-    public static let TimesNewRomanCondensed = PPEditorialNew_Regular
-//    public static let TimesNewRomanCondensed = SpenceKitFont(named: "Times-New-Roman-Condensed")
 }
 
 #endif

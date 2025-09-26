@@ -9,12 +9,6 @@
 
 import SwiftUI
 
-#if os(macOS) && canImport(SwiftUICore)
-
-import SwiftUICore
-
-#endif
-
 /// Defines CornerRadiusReader to read CGFloat value passed in from a parent View
 public struct CornerRadiusReader<Content: View>: View {
     @Environment(\.cornerRadius) var cornerRadiusModel: CornerRadiusModel? // Optional

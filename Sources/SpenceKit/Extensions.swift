@@ -10,12 +10,6 @@
 import SwiftUI
 import UIKit
 
-#if os(macOS) && canImport(SwiftUICore)
-
-import SwiftUICore
-
-#endif
-
 
 extension Animation {
     /// Contains SpenceKit related structures and objects

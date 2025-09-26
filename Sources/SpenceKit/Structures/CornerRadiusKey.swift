@@ -9,12 +9,6 @@
 
 import SwiftUI
 
-#if os(macOS) && canImport(SwiftUICore)
-
-import SwiftUICore
-
-#endif
-
 /// Defines an EnvironmentKey for optional CornerRadiusModel
 public struct CornerRadiusKey: @preconcurrency EnvironmentKey {
     @MainActor public static let defaultValue: CornerRadiusModel? = nil

@@ -10,6 +10,12 @@
 import Foundation
 import SwiftUI
 
+#if os(macOS) && canImport(SwiftUICore)
+
+import SwiftUICore
+
+#endif
+
 /// Universal enum determining either/both Color and functionality of SpenceKit Views
 public enum SpenceKitStyle: Int {
     case CTA = 0

@@ -9,6 +9,12 @@
 
 import SwiftUI
 
+#if os(macOS) && canImport(SwiftUICore)
+
+import SwiftUICore
+
+#endif
+
 /// Creates Fonts for registration using .xcasset name
 public struct SpenceKitFont: Sendable {
 

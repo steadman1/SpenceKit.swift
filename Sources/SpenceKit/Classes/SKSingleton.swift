@@ -10,6 +10,12 @@
 import Foundation
 import SwiftUI
 
+#if os(macOS) && canImport(SwiftUICore)
+
+import SwiftUICore
+
+#endif
+
 /// Contains SpenceKit related structures and objects
 final public class SKSingleton: Sendable {
     public static let shared = SKSingleton()

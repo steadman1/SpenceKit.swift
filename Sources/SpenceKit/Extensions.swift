@@ -5,11 +5,17 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
-#if canImport(SwiftUI) && canImport(SwiftUICore) && canImport(UIKit)
+#if canImport(SwiftUI) && canImport(UIKit)
 
 import SwiftUI
-import SwiftUICore
 import UIKit
+
+#if os(macOS) && canImport(SwiftUICore)
+
+import SwiftUICore
+
+#endif
+
 
 extension Animation {
     /// Contains SpenceKit related structures and objects

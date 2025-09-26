@@ -11,24 +11,21 @@ https://chatgpt.com/g/g-67893e24f09881918c232c76d8f3e0f7-spencekit-swift
 
 # License
 
-This software is proprietary and subject to the following licensing terms:
+Copyright 2025 Spencer Steadman
 
-1. **Payment Required**:
-    - The use of the library's binary requires the purchase of a valid license from the copyright holder.
-    - To obtain a license, please email support@mypainterstape.com or visit https://mypainterstape.com.
-2. **Modification**:
-    - Users are permitted to modify the source code for internal, non-distributable purposes.
-    - Modified versions of the software cannot be shared, distributed, or sub-licensed in any form.
-3. **Distribution Prohibited**:
-    - Redistribution of the software, whether in its original form, modified form, or as part of another product, is strictly prohibited without prior written permission from the copyright holder.
-4. **Commercial Use**:
-    - Commercial use of the software is permitted, provided the user has purchased a valid license. All revenue generated from such use belongs to the user.
-5. **Non-Transferable License**:
-    - Licenses are non-transferable and may only be used by the individual or entity that purchased the license.
+Licensed under the Apache License, Version 2.0 (the "License");  
+you may not use this library except in compliance with the License.  
+You may obtain a copy of the License at
 
-For full license details, see the LICENSE file. By using this software, you agree to these terms.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-If you have questions or need to purchase a license, please contact support@mypainterstape.com.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+If you have any questions, contact `support@mypainterstape.com`!
 
 ---
 

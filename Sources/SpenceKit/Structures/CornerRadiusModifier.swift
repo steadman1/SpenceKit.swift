@@ -9,6 +9,12 @@
 
 import SwiftUI
 
+#if os(macOS) && canImport(SwiftUICore)
+
+import SwiftUICore
+
+#endif
+
 /// Defines CornerRadiusModifier to inject the corner radius into the environment
 public struct CornerRadiusModifier: ViewModifier {
     @ObservedObject var cornerRadius: CornerRadiusModel

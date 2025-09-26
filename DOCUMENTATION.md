@@ -3149,6 +3149,7 @@ HelperButtons.Info {
 
 ---
 # Structures
+(that aren't Views)
 
 ## `SpenceKit`
 
@@ -3561,11 +3562,26 @@ public enum SpenceKitStyle: Int
 - **`.lowest`** (`4`): Lowest-priority style for minimal emphasis.
 - **`.destructive`** (`5`): Destructive style for actions that delete or remove.
 
-### Usage Example
+### Usage Example 1
 
 ```swift
-Button("Delete", action: { /* delete logic */ })
-    .buttonStyle(SpenceKitStyle.destructive)
+ExpandingButton(.CTA) {
+    print("Hello, World")
+} label: {
+    Text("Hello, World")
+        .font(.SpenceKit.BodyFont)
+}
+```
+
+### Usage Example 2
+
+```swift
+SmallChip(.destructive) {
+    print("Hello, World")
+} label: {
+    Text("Hello, World")
+        .font(.SpenceKit.BodyFont)
+}
 ```
 
 ---

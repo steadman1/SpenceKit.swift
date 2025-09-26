@@ -2,7 +2,11 @@
 
 **SpenceKit** is a powerful, developer-friendly framework designed to simplify the creation of consistent, visually appealing user interfaces. Built with modularity, accessibility, and usability in mind, SpenceKit provides prebuilt components and tools to accelerate development and enable professional-grade UI results, even for developers without a design background.
 
-
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/83784905-7490-4501-afd2-2e7c09ded33b" 
+       alt="SpenceKitBanner" 
+       width="75%" />
+</p>
 
 ## See the Docs
 

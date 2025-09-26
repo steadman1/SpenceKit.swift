@@ -4,7 +4,7 @@
 
 
 
-# See the Docs
+## See the Docs
 
 The complete API reference and usage guides for all Views are available in the [SpenceKit Documentation](./DOCUMENTATION.md) and previews of all Views on Figma at [Figma Previews](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=673-205&t=8VBDpbuxr4nibJhb-0). This includes info such as:
 
@@ -113,7 +113,11 @@ limitations under the License.
 
 If you have any questions, contact `support@mypainterstape.com`!
 
+## Attribution during Hackations
 
+If you use SpenceKit at a hackathon, please include both SpenceKit.swift and my name, Spencer Steadman, in your project’s “open source libraries” or “credits” slide if you have one.
+If judges or others ask about your UI, a quick note that “our UI was built with SpenceKit.swift by Spencer Steadman” is appreciated.
+THANK YOU!
 
 ## Third-Party Licenses
 

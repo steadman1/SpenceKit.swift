@@ -91,14 +91,25 @@ The complete API reference and usage guides for all components are available in 
 
 ## License
 
-This software is proprietary and subject to the following terms:
+Copyright 2025 Spencer Steadman
 
-1. **Payment Required**: The use of the library's binary requires the purchase of a valid license from the copyright holder. Contact `support@mypainterstape.com` for licensing.
-2. **Modification**: Users can modify the source code for internal, non-distributable purposes only.
-3. **Distribution Prohibited**: Redistribution of the software, whether modified or not, is strictly prohibited.
-4. **Commercial Use**: Commercial use is permitted for licensed users, with all proceeds belonging to the user.
+Licensed under the Apache License, Version 2.0 (the "License");  
+you may not use this library except in compliance with the License.  
+You may obtain a copy of the License at
 
-For full details, see the [LICENSE](./LICENSE) file.
+    http://www.apache.org/licenses/LICENSE-2.0
+    
+or at
+
+    [LICENSE](./LICENSE)
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+If you have any questions, contact `support@mypainterstape.com`!
 
 ---
 

@@ -2,12 +2,10 @@
 
 **SpenceKit** is a powerful, developer-friendly framework designed to simplify the creation of consistent, visually appealing user interfaces. Built with modularity, accessibility, and usability in mind, SpenceKit provides prebuilt components and tools to accelerate development and enable professional-grade UI results, even for developers without a design background.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/83784905-7490-4501-afd2-2e7c09ded33b" 
+<img src="https://github.com/user-attachments/assets/83784905-7490-4501-afd2-2e7c09ded33b" 
        alt="SpenceKitBanner" 
-       width="75%" />
-</p>
-
+       width="100%" />
+       
 ## See the Docs
 
 The complete API reference and usage guides for all Views are available in the [SpenceKit Documentation](./DOCUMENTATION.md) and previews of all Views on Figma at [Figma Previews](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=673-205&t=8VBDpbuxr4nibJhb-0). This includes info such as:

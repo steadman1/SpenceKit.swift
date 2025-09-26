@@ -5,9 +5,10 @@
 //  Created by Spencer Steadman on 10/19/24.
 //
 
-#if canImport(SwiftUI) && canImport(UIKit)
+#if canImport(SwiftUI) && canImport(SwiftUICore) && canImport(UIKit)
 
 import SwiftUI
+import SwiftUICore
 import UIKit
 
 extension Animation {

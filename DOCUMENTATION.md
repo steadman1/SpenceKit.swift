@@ -4,7 +4,12 @@ SpenceKit.swift is a powerful, developer-friendly framework designed to simplify
 
 The following documentation contains all Views, Structures, and Functions provided by the SpenceKit Swift library. 
 
-## SpenceKit.swift Helper GPT
+# Preview every available View on Figma
+
+Linked below is a Figma file containing all available Views in SpenceKit.swift mocked up in Figma with more information on the project. The Figma file also includes more info about SpenceKit's Typography and Color.
+https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=673-205&t=8VBDpbuxr4nibJhb-0
+
+# SpenceKit.swift Helper GPT
 
 Linked below is a custom OpenAI GPT with full access to this documentation for assistance with understanding and developing SwiftUI Views that make full use of SpenceKit.
 https://chatgpt.com/g/g-67893e24f09881918c232c76d8f3e0f7-spencekit-swift

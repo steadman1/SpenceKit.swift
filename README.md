@@ -2,6 +2,18 @@
 
 **SpenceKit** is a powerful, developer-friendly framework designed to simplify the creation of consistent, visually appealing user interfaces. Built with modularity, accessibility, and usability in mind, SpenceKit provides prebuilt components and tools to accelerate development and enable professional-grade UI results, even for developers without a design background.
 
+---
+
+# See the Docs
+
+The complete API reference and usage guides for all Views are available in the [SpenceKit Documentation](./DOCUMENTATION.md) and previews of all Views on Figma at [Figma Previews](https://www.figma.com/design/P1idYsSZ2mbgbCAQHGRmpw/SpenceKit?node-id=673-205&t=8VBDpbuxr4nibJhb-0). This includes info such as:
+
+- **Core Components**: `Divider`, `SFIcon`, `Radio`, `Checkbox`, etc.
+- **Advanced Components**: `ProgressSelector`, `TabBar`, `HelperButton`, etc.
+- **Utilities and Constants**: Design constants, animations, and reusable styles.
+
+---
+
 ## Key Features
 
 - **Modular Components**: A comprehensive library of reusable components to build modern, consistent UIs.
@@ -76,18 +88,6 @@ struct ContentView: View {
 ```
 
 For detailed usage of components, check the documentation below.
-
----
-
-## Documentation
-
-The complete API reference and usage guides for all components are available in the [SpenceKit Documentation](https://mypainterstape.com/docs/spencekit). This includes:
-
-- **Core Components**: `Divider`, `SFIcon`, `Radio`, `Checkbox`, etc.
-- **Advanced Components**: `ProgressSelector`, `TabBar`, `HelperButton`, and more.
-- **Utilities and Constants**: Design constants, animations, and reusable styles.
-
----
 
 ## License
 

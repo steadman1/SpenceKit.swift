@@ -113,7 +113,7 @@ limitations under the License.
 
 If you have any questions, contact `support@mypainterstape.com`!
 
-## Attribution during Hackations
+## Attribution during Hackathons
 
 If you use SpenceKit at a hackathon, please include both SpenceKit.swift and my name, Spencer Steadman, in your project’s “open source libraries” or “credits” slide if you have one.
 If judges or others ask about your UI, a quick note that “our UI was built with SpenceKit.swift by Spencer Steadman” is appreciated.

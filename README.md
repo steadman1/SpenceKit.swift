@@ -2,7 +2,7 @@
 
 **SpenceKit** is a powerful, developer-friendly framework designed to simplify the creation of consistent, visually appealing user interfaces. Built with modularity, accessibility, and usability in mind, SpenceKit provides prebuilt components and tools to accelerate development and enable professional-grade UI results, even for developers without a design background.
 
----
+
 
 # See the Docs
 
@@ -12,7 +12,9 @@ The complete API reference and usage guides for all Views are available in the [
 - **Advanced Components**: `ProgressSelector`, `TabBar`, `HelperButton`, etc.
 - **Utilities and Constants**: Design constants, animations, and reusable styles.
 
----
+A custom ChatGPT _GPT_, [SpenceKit.swift GPT](https://chatgpt.com/g/g-67893e24f09881918c232c76d8f3e0f7-spencekit-swift) is also available to discuss the Docs with you or help build your UI.
+
+
 
 ## Key Features
 
@@ -22,7 +24,7 @@ The complete API reference and usage guides for all Views are available in the [
 - **Rapid Prototyping**: Quickly bring ideas to life with minimal effort and maximum elegance.
 - **Lightweight and Efficient**: Designed to integrate seamlessly with SwiftUI while maintaining high performance.
 
----
+
 
 ## Getting Started
 
@@ -30,7 +32,7 @@ The complete API reference and usage guides for all Views are available in the [
 
 - **iOS 16.0+**
 
----
+
 
 ### Installation
 
@@ -49,7 +51,7 @@ The complete API reference and usage guides for all Views are available in the [
 2. Drag and drop the `SpenceKit` folder into your Xcode project.
 3. Add `SpenceKit.swift` to your target.
 
----
+
 
 ### Usage
 
@@ -111,7 +113,7 @@ limitations under the License.
 
 If you have any questions, contact `support@mypainterstape.com`!
 
----
+
 
 ## Third-Party Licenses
 
@@ -122,7 +124,7 @@ SpenceKit includes the following third-party open-source components:
 
 See the [LICENSE](./LICENSE) file for full details.
 
----
+
 
 ## Support
 
@@ -132,7 +134,7 @@ If you encounter issues, have questions, or want to request features, please con
 - Website: [mypainterstape.com](https://mypainterstape.com)
 - Documentation: [SpenceKit Docs](https://mypainterstape.com/docs/spencekit)
 
----
+
 
 ## Acknowledgments
 

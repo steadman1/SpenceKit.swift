@@ -38,22 +38,18 @@ A custom ChatGPT _GPT_, [SpenceKit.swift GPT](https://chatgpt.com/g/g-67893e24f0
 
 ### Installation
 
-#### Local Integration
+You can add **SpenceKit.swift** to your project using Xcode’s Swift Package Manager integration:
 
-1. Download the latest release from Gumroad to a given directory `~/spence/Desktop` for example.
-2. Open your Xcode Project (.xcodeproj or .xcworkspace file).
-3. Navigate to "Packagge Dependencies" in your Project File .
-4. Click the "+" to add a dependency.
-5. Click "Add Local" in the bottom left.
-6. Open `~/spence/Desktop/SpenceKit` directory in the Finder window and click "Add Package."
+1. Open your project in **Xcode**.
+2. In the menu bar, go to **File > Add Packages...**.
+3. In the search bar, enter the repository URL: https://github.com/steadman1/SpenceKit.swift
+4. Set the **Dependency Rule** (e.g., “Up to Next Major Version”).
+5. Click **Add Package** and select your target(s).
+6. Import SpenceKit in your Swift files where needed:  
 
-#### In-project Integration
-
-1. Clone the repository or download the latest release from the [Releases](https://github.com/your-repo/spencekit/releases) page.
-2. Drag and drop the `SpenceKit` folder into your Xcode project.
-3. Add `SpenceKit.swift` to your target.
-
-
+```swift
+import SpenceKit
+```
 
 ### Usage
 

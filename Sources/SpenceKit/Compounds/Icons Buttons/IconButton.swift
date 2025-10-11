@@ -69,8 +69,8 @@ public struct IconButton<Content: View>: View {
                 label()
                     .foregroundColor(foreground)
             }
-        }.frame(minWidth: minWidth,
-                minHeight: minHeight)
+        }.frame(maxWidth: minWidth,
+                maxHeight: minHeight)
             .background(background)
             .clipShape(RoundedRectangle(cornerRadius: minWidth > 0 ? SpenceKit.Constants.cornerRadiusMAX : 0))
             .stroke(color: border, width: SpenceKit.Constants.borderWidth)

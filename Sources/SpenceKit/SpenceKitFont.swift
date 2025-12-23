@@ -24,7 +24,7 @@ public struct SpenceKitFont: Sendable {
         }
     }
 
-    public static let LibreCaslon_RegularItalic = SpenceKitFont(named: "LibreCaslonCondensed-RegularItalic")
+    public static let LibreCaslon_RegularItalic = SpenceKitFont(named: "LibreCaslonCondensed-Italic")
     public static let LibreCaslon_MediumItalic = SpenceKitFont(named: "LibreCaslonCondensed-MediumItalic")
     public static let LibreCaslon_BoldItalic = SpenceKitFont(named: "LibreCaslonCondensed-BoldItalic")
     

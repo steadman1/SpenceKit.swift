@@ -459,7 +459,7 @@ public struct CenterAligned: ViewModifier {
 }
 
 public extension View {
-    func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .black) -> some View {
+    func serifBold(font: Font.SpenceKit.FontSkeleton, strokeColor: Color = .SpenceKit.PrimaryText) -> some View {
         self
             .font(.custom(font.name, size: font.size))
             .textStroke(color: strokeColor, width: font.size / 80)
